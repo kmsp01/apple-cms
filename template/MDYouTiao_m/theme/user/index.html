@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="full-screen" content="true">
+		<meta name="screen-orientation" content="portrait">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="360-fullscreen" content="true">
+		<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover">
+		<title>会员中心 - {$maccms.site_name}</title>
+		<meta name="keywords" content="会员中心,{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/main.css">
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/my.css">
+		<script src="https://fen.kmsp001.online/static/index/js/nosafari.js "></script>
+	</head>
+	<body style="font-size: 12px;">
+		<div id="app">
+			<div class="app-layout app-view isFooter my">
+				<div class="container router-view" style="padding-top: 40px;">
+					<div class="page-header page-header-wrap my">
+						<div class="page-header-top">
+							<div class="page-left">
+								<div></div>
+							</div>
+							<div class="page-center">个人中心</div>
+							<div class="page-right">
+								<a href="{:mac_url('user/setting')}" class="right-wrap"><img src="data:image/png;base64,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" class="left"></a>
+							</div>
+						</div>
+					</div>
+					<div class="heads">
+						<div class="user-info">
+							<div class="user-wrap">
+								<div class="left">
+									<a href="{:mac_url('user/userinfo')}" class="img-bg portrait" style="background-image: url({$user.user_id|mac_get_user_portrait});"></a>
+									<div class="left-main">
+										<div class="text1">
+											<img src="{$maccms.path}MDassets/h5/img/{if condition="$GLOBALS['user']['group_id'] eq 3"}vips{else}novips{/if}.png" class="icon">
+											<p class="text name loginTitle">{$user.user_name}</p>
+										</div>
+										<div class="text2">
+											<p class="text pwd">{$user.user_reg_time|mac_day}</p>
+										</div>
+									</div>
+								</div>
+								<div class="right">
+									<a href="{:mac_url('user/upgrade')}" class="drill-wrap">
+										<img src="{$maccms.path}MDassets/h5/img/drill.png" class="drill"><span>黄钻商城</span>
+										<span class="title">{$user.user_points}</span><i class="iconfont iconright1"></i>
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="card-wrap">
+							<div class="ellipse">
+								{if condition="$GLOBALS['user']['group_id'] eq 3"}
+								<div class="vip">
+									<div class="top">
+										<div class="top-left">
+											<div class="vip-name"> 尊贵VIP会员 <div class="vip-icon">
+											<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAsCAMAAAAtr3oOAAACBFBMVEVHcEz/2pz//8z/25z//6r/3aH/27b/5rP/2pz/////25z/2pz/253/3Jz/25z/2p7//7//2p//253/46H/257/3J3/253/3Z//25z/253/3J7/25z/3J3/////2p3/2p3/25z/6qr/35//35//253/2p3/253/3J3/25z/2p3/2pz/25z/253/4KL/2p3/253/3p3/2p3/257/253/253/25z/2p3/3Z3/3Z7/2p3/25z/257/2pz/3J7/3Z7/35//3Z//2p//4KP/3KD/253/257/253/253/253/253/253/3J7/253/25z/2pz/253/25z/2p7/3Jz/2p3/4KL/5qb/25z/25z/25z/2pz/3ar/253/3Z//2p3/2p3/25z/3J3/253/253/253/35//35//257/253/257/253/25z/46r/3J//257/253/3Jz/2pwmLDv10pcpLjxWUlErMD1vZlw1OELjwo9LSUxOTE3+2Zs6PEQnLDsyNT/px5KEeGXLr4VTUE7Fq4HApoD305ihj3KIemYzNkFMSkviw4+ok3SUhGw2OEIsMD7Gq4IqLz2Xhm11a169pX+cinC+pn44OkOWhW3vzZXHrYNzaV7NsoXox5GfjXGMfWjnx5HGrIP51ZmRgWvCqYCejHHgwY5+c2NsZFuZh2361pooLTyplHXCfMV7AAAAcHRSTlMA7QXwBh4HCvoC/dbvWNmDBFqvG3FBRi2wnB1dSQHI8oYMKBiiweqX1PTzd/4p+cAvu2TFY8TkNFmmqk/JOkQgNUUZO5UVufya4oBshcfCa8yLUK4hFJMxt28PeiXXvNtR8bO4CDCIWzKx3AlInXJ0h3RTBAAAAdtJREFUGBmtwWNjIwEABNBJk7RJbets27Zt2zOpdT3btn1/8jYbbHaTJvvh3sP/kFU3NRvuzSZ3BuFWOQ2r4dK8AA25i+DKsuk0DS+DC8FJjJpWjMyKGLcJGdWPpWUOMvB7mCB/K9LyzaXNxmyks5QOI+CwbUkWYmYySQliiisWAFVNLFyIiHGjmGT0YETsyGOgAs0kA3uCMAzKYwojc2AIjgmQrMEFhg3zA5jFlIYC8E9g2HHU05RfgA0cwPYZa7w01cHPqNLxzOgkGproWu4ZoJGunQZwjq6dAnCelletbT96aPnwoPsjLc0AztLyS9IXxr2XdJOWEwBqabkrqe85ox62SHpMyzEYDjHud6ukW99p6rwvqSvEuNyjMKyjpb9XUleIhtBtSR13aDmAsBomuPxIUjsNPyW1XGWCaoSVM9ENGZ6R92T4xkRrEVZJmzeSWj497ZP0hDYlCCujzfVuSS8uSrrymTYTYfLSprNDpt53tFmRDdMU2n39I0PbW9oVImIlHV7K8JcOWxCxi07t0iU6FSFiPp16rr1mkgJELKYrVYjy0IWAD1GldGE9YjbThcmIaVjOjBp9iNu9jxmsGoIEtdVMa/9e2FUe9nAA3iMHkUJWTko+WP4BftEz1mONW0kAAAAASUVORK5CYII=" class="VIPicon">
+											<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAXCAMAAAB+gOwGAAABvFBMVEVHcEz/15L/1pL/1pP/2ZT/1pn//6r/15T/1pP/15L/6KL/15P/15P/1pP/15P/15b//5n/27b/////15P/1pP/15P/2JL/15L/2JL/15L/15L/15T/1pL/15P/2pX/2Jb/35X/1pL/2JX/257/15P/15b/1pL/1pL/46r/15L/15P/15L/15P/1pT/2JP/2JP/15P/1pL/15P/3pv/1pP/2JP/2JP/2JP/15P/15L/2JX/15T/1pP/15L/15L/25n/2JT/15P/1pP/15L/15L/15P/1pL/15P/15P/15T/1pT/2pL/2Jb/15P/////2ZL/2JX/2JL/15T/15P/15X/15L/4Zb/15L/15P/15L/15T/1pP/1pP/15P/25f/2JP/26T/15T/2pT/1pP/2ZT/15L/1pP/15P/1pT/1pP/15T/15P/15P/1pP/15P/15L/2ZT/2JP/2pb/15T/3Zn/1pP/1pT/15P/15P/1pP/15L/2JP/15P/1pb/15P/15L/1pL//6r/15X/2JT/1pL/6pX/2JP/2JX/1pP/1pL/15P/1pf/15f/2ZP/15P/15P/2ZL/15P/25j/1pJDOol7AAAAk3RSTlMA6vtqXRkGefr9C0D+7rg/BQcC0ruLdetujatf6LowJxjDSBX8M870CeaS8dd3YULp3KoXoxohlaWkVIzJ9pQjYkfIzNGZvPCOE1FELuUBL0GbfqFGgRHT2bmRr+K/MVwOhTeoQ/KJdDKXcppt1Fr4SoIimA+ERcumwr52UzjGbO0DTWnhDG9bffmxLCBJoOw2rSqBeLQQAAABtElEQVQYGWXBA3NrYQBF0V2kTYrUtm0927Zt27Z9/vD7Tm4ynUnWokFBOYsWVAu/FbQCRfnKEqdLFiNjPq4/zMmOAu3Ktpnrsu1kzOov/JTVAYWyVVilbIhrskbSvicS/2BMVgjUyQqwQ7JR7sg2kvZNv4Ansh1AUlaBzcuS3JN1EXmprz+AmwriRcBOWQ+2R3aV6tsKyok80zBQla9gA7BVlkfKGtllqJF1Yo80MAOcks0CpbKTpByTlcK07AL2WA8JWmT1QKNsgZR+Bb0lcFd2g+CFyh8QNMkOAHtlBdiZhIJ+4JbsPvB2VM+xTbJOYJ2sAuuWXQKuyJ4C4xoaxPIU5AG7BmQ92FlZKVBSpuANVH3QeywmqwVWK9vFSoITshk+aaoSWytrArbJzhcvOo21ySY+TuozKfWyFmCf7BzZhmWvv6immpSlsnagWUFZCdkKZNMjekekRkF+FXBEwRQ5JhR5RaQoruAwMJhQcJwcMUUqiOyWLQH6ZAfJNSJLklYoGwPGZcvItUJBWR9py2XdwBZZB7n2K2gmo002B9QqWFlNrmJJvR1ktCpoIJhUsJ4s/wFepid4EqVcuwAAAABJRU5ErkJggg==" class="VIP">
+											</div>
+											</div>
+											<div class="due-to">{$obj.user_end_time|mac_day|mac_default='无限期'}到期</div>
+										</div>
+										<a href="{:mac_url('label/vip')}" class="renewal">续费</a>
+									</div>
+									<!--div class="wallet">
+										<div class="wallet-title">
+											<span class="title">推广邀请码</span>
+											<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAE0AAABNCAMAAADU1xmCAAADAFBMVEVHcEw0NDQzMzMqKiozMzMzMzMzMzMAAABVVVUzMzNAQEA5OTkzMzMAAAAzMzMzMzMzMzNAQEAzMzMzMzMuLi40NDQzMzM6Ojo3NzczMzMzMzMzMzMzMzMzMzMzMzMzMzMxMTE0NDRJSUk0NDQwMDAzMzM0NDQ0NDQ1NTUzMzMzMzM5OTk3Nzc0NDQ4ODgzMzM0NDQzMzM0NDQ0NDR/f382NjYyMjI0NDQ2NjZAQEA0NDQzMzM1NTUzMzM2NjYzMzM0NDQzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzM8PDw0NDQ5OTk0NDQ0NDQ1NTUzMzMzMzM0NDQ1NTUzMzMzMzMzMzMzMzMzMzM3NzczMzM3NzczMzM0NDQzMzM0NDQzMzMzMzMzMzMzMzM3NzczMzP///80NDQzMzMzMzMzMzMzMzM1NTUzMzMzMzMzMzMzMzMzMzM1NTUzMzMzMzMzMzMzMzMzMzMzMzMzMzM1NTUzMzM0NDQzMzMzMzM0NDQyMjIzMzMzMzNGRkYzMzM0NDQ0NDQzMzMzMzMzMzMzMzM0NDQxMTEzMzMzMzMyMjIxMTE0NDQzMzM0NDQzMzMzMzMzMzM1NTUzMzMzMzMzMzMzMzMzMzM0NDQ0NDQzMzMzMzMzMzMyMjI0NDQzMzMzMzMzMzMzMzM1NTUzMzM0NDQ0NDQ0NDQzMzM1NTUzMzM0NDQ1NTU0NDQ0NDQyMjI0NDQzMzM0NDQzMzMuLi40NDQzMzMzMzM0NDQzMzM1NTU0NDQzMzM0NDQ0NDQ0NDQ2NjYzMzM0NDQ0NDQzMzMzMzM0NDQyMjIzMzMzMzMzMzM0NDQ0NDQ0NDQ3Nzc3NzczMzMzMzM0NDQzMzMzMzNtbW00NDQ0NDQzMzMzMzM0NDQ0NDQzMzM2NjYzMzMzMzMzMzMyMjIzMzM0NDQ1NTUyMjIkJCQ1NTU0NDQ1NTU0NDQ3Nzc6OjotLS01NTU0NDQ9PT0zMzM0NDQ0NDQyMjI0NDQ0NDQyMjI0NDQ0NDQzMzOOBORAAAAA/3RSTlMABfMG+/75AQP9BAn4AvT69ggP/Av88RYO6/XS7uT36RC8B7EM6vfjIdafEhxPG99wS3HtAhMVjy8MymYwFB3YScfPmtPwtc/IQhEiJNQ7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">
+										</div>
+										<div class="wallet-bottom">
+											<div class="bottom-left"><span>{$user.user_codes}</span></div>
+											<div class="bottom-right">
+												{if condition="$GLOBALS['config']['user']['cash_status'] eq 1"}
+												<a href="{:mac_url('user/cash')}">
+												<button class="button van-button van-button--default van-button--normal van-button--plain van-button--round" style="color: rgb(102, 102, 102); border-color: rgb(102, 102, 102);">
+													<div class="van-button__content"><span class="van-button__text">提现</span></div>
+												</button>
+												</a>
+												{/if}
+												<a href="{:mac_url('user/share')}">
+												<button class="button van-button van-button--default van-button--normal van-button--plain van-button--round" style="color: rgb(249, 172, 4); border-color: rgb(249, 172, 4);">
+													<div class="van-button__content"><span class="van-button__text">分享</span></div>
+												</button>
+												</a>
+											</div>
+										</div>
+									</div-->
+								</div>
+								{else}
+								<div class="tourists">
+								<a href="{:mac_url('label/vip')}">
+									<button class="vip-button">
+										<div>立即开通</div>
+										<div class="desc">(平均每天不超1元)</div>
+									</button>
+								</a>	
+								</div>
+								{/if}
+							</div>
+						</div>
+						<div class="history-wrap">
+							<div class="title-top">
+								<div class="HeadLink-title">
+									<div class="t-left">
+										<div>历史记录</div>
+									</div>
+									<div class="t-cent"></div>
+									<a href="{:mac_url('user/plays')}" class="t-right"><div class="look">{if condition="$__PAGING__.record_total gt 0"}查看更多{else/}无{/if}</div><i class="iconfont iconright"></i></a>
+								</div>
+							</div>
+							{if condition="$__PAGING__.record_total gt 0"}
+							<div class="history">
+								{volist name="list" id="vo"}
+								{if condition="$vo.ulog_mid eq 1"}
+								{maccms:vod order="desc" by="time" ids="'.$vo['ulog_rid'].'" id="vo1" key="key1"}
+								<a href="{$vo.data.link}" class="item">
+									<div class="img-bg mask" style="background-image: url({:mac_url_img($vo1.vod_pic)});">
+										<span class="video-item-tag-hits">
+											<img src="{$maccms.path}MDassets/h5/img/hits.png" class="play-icon">
+											{$vo1.vod_hits}
+										</span>
+									</div>
+								</a>
+								{/maccms:vod}
+								{/if}
+								{/volist}
+							</div>
+							{/if}
+						</div>
+						<div class="link-wrap">
+							<div class="link-title">
+								<p>功能列表</p>
+							</div>
+							<div class="link-list">
+								<!--a href="{:mac_url('user/buy')}" class="item">
+									<img src="{$maccms.path}MDassets/h5/img/list-1.png" class="item-img">
+									<span class="name">卡密充值</span>
+								</a-->
+								<a href="{:mac_url('user/favs')}" class="item">
+									<img src="{$maccms.path}MDassets/h5/img/list-2.png" class="item-img">
+									<span class="name">我的喜欢</span>
+								</a>
+								<!--a href="{:mac_url('label/contact')}" class="item">
+									<img src="{$maccms.path}MDassets/h5/img/list-3.png" class="item-img">
+									<span class="name">商务合作</span>
+								</a-->
+								<a href="{$madou.serve}" class="item">
+									<img src="{$maccms.path}MDassets/h5/img/list-4.png" class="item-img">
+									<span class="name">专属客服</span>
+								</a>
+								<!--a href="{$madou.join}" class="item">
+									<img src="{$maccms.path}MDassets/h5/img/list-5.png" class="item-img">
+									<span class="name">加盟代理</span>
+								</a-->
+								<a href="{:mac_url('user/feedback')}" class="item">
+									<img src="{$maccms.path}MDassets/h5/img/list-6.png" class="item-img">
+									<span class="name">意见反馈</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div style="padding: 15px;">
+						<div class="ad-container"></div>
+					</div>
+				</div>
+				{include file="system/footer"}
+			</div>
+		</div>
+	</body>
+</html>

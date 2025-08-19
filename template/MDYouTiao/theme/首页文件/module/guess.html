@@ -1,0 +1,45 @@
+<div class="guess-love-wrap">
+	<div class="lists2">
+		<ul class="madou_list">
+			{maccms:vod num="8" type="current" order="desc" by="hits"}
+			<li class="madou1">
+				<div class="thumb">
+					<img class="img lazyload" src="{$madou['lazy']['img']}" data-src="{:mac_url_img($vo.vod_pic)}">
+					<a href="{:mac_url_vod_play($vo)}" class="play"><i class="el-icon-caret-right"></i></a>
+					{if condition="$madou['free']['state'] eq ''"}{if condition="$vo.vod_points eq ''"}{if condition="$vo.type_id neq $madou['type']['free']"}<span class="tag vip"></span>{/if}{else}<span class="paid vip"></span>{/if}{else}{/if}
+					<span class="counts"><i class="el-icon-caret-right"></i>{$vo.vod_hits}次</span>
+					<span class="duration">{$vo.vod_duration|mac_default=''}</span>
+				</div>
+				<h2>{$vo.vod_name}</h2>
+			</li>
+			{/maccms:vod}
+			{maccms:vod num="8" start="9" type="current" order="desc" by="hits"}
+			<li class="madou2 hidden">
+				<div class="thumb">
+					<img class="img lazyload" src="{$madou['lazy']['img']}" data-src="{:mac_url_img($vo.vod_pic)}">
+					<a href="{:mac_url_vod_play($vo)}" class="play"><i class="el-icon-caret-right"></i></a>
+					{if condition="$madou['free']['state'] eq ''"}{if condition="$vo.vod_points eq ''"}{if condition="$vo.type_id neq $madou['type']['free']"}<span class="tag vip"></span>{/if}{else}<span class="paid vip"></span>{/if}{else}{/if}
+					<span class="counts"><i class="el-icon-caret-right"></i>{$vo.vod_hits}次</span>
+					<span class="duration">{$vo.vod_duration|mac_default=''}</span>
+				</div>
+				<h2>{$vo.vod_name}</h2>
+			</li>
+			{/maccms:vod}
+			{maccms:vod num="8" start="17" type="current" order="desc" by="hits"}
+			<li class="madou3 hidden">
+				<div class="thumb">
+					<img class="img lazyload" src="{$madou['lazy']['img']}" data-src="{:mac_url_img($vo.vod_pic)}">
+					<a href="{:mac_url_vod_play($vo)}" class="play"><i class="el-icon-caret-right"></i></a>
+					{if condition="$madou['free']['state'] eq ''"}{if condition="$vo.vod_points eq ''"}{if condition="$vo.type_id neq $madou['type']['free']"}<span class="tag vip"></span>{/if}{else}<span class="paid vip"></span>{/if}{else}{/if}
+					<span class="counts"><i class="el-icon-caret-right"></i>{$vo.vod_hits}次</span>
+					<span class="duration">{$vo.vod_duration|mac_default='00:00'}</span>
+				</div>
+				<h2>{$vo.vod_name}</h2>
+			</li>
+			{/maccms:vod}
+		</ul>
+		<button type="button" class="el-button btn el-button--default madou_change">
+			<span>换一换</span>
+		</button>
+	</div>
+</div>

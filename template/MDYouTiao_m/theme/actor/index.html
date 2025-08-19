@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="full-screen" content="true">
+		<meta name="screen-orientation" content="portrait">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="360-fullscreen" content="true">
+		<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover">
+		<title>明星库 - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/main.css">
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/actor.css">
+	</head>
+	<body style="font-size: 12px;" class="">
+		<div id="app">
+			<div class="app-layout app-view">
+				<div class="nvyou router-view">
+					<div class="nav-bg">
+						<div class="van-nav-bar van-hairline--bottom">
+							<div class="van-nav-bar__content">
+								<div onClick="javascript:history.back(-1);" class="van-nav-bar__left"><img width="15px" height="13px" src="{$maccms.path}MDassets/h5/img/black-back.png"></div>
+								<div class="van-nav-bar__title van-ellipsis"><span class="nav-title">明星列表</span></div>
+							</div>
+						</div>
+					</div>
+					<div class="van-pull-refresh">
+						<div class="van-pull-refresh__track">
+							<div class="van-pull-refresh__head"></div>
+							<div class="list van-row">
+								<div role="feed" class="van-list">
+									<div>
+										{maccms:actor num="1000" order="desc" by="time" }
+										<div class="girls">
+											<div class="ui-top">
+												<h2 class="h2-14">
+													<div class="img-bg van-image" style="background-image: url({:mac_url_img($vo.actor_pic)});"></div>
+													<span>{$vo.actor_name}</span>
+													<small></small>
+												</h2>
+												{maccms:vod paging="yes" pageurl="topic/index" actor="'.$vo['actor_name'].'" order="desc" by="time" id="vo2" key="key2"}{/maccms:vod}
+												<a href="{$vo|mac_url_actor_detail}" class="more"><span>共{$__PAGING__.record_total}部</span><i class="van-icon van-icon-arrow"></i></a>
+											</div>
+											<div class="ui-body">
+												<div class="actor-swiper">
+													<div class="swiper-wrapper">
+														{maccms:vod num="6" actor="'.$vo['actor_name'].'" order="desc" by="time" }
+														<a href="{:mac_url_vod_play($vo)}" class="swiper-slide" style="margin-right: 10px;">
+															<div class="item">
+																<div class="img-bg van-image" style="background-image: url({:mac_url_img($vo.vod_pic)});"></div>
+																<span class="score">{$vo.vod_score}分</span>
+															</div>
+														</a>
+														{/maccms:vod}
+													</div> 
+													<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+												</div>
+											</div>
+										</div>
+										{/maccms:actor}	
+									</div>
+									<div class="van-list__finished-text">啊～哥哥到底啦！</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

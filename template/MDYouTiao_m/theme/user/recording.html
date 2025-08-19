@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="full-screen" content="true">
+		<meta name="screen-orientation" content="portrait">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="360-fullscreen" content="true">
+		<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover">
+		<title>提现记录 - 会员中心 - {$maccms.site_name}</title>
+		<meta name="keywords" content="会员中心,{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/recording.css">
+	</head>
+	<body style="font-size: 12px;">
+		<div id="app">
+			<div class="app-layout app-view">
+				<div class="containers router-view" style="padding-top: 40px;">
+					<div class="page-header">
+						<div class="page-header-top">
+							<div class="page-left" onclick="javascript:history.back(-1);"><i class="iconfont iconnext"></i></div>
+							<div class="page-center">
+								提现记录
+							</div>
+							<div class="page-right"></div>
+						</div>
+					</div>
+					{volist name="list" id="vo"}
+					<div class="list">
+						<div class="listHead">
+							<p>时间：{$vo.cash_time|date='Y-m-d H:i',###}</p>
+							<p>{if condition="$vo.cash_status eq '1'"}已审核{else/}未审核{/if}</p>
+						</div>
+						<div class="content">
+							<div class="item">
+								<p>收款方式：{$vo.cash_bank_name}</p>
+								<p style="margin: 5px 0px;">收款账户：{$vo.cash_bank_no}</p>
+								<p>收款姓名：{$vo.cash_payee_name}</p>
+							</div>
+							<p>￥{$vo.cash_money}</p>
+						</div>
+					</div>
+					{/volist}
+					{if $__PAGING__.record_total==0}
+					<div style="margin-top: 50px;">暂无数据</div>
+					{/if}
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

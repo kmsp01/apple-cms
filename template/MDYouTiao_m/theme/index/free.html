@@ -1,0 +1,52 @@
+<div class="hot-area">
+									<div class="HeadLink-title">
+										<img class="img left-icon round-icon" src="{$maccms.path}MDassets/h5/img/free.png"  style="width: 0.4rem; height: 0.4rem;">
+										<div class="t-left"><div>免费专区</div></div>
+										<div class="t-cent"></div>
+										{maccms:type ids="'.($madou['type']['free']).'" order="asc" by="sort" id="vo" key="key"} 
+										<a href="{:mac_url_type($vo)}" class="t-right"><div class="look">更多爽片</div><i class="iconfont iconright"></i></a>
+										{/maccms:type}
+									</div>
+									<div class="video-contaner madou_list">
+										{maccms:vod num="'.($madou['wap']['free']['num']).'" type="'.($madou['type']['free']).'" by="time" order="desc"}
+										<a href="{:mac_url_vod_play($vo)}" class="video-surface madou1">
+											<div class="video-surface-wrap">
+												{if condition="$madou['free']['state'] eq ''"}{if condition="$vo.vod_points eq ''"}{if condition="$vo.type_id neq $madou['type']['free']"}<span class="video-item-tag video-item-tag-is-vip"></span>{/if}{else}<span class="video-item-tag video-item-tag-is-paid"></span>{/if}{else}{/if}
+												<div class="video-container" style="height: 2.82667rem;">
+													<div class="img-bg surface-img" style="background-image: url({:mac_url_img($vo.vod_pic)});"></div>
+													<span class="video-item-tag video-item-tag-hits"><img src="{$maccms.path}MDassets/h5/img/hits.png" class="play-icon">{$vo.vod_hits}</span>
+													<span class="video-item-tag video-item-tag-duration">{$vo.vod_duration|mac_default=''}</span>
+												</div>
+												<div class="video-desc text-one-line">{$vo.vod_name}</div>
+											</div>
+										</a>
+										{/maccms:vod}
+										{maccms:vod num="'.($madou['wap']['free']['num']).'" type="'.($madou['type']['free']).'" start="'.($madou['wap']['free']['num']+1).'" by="time" order="desc"}
+										<a href="{:mac_url_vod_play($vo)}" class="video-surface madou2 hidden">
+											<div class="video-surface-wrap">
+												{if condition="$madou['free']['state'] eq ''"}{if condition="$vo.vod_points eq ''"}{if condition="$vo.type_id neq $madou['type']['free']"}<span class="video-item-tag video-item-tag-is-vip"></span>{/if}{else}<span class="video-item-tag video-item-tag-is-paid"></span>{/if}{else}{/if}
+												<div class="video-container" style="height: 2.82667rem;">
+													<div class="img-bg surface-img" style="background-image: url({:mac_url_img($vo.vod_pic)});"></div>
+													<span class="video-item-tag video-item-tag-hits"><img src="{$maccms.path}MDassets/h5/img/hits.png" class="play-icon">{$vo.vod_hits}</span>
+													<span class="video-item-tag video-item-tag-duration">{$vo.vod_duration|mac_default=''}</span>
+												</div>
+												<div class="video-desc text-one-line">{$vo.vod_name}</div>
+											</div>
+										</a>
+										{/maccms:vod}
+										{maccms:vod num="'.($madou['wap']['free']['num']).'" type="'.($madou['type']['free']).'" by="time" start="'.($madou['wap']['free']['num']*2+1).'" order="desc"}
+										<a href="{:mac_url_vod_play($vo)}" class="video-surface madou3 hidden">
+											<div class="video-surface-wrap">
+												{if condition="$madou['free']['state'] eq ''"}{if condition="$vo.vod_points eq ''"}{if condition="$vo.type_id neq $madou['type']['free']"}<span class="video-item-tag video-item-tag-is-vip"></span>{/if}{else}<span class="video-item-tag video-item-tag-is-paid"></span>{/if}{else}{/if}
+												<div class="video-container" style="height: 2.82667rem;">
+													<div class="img-bg surface-img" style="background-image: url({:mac_url_img($vo.vod_pic)});"></div>
+													<span class="video-item-tag video-item-tag-hits"><img src="{$maccms.path}MDassets/h5/img/hits.png" class="play-icon">{$vo.vod_hits}</span>
+													<span class="video-item-tag video-item-tag-duration">{$vo.vod_duration|mac_default=''}</span>
+												</div>
+												<div class="video-desc text-one-line">{$vo.vod_name}</div>
+											</div>
+										</a>
+										{/maccms:vod}
+									</div>
+									<div class="video-change madou_change">换一换</div>
+								</div>

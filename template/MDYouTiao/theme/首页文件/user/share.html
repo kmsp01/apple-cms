@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>分享推广 - 会员中心 -{$maccms.site_name}</title>
+		<meta name="keywords" content="会员中心,{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/web/css/share.css">
+		<script src="{$maccms.path}MDassets/js/clipboard.min.js"></script>
+	</head>
+	<body>
+		<div id="appSite" class="site reset-element">
+			{include file="system/header"}
+			<div class="main-contaner">
+				<div class="middle">
+					<div class="el-row">
+						<div class="share">
+							<div class="share-con">
+								<div class="top-wrap">
+									<div class="top-con">
+										<div class="title-wrap"><div class="title">我的分享</div>{if condition="$GLOBALS['config']['user']['cash_status'] eq 1"}<span id="btn-cash">提现 &gt;</span>{/if}</div>
+										<div class="num-wrap">
+											<div class="num-1">
+												<h3><span>{$count}</span></h3>
+												<p>累计邀请人数</p>
+											</div>
+											{if condition="$GLOBALS['config']['user']['cash_status'] eq 1"}
+											<div class="num-2">
+												<h3> ¥ <span>{$GLOBALS['user']['user_points']/$GLOBALS['config']['user']['cash_ratio']|mac_substring=4}</span></h3>
+												<p>当前可提现余额</p>
+											</div>
+											{/if}
+										</div>
+										<div id="btn-share" class="btn-wrap"><span>分享注册即可获得</span></div>
+									</div>
+								</div>
+								<div class="label-wrap">
+									<div>领取钻石</div>
+									<p>1、分享二维码或者邀请链接注册成功一位会员即可获得{$GLOBALS['config']['user']['invite_reg_points']}钻石。</p>
+									<p>2、越多好友注册赠送{$GLOBALS['config']['user']['invite_reg_points']}越多，赠送的钻石还可以累积，多劳多得哦！</p>
+									<p>3、邀请的好友有消费你也可以获得钻石分成，钻石可用于兑换VIP会员或购买付费视频提现等，快去分享吧！</p>
+								</div>
+								<div class="tab-wrap">
+									
+									<div class="tab-bar">
+										<a href="{:mac_url('user/share')}"><p class="active">收益明细</p></a>
+										<a href="{:mac_url('user/cashlog')}"><p>提现记录</p></a>
+									</div>
+								
+									<div class="share-item tab-1-wrap">
+										{volist name="list" id="vo"}
+										<div class="tab-item">
+											<div class="tab-left">
+												<h3>{$vo.plog_type|mac_get_plog_type_text}</h3><span>{$vo.plog_time|mac_day}</span>
+											</div>
+											<div class="tab-right"><span>{if condition="in_array($vo.plog_type,[1,2,3,4])"}+{else/}-{/if}</span><span>{$vo.plog_points} 钻石</span></div>
+										</div>
+										{/volist}
+									</div>
+								</div>
+							</div>
+							{if condition="$GLOBALS['config']['user']['cash_status'] eq 1"}
+							<div class="el-dialog__wrapper user_cash" style="z-index: 2007; display: none;">
+								<div role="dialog" aria-modal="true" aria-label="申请提现" class="el-dialog" style="margin-top: 15vh; width: 490px;">
+									<div class="el-dialog__header"><span class="el-dialog__title">申请提现</span>
+										<button type="button" aria-label="Close" class="el-dialog__headerbtn"><i class="el-dialog__close el-icon el-icon-close"></i></button>
+									</div>
+									<div class="el-dialog__body">
+										<form id="fm" name="fm" method="post" action="">
+											<div class="forms"><span>提现金额</span>
+												<div class="el-input">
+													<input type="number" autocomplete="off" name="cash_money" placeholder="最少￥{$GLOBALS['config']['user']['cash_min']}" class="el-input__inner">
+												</div>
+											</div>
+											<div class="forms"><span>银行名称</span>
+												<div class="el-input">
+													<input type="text" autocomplete="off" name="cash_bank_name" placeholder="请输入银行名称" class="el-input__inner">
+												</div>
+											</div>
+											<div class="forms"><span>银行账户</span>
+												<div class="el-input">
+													<input type="text" autocomplete="off" name="cash_bank_no" placeholder="请输入银行卡号" class="el-input__inner">
+												</div>
+											</div>
+											<div class="forms"><span>收款姓名</span>
+												<div class="el-input">
+													<input type="text" autocomplete="off" name="cash_payee_name" placeholder="请输入户主姓名" class="el-input__inner">
+												</div>
+											</div>
+											<p class="prompt">剩余{$GLOBALS['user']['user_points']}钻石，相当于{$GLOBALS['user']['user_points']/$GLOBALS['config']['user']['cash_ratio']}元；冻结{$GLOBALS['user']['user_points_froze']}钻石，相当于{$GLOBALS['user']['user_points_froze']/$GLOBALS['config']['user']['cash_ratio']}元</p>
+											<button id="btn_submit" type="button" class="el-button takeBtn el-button--default"><span>提交申请</span></button>
+										</form>
+									</div>
+								</div>
+							</div>
+							{/if}
+						</div>
+						<div class="el-dialog__wrapper dialog2" style="z-index: 2005;display: none;">
+							<div class="el-dialog" style="margin-top: 10vh; width: 600px;">
+								<div class="el-dialog__header"><span class="el-dialog__title">分享推广</span>
+									<button type="button" aria-label="Close" class="el-dialog__headerbtn"><i class="el-dialog__close el-icon el-icon-close"></i></button>
+								</div>
+								<div class="el-dialog__body">
+									<div class="dialog-wrap">
+										<div class="dialog-bg">
+											<div class="top">
+												<img src="{$maccms.path}MDassets/web/img/share-logo.png">
+												<div><span>//</span>快将二维码发给好友吧！<span>//</span></div>
+											</div>
+											<div class="center"><img src="{:mac_url('qrcode/index')}?url={$maccms.http_type}{$maccms.site_url}?invite={$user.user_codes}"></div>
+											<div class="bottom">
+												<span>您的邀请码</span>
+												<p>{$user.user_codes}</p>
+											</div>
+											<div class="btn-wrap">
+												<button id="share" data-clipboard-text="{$maccms.http_type}{$maccms.site_url}?invite={$user.user_codes}">复制推广链接</button>
+											</div>
+										</div>
+										<div class="label-wrap">
+											<p>邀请码：{$user.user_codes}</p>
+											<p>推广链接：{$maccms.http_type}{$maccms.site_url}?invite={$user.user_codes}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+		
+				{include file="system/footer"}
+				<script>
+					var clipboard = new ClipboardJS('#share');
+						clipboard.on('success', function (e) {
+							layer.msg("复制成功,快去分享吧！");
+						});
+						clipboard.on('error', function (e) {
+						  console.log(e);
+					});
+				</script>
+				{if condition="$GLOBALS['config']['user']['cash_status'] eq 1"}
+				<script>
+					$("#btn_submit").click(function() {
+						var cash_money = $('input[name="cash_money"]').val();
+						if(cash_money==''){
+							layer.msg('请输入提现金额');
+							return;
+						}
+						var cash_bank_name = $('input[name="cash_bank_name"]').val();
+						if(cash_bank_name==''){
+							layer.msg('请输入开户行名称或支付宝微信');
+							return;
+						}
+						var cash_bank_no = $('input[name="cash_bank_no"]').val();
+						if(cash_bank_no==''){
+							layer.msg('请输入银行账户或支付宝微信账号');
+							return;
+						}
+						var cash_payee_name = $('input[name="cash_payee_name"]').val();
+						if(cash_payee_name==''){
+							layer.msg('请输入收款人姓名');
+							return;
+						}
+						
+
+						var data = $("#fm").serialize();
+						$.ajax({
+							url: "{:url('user/cash')}",
+							type: "post",
+							dataType: "json",
+							data: data,
+							beforeSend: function () {
+								//开启loading
+								//$(".loading_box").css("display","block");
+								$("#btn_submit").val("loading...");
+							},
+							success: function (r) {
+								layer.msg(r.msg);
+								if(r.code==1){
+									setTimeout(function(){
+										location.href="{:url('user/share')}";
+									},1500);
+								}
+							},
+							complete: function () {
+								//结束loading
+								//$(".loading_box").css("display","none");
+								$("#btn_submit").val("提交");
+							}
+						});
+					});
+				</script>
+				{/if}
+			</div>
+		</div>
+	</body>
+</html>

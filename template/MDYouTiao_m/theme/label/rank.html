@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="full-screen" content="true">
+		<meta name="screen-orientation" content="portrait">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="360-fullscreen" content="true">
+		<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover">
+		<title>排行榜单 - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/main.css">
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/rank.css">
+	</head>
+	<body style="font-size: 12px;">
+		<div id="app">
+			<div class="app-layout app-view">
+				<div class="rank router-view">
+				<div class="top-wrap"></div>
+					<div class="tab-wrap">
+						<div class="van-tabs van-tabs--line">
+							<div id="sticky">
+								<div class="van-sticky">
+									<div class="van-tabs__wrap">
+										<div class="van-tabs__nav van-tabs__nav--line">
+											<a href="{:mac_url('label/rank',['by'=>'hits'])}" class="van-tab {if strpos($_SERVER["REQUEST_URI"],'hits')}van-tab--active{/if}"><span class="van-tab__text van-tab__text--ellipsis">热门榜</span></a>
+											<a href="{:mac_url('label/rank',['by'=>'time'])}" class="van-tab {if strpos($_SERVER["REQUEST_URI"],'time')}van-tab--active{/if}"><span class="van-tab__text van-tab__text--ellipsis">新片榜</span></a>
+											<a href="{:mac_url('label/rank',['by'=>'score'])}" class="van-tab {if strpos($_SERVER["REQUEST_URI"],'score')}van-tab--active{/if}"><span class="van-tab__text van-tab__text--ellipsis">好评榜</span></a>
+											<a href="{:mac_url('label/rank',['by'=>'up'])}" class="van-tab {if strpos($_SERVER["REQUEST_URI"],'up')}van-tab--active{/if}"><span class="van-tab__text van-tab__text--ellipsis">收藏榜</span></a>
+										</div>
+									</div>
+								</div>
+							</div>	
+							<div class="van-tabs__content van-tabs__content--animated">
+								<div class="van-tabs__track">
+									<div class="van-tab__pane-wrapper">
+										<div class="van-tab__pane">
+											<div class="tab-hot">
+												<div role="feed" class="lists van-list">
+													{maccms:vod num="10" paging="yes" pageurl="label/rank" order="desc" by="time"}
+													<div class="video-surfaceone">
+														<a href="{:mac_url_vod_play($vo)}">
+															<span class="video-item-tag video-item-tag-tips no{$key}">No.{$key}</span>
+															{if condition="$madou['free']['state'] eq ''"}{if condition="$vo.vod_points eq ''"}{if condition="$vo.type_id neq $madou['type']['free']"}<span class="video-item-tag video-item-tag-is-vip"></span>{/if}{else}<span class="video-item-tag video-item-tag-is-paid"></span>{/if}{else}{/if}
+															<div class="video-container" style="height: 4.24rem;">
+																<div class="img-bg surface-img" style="background-image: url({:mac_url_img($vo.vod_pic)});"></div>
+																<div class="video-item-tag video-item-tag-hits">
+																<span><i class="iconfont iconbofang"></i>{$vo.vod_hits}次播放</span>
+																</div>
+																<span class="video-item-tag video-item-tag-duration">{$vo.vod_duration|mac_default=''}</span>
+																
+															</div>
+															<div class="video-desc text-one-line">{$vo.vod_name}</div>
+														</a>
+													</div>
+													{/maccms:vod}
+												</div>
+												<div role="feed" class="lists van-list" id="content">
+													{maccms:vod num="10" paging="yes" pageurl="label/rank" start="11" order="desc" by="time"}
+													<div class="video-surface">
+														<a href="{:mac_url_vod_play($vo)}">
+															<div class="video-container" style="height: 4.24rem;">
+																{if condition="$madou['free']['state'] eq ''"}{if condition="$vo.vod_points eq ''"}{if condition="$vo.type_id neq $madou['type']['free']"}<span class="video-item-tag video-item-tag-is-vip"></span>{/if}{else}<span class="video-item-tag video-item-tag-is-paid"></span>{/if}{else}{/if}
+																<div class="img-bg surface-img" style="background-image: url({:mac_url_img($vo.vod_pic)});"></div>
+																<div class="video-item-tag video-item-tag-hits">
+																<span><i class="iconfont iconbofang"></i>{$vo.vod_hits}次播放</span>
+																</div>
+																<span class="video-item-tag video-item-tag-duration">{$vo.vod_duration|mac_default=''}</span>
+															</div>
+															<div class="video-desc text-one-line">{$vo.vod_name}</div>
+														</a>
+													</div>
+													{/maccms:vod}
+												</div>
+											</div>
+										</div>
+										{include file="module/lazy"}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{include file="system/footer"}
+			</div>
+		</div>
+	</body>
+</html>

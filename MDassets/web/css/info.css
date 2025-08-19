@@ -1,0 +1,269 @@
+.updateInfo {
+	margin-top: 34px
+}
+
+.updateInfo .portraitBox span {
+	font-size: 14px;
+	font-family: PingFangSC;
+	font-weight: 400;
+	color: #000;
+	line-height: 20px
+}
+
+.updateInfo .portraitBox .portrait,
+.updateInfo .portraitBox {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex
+}
+
+.updateInfo .portraitBox .portrait {
+	margin-left: 13px;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	-webkit-box-align: end;
+	-ms-flex-align: end;
+	align-items: flex-end
+}
+
+.updateInfo .portraitBox .portrait .img {
+	width: 58px;
+	height: 58px;
+	border-radius: 6px;
+	background-color: #f1f1f1;
+	margin-right: 20px
+}
+
+.updateInfo .portraitBox .portrait button {
+	width: 70px;
+	height: 30px;
+	padding: 0;
+	border-radius: 15px;
+	border: 1px solid #c9c9c9;
+	background: #fff;
+	color: #333;
+	font-size: 12px;
+	font-weight: 700
+}
+
+.updateInfo .content {
+	margin-top: 20px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center
+}
+
+.updateInfo .content .input-icon {
+	width: 20px;
+	height: 20px;
+	margin-top: 15px;
+	margin-left: 10px;
+	margin-right: 10px
+}
+
+.updateInfo .content >span {
+	width: 80px;
+	font-size: 14px;
+	font-family: PingFangSC;
+	font-weight: 400;
+	color: #000;
+	line-height: 20px
+}
+
+.updateInfo .content .input-nick {
+	width: 260px;
+	height: 46px
+}
+
+.updateInfo .content .el-input__inner:focus {
+	border-color: #dcdfe6
+}
+
+.updateInfo .content .input-wrap {
+	width: 360px;
+	height: 46px;
+	border: none;
+	outline: none;
+	border-radius: 25px;
+	margin-right: 20px;
+	font-size: 14px;
+	font-family: PingFangSC;
+	font-weight: 400
+}
+
+.updateInfo .content .input-wrap .el-input--suffix .el-input__inner {
+	width: 80px;
+	color: #333;
+	font-weight: 500;
+	font-size: 13px
+}
+
+.updateInfo .content .capacha-input {
+	margin-right: 20px;
+	width: 260px
+}
+
+.updateInfo .content .capacha-button {
+	border-color: #ffbb24;
+	color: #ffbb24;
+	font-size: 14px
+}
+
+.updateInfo .content .el-input-group__prepend {
+	border-top-left-radius: 40px;
+	border-bottom-left-radius: 40px;
+	background: #fff;
+	border-right: 0;
+	width: 90px
+}
+
+.updateInfo .content .el-input-group--prepend .el-input__inner {
+	border-left: 0;
+	border-top-right-radius: 40px;
+	border-bottom-right-radius: 40px;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+	padding-left: 10px
+}
+
+.updateInfo .content .el-input-group--prepend .el-input--suffix .el-input__inner {
+	text-align: center
+}
+
+/*.updateInfo .content input {
+	padding: 0 20px;
+	width: 260px;
+	height: 46px;
+	border: none;
+	outline: none;
+	border-radius: 25px;
+	border: 1px solid #e7e7e7;
+	font-size: 14px;
+	font-family: PingFangSC;
+	font-weight: 400
+}
+*/
+.updateInfo .saveBtn {
+	margin: 20px 0 0 55px;
+	width: 131px;
+	height: 40px;
+	border-radius: 25px;
+	font-size: 16px;
+	font-family: PingFangSC;
+	font-weight: 600;
+	color: #000;
+	background: -webkit-gradient(linear, left top, right top, from(#ffe23a), to(#faae15));
+	background: linear-gradient(90deg, #ffe23a, #faae15);
+	border: none;
+	outline: none;
+	cursor: pointer
+}
+
+.updateInfo .el-dialog {
+	width: 490px;
+	border-radius: 10px
+}
+
+.updateInfo .el-dialog /deep/ .el-dialog__header {
+	background: -webkit-gradient(linear, left top, right top, from(#ffe549), to(#ffb41e));
+	background: linear-gradient(90deg, #ffe549, #ffb41e);
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px
+}
+
+.updateInfo .el-dialog /deep/ .el-dialog__header .el-dialog__title {
+	font-size: 18px;
+	font-weight: 700;
+	color: #000
+}
+
+.updateInfo .el-dialog .el-dialog__headerbtn .el-dialog__close {
+	color: #333;
+	font-weight: 700
+}
+
+.updateInfo .dialog {
+	padding: 0 40px
+}
+
+.updateInfo .dialog .avatar-wrap {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap
+}
+
+.updateInfo .dialog .avatar-wrap .avatar-item {
+	position: relative;
+	border-radius: 26px;
+	margin-right: 54px;
+	margin-bottom: 22px
+}
+
+.updateInfo .dialog .avatar-wrap .avatar-item:nth-child(4n) {
+	margin-right: 0
+}
+
+.updateInfo .dialog .avatar-wrap .avatar-item .avatar {
+	width: 52px;
+	height: 52px;
+	border-radius: 26px
+}
+
+.updateInfo .dialog .avatar-wrap .avatar-item .select-img {
+	position: absolute;
+	width: 23px;
+	height: 23px;
+	bottom: 0;
+	right: 0
+}
+
+.updateInfo .dialog .btn-wrap {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center
+}
+
+.updateInfo .dialog .btn-wrap button {
+	width: 150px;
+	height: 44px
+}
+
+.updateInfo .dialog .btn-wrap button.btn-1 {
+	color: #333;
+	font-size: 14px;
+	font-weight: 700;
+	border-color: #979797
+}
+
+.updateInfo .dialog .btn-wrap button.btn-2 {
+	color: #000;
+	font-size: 14px;
+	font-weight: 700;
+	border: none;
+	background: -webkit-gradient(linear, left top, right top, from(#ffe549), to(#ffb41e));
+	background: linear-gradient(90deg, #ffe549, #ffb41e);
+	margin-left: 20px;
+	cursor: pointer
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="full-screen" content="true">
+		<meta name="screen-orientation" content="portrait">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="360-fullscreen" content="true">
+		<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover">
+		<title>频道 - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/main.css">
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/channel.css">
+	</head>
+	<body style="font-size: 12px;">
+		<div id="app">
+			<div class="app-layout app-view isTopBar">
+				<div class="tabbar">
+					{include file="system/headtop"}
+				</div>
+				<div class="channel router-view">
+					<div>
+						<div class="nvyou">
+							<div class="con-wrap">
+								<div class="left">
+									<h4>明星列表</h4>
+									<p>一应俱全让您深陷其中，点击一起观看吧</p>
+								</div>
+								<a href="{:mac_url('actor/index')}" class="right">立即查看</a>
+							</div>
+						</div>
+						<div class="channel-list">
+							{maccms:topic num="100" paging="yes" order="asc" by="time"}
+							<div class="list-item">
+								<a href="{:mac_url_topic_detail($vo)}" class="img-bg topic-item" style="background-image: url({$vo.topic_pic|mac_url_img});">
+									<div class="con-wrap">
+										<h3>{$vo.topic_name}</h3>
+										<p><p>{$vo.topic_sub}</p></p>
+									</div>
+								</a>
+							</div>
+							{/maccms:topic}	
+						</div>
+					</div>
+				</div>
+				{include file="system/footer"}
+			</div>
+		</div>
+	</body>
+</html>

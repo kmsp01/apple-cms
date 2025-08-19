@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="full-screen" content="true">
+		<meta name="screen-orientation" content="portrait">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="360-fullscreen" content="true">
+		<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover">
+		<title>分享推广 - 会员中心 - {$maccms.site_name}</title>
+		<meta name="keywords" content="会员中心,{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+	</head>
+	<body style="font-size: 12px;">
+		<div id="app">
+			<div class="containers app-view" style="padding-top: 40px;">
+				<div class="page-header">
+					<div class="page-header-top">
+						<div class="page-left" onClick="javascript:history.back(-1);"><i class="iconfont iconnext"></i></div>
+						<div class="page-center">分享推广</div>
+						<div class="page-right"><a href="{:mac_url('user/reward')}" class="clearHistory">我的分享</a></div>
+					</div>
+				</div>
+				<div class="center">
+					<div class="scroll">
+						<div class="pop-up">
+							{if condition="$GLOBALS['config']['user']['cash_status'] eq 1"}<a href="{:mac_url('user/cash')}" class="deposit">提现&gt;</a>{/if}
+							<div class="list">
+								<div class="item item1">
+									<div class="title">{$count}</div>
+									<div class="d">累计邀请人数</div>
+								</div>
+								{if condition="$GLOBALS['config']['user']['cash_status'] eq 1"}
+								<div class="item item2">
+									<div class="title">{$GLOBALS['user']['user_points']/$GLOBALS['config']['user']['cash_ratio']|mac_substring=4}</div>
+									<div class="d">当前可提现余额</div>
+								</div>
+								{/if}
+							</div>
+							<a href="{:mac_url('user/invite')}"><div class="but">分享注册即可获得</div></a>
+						</div>
+	
+
+						<div class="desc">
+							<div class="header">领取钻石</div>
+							<p>1、分享二维码或者邀请链接注册成功一位会员即可获得{$GLOBALS['config']['user']['invite_reg_points']}钻石。</p>
+							<p>2、越多好友注册赠送{$GLOBALS['config']['user']['invite_reg_points']}越多，赠送的钻石还可以累积，多劳多得哦！</p>
+							<p>3、邀请的好友有消费你也可以获得钻石分成，钻石可用于兑换VIP会员或购买付费视频提现等，快去分享吧！</p>
+						</div>
+						<div class="van-tabs van-tabs--line">
+							<div class="van-tabs__wrap">
+								<div class="van-tabs__nav van-tabs__nav--line">
+									<a href="{:mac_url('user/share')}" class="van-tab">
+										<span class="van-tab__text van-tab__text--ellipsis">收益明细</span>
+									</a>
+									<a href="{:mac_url('user/cashlog')}" class="van-tab van-tab--active"  style="color: rgb(245, 39, 84);">
+										<span class="van-tab__text van-tab__text--ellipsis">提现记录</span>
+									</a>
+								</div>
+							</div>
+
+							<div class="van-tabs__content">
+								
+								
+								<div class="van-tab__pane">
+									<div class="earnings withdrawal">
+										{volist name="list" id="vo"}
+										<div class="item">
+											<div class="top">
+												<div class="l">提现时间：{$vo.cash_time|date='Y-m-d H:i',###}</div>
+												<div class="r">{if condition="$vo.cash_status eq '1'"}已审核{else/}未审核{/if}</div>
+											</div>
+											<div class="bottom">
+												<div class="l">
+													<div class="name">收款方式：{$vo.cash_bank_name}</div>
+													<div class="no">收款账户：{$vo.cash_bank_no}</div>
+													<div class="d">收款姓名：{$vo.cash_payee_name}</div>
+												</div>
+												<div class="r">￥{$vo.cash_money}</div>
+											</div>
+										</div>
+										{/volist}
+										{if $__PAGING__.record_total==0}
+										<div class="van-empty">
+											<div class="van-empty__image"><img src="{$maccms.path}MDassets/h5/img/empty-image-default.png"></div>
+											<p class="van-empty__description">暂无明细</p>
+										</div>
+										{/if}
+									</div>
+								</div>
+								
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

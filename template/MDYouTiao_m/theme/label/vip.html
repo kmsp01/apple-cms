@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="full-screen" content="true">
+		<meta name="screen-orientation" content="portrait">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="360-fullscreen" content="true">
+		<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover">
+		<title>VIP开通 - {$maccms.site_name}</title> 
+		<meta name="keywords" content="{$maccms.site_keywords}"> 
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/main.css">
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/vip.css">
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/login.css">
+	</head>
+	<body style="font-size: 12px;">
+		<div id="app">
+			<div class="vip-open app-view">
+				<div class="top-wrap">
+					<div class="card-wrap">
+						<div class="img-bg avatar" style="background-image: url({$user.user_id|mac_get_user_portrait});"></div>
+						<div class="name-wrap">
+							<p>{$user.user_name}</p><span>{if condition="$GLOBALS['user']['group_id'] eq 3"}{$user.user_end_time|mac_day|mac_default='无限期'}到期{else}您当前未开通VIP会员{/if}</span>
+						</div>
+						{if condition="$GLOBALS['user']['user_id']" gt 0}
+						<!--a href="{:mac_url('user/share')}" class="btn-wrap">
+							<div class="btn">分享推广</div>
+						</a-->
+						{/if}
+					</div>
+					<div class="bottom-wrap">
+						<div class="bottom-con">
+							<p>优惠剩余时间 <span id="days"></span></p>
+						</div>
+					</div>
+				</div>
+				<div class="product-wrap">
+					<div class="product">
+						<div class="title-wrap">
+							<h3>VIP会员</h3>
+							<!--p>手机/网页/电脑正常使用</p-->
+						</div>
+						{volist name="group_list" id="vo"}
+						{if condition="$vo.group_id gt 2 && $vo.group_status eq 1"}
+						<div class="list-wrap list-2">
+							<div data-index='0' class="list-item active" data-id="{$vo.group_id}" data-name="{$vo.group_name}" data-time="{$madou['site_time_0']}" data-points="{$madou['site_point_0']}" data-long="day">
+								<h3 class="name">{$madou['site_time_0']}天VIP会员</h3>
+								<div class="center-wrap">
+									<p class="amount">¥<span>{$madou['site_point_0']}</span></p>
+									<span class="des">{$madou['site_point_0']/$madou['site_time_0']|mac_substring=3}元/天</span>
+								</div>
+								<div class="label">{if condition="$madou['site_givetime_0'] neq 0"}赠送{$madou['site_givetime_0']}天VIP{/if}{if condition="$madou['site_giveintegra_0'] neq 0"} 赠送{$madou['site_giveintegra_0']}钻石{/if}</div>
+							</div>
+							<div data-index='1' class="list-item" data-id="{$vo.group_id}" data-name="{$vo.group_name}" data-time="{$madou['site_time_1']}" data-points="{$madou['site_point_1']}" data-long="week">
+								<h3 class="name">{$madou['site_time_1']}天VIP会员</h3>
+								<div class="center-wrap">
+									<p class="amount">¥<span>{$madou['site_point_1']}</span></p>
+									<span class="des">{$madou['site_point_1']/$madou['site_time_1']|mac_substring=3}元/天</span>
+								</div>
+								<div class="label">{if condition="$madou['site_givetime_1'] neq 0"}赠送{$madou['site_givetime_1']}天VIP{/if}{if condition="$madou['site_giveintegra_1'] neq 0"} 赠送{$madou['site_giveintegra_1']}钻石{/if}</div>
+							</div>
+						</div>	
+						<div class="list-wrap list-2">	
+							<div data-index='2' class="list-item" data-id="{$vo.group_id}" data-name="{$vo.group_name}" data-time="{$madou['site_time_2']}" data-points="{$madou['site_point_2']}" data-long="month">
+								<h3 class="name">{$madou['site_time_2']}天VIP会员</h3>
+								<div class="center-wrap">
+									<p class="amount">¥<span>{$madou['site_point_2']}</span></p>
+									<span class="des">{$madou['site_point_2']/$madou['site_time_2']|mac_substring=3}元/天</span>
+								</div>
+								<div class="label">{if condition="$madou['site_givetime_2'] neq 0"}赠送{$madou['site_givetime_2']}天VIP{/if}{if condition="$madou['site_giveintegra_2'] neq 0"} 赠送{$madou['site_giveintegra_2']}钻石{/if}</div>
+							</div>
+							<div data-index='3' class="list-item" data-id="{$vo.group_id}" data-name="{$vo.group_name}" data-time="{$madou['site_time_3']}" data-points="{$madou['site_point_3']}" data-long="year">
+								<h3 class="name">{$madou['site_time_3']}天VIP会员</h3>
+								<div class="center-wrap">
+									<p class="amount">¥<span>{$madou['site_point_3']}</span></p>
+									<span class="des">{$madou['site_point_3']/$madou['site_time_3']|mac_substring=3}元/天</span>
+								</div>
+								<div class="label">{if condition="$madou['site_givetime_3'] neq 0"}赠送{$madou['site_givetime_3']}天VIP{/if}{if condition="$madou['site_giveintegra_3'] neq 0"} 赠送{$madou['site_giveintegra_3']}钻石{/if}</div>
+							</div>
+						</div>
+						{/if}
+						{/volist}
+						
+					</div>
+				</div>
+				<div class="sep"></div>
+				
+				<!--div class="btn-pay-wrap">
+				    
+					<div class="btn-pay">
+						<div class="left-wrap">
+							<p>合计 <span>¥</span>  <span class="number">{$madou['site_point_0']}</span></p>
+						</div>
+					
+						<div class="right-wrap btn-pays" data-id="{$vo.group_id}" data-name="{$vo.group_name}" data-time="{$madou['site_time_0']}" data-points="{$madou['site_point_0']}" data-long="day">立即支付</div>
+					</div>
+				</div-->
+				
+
+
+
+					<div class="page-body">
+						<div class="content">
+							<input type="text" name="card_no" value="" placeholder="请输入请输入充值卡号">
+						</div>
+						<p class="tishi">点击购买卡密(有效期间为从成功充值日期起计算)</p>
+						{if condition="$GLOBALS['config']['pay']['card']['url'] neq ''"}
+						<a href="{$GLOBALS['config']['pay']['card']['url']}" target="_blank"><button class="card-url" type="button">购买卡密</button></a>
+						{/if}
+						<button class="button" type="button" id="btn_submit_card">立即充值</button>
+					</div>
+				
+				
+				
+				
+				<div class="sep"></div>
+				<div class="vip-wrap">
+					<div class="title-wrap">
+						<h3>VIP会员特权</h3>
+					</div>
+					<div class="vip-list">
+						<div class="vip-item">
+							<img src="{$maccms.path}MDassets/h5/img/vip-list-1.png">
+							<p>VIP高速线路</p>
+						</div>
+						<div class="vip-item">
+							<img src="{$maccms.path}MDassets/h5/img/vip-list-2.png">
+							<p>免广告</p>
+						</div>
+						<div class="vip-item">
+							<img src="{$maccms.path}MDassets/h5/img/vip-list-3.png">
+							<p>高清观影</p>
+						</div>
+						<div class="vip-item">
+							<img src="{$maccms.path}MDassets/h5/img/vip-list-4.png">
+							<p>无限下载</p>
+						</div>
+					</div>
+				</div>
+				<div class="sep"></div>
+				{include file="system/footer"}
+				<script>
+				
+
+				$('.list-item').click(function(){
+					let index=$(this).attr('data-index')
+					$('.list-item').each((i,item)=>{
+						if(index==i){
+							$(this).addClass('active')
+						}else{
+							$(item).removeClass('active')
+						}
+
+					})
+					var ids = $(".active").attr("data-id"); 
+					var names = $(".active").attr("data-name"); 
+					var times = $(".active").attr("data-time"); 
+					var points = $(".active").attr("data-points"); 
+					var longs = $(".active").attr("data-long"); 
+					$('.number').html(points);
+					$(".btn-pays").attr("data-id",ids);
+					$(".btn-pays").attr("data-name",names);
+					$(".btn-pays").attr("data-time",times);
+					$(".btn-pays").attr("data-points",points);
+					$(".btn-pays").attr("data-long",longs);
+				})
+				$('.btn-pays').click(function() {
+					var that = $(this);
+					var group_id = that.attr('data-id');
+					var group_name = that.attr('data-name');
+					var long = that.attr('data-long');
+					var group_time = that.attr('data-time');
+					var points = that.attr('data-points');
+					var user_id ="{$user.user_id}";
+					layer.confirm('确定要开通【'+group_time+'】天'+group_name+'吗？需要花费【'+points+'】元', {
+						title: '提示',
+						btn: ['确定', '取消']
+					}, function() {
+						$.ajax({
+							url: "{:url('user/upgrade')}",
+							type: "post",
+							dataType: "json",
+							data: {group_id: group_id,long:long},
+							beforeSend: function () {},
+							success: function(r) {
+								if (r.code == 1) {
+								    //window.open('https://pay.kmsp001.online', '_blank');
+								    location.href = "https://pay.kmsp001.online";
+									//location.href = "{:mac_url('user/pay')}?order_code=" + r.data.order_code;
+								} else {
+									if (user_id == 0) {
+										layer.msg("请先登录或注册账号");
+										setTimeout(function(){
+											location.href = "{:mac_url('user/login')}";
+										},1500);
+									} else {
+										layer.msg(r.msg);
+									}
+								}
+							},
+							complete: function () {}
+						});
+				
+					});
+				});
+				Madou.countdown();
+				</script>
+					<script>
+						$(".go-back").click(function () {
+							var ref = document.referrer;
+							location.href=ref;
+						});
+						$('#btn_submit_card').click(function(){
+							var that=$(this);
+							var no = $('input[name="card_no"]').val();
+							if(no==''){
+								layer.msg('请输入充值卡卡号');
+								return;
+							}
+							layer.confirm('确定要使用充值卡充值吗？', {
+							title:'提示',btn: ['确定','取消']
+							}, function(){
+								$.ajax({
+									url: "{:url('user/buy')}",
+									type: "post",
+									dataType: "json",
+									data: {card_no: no,flag:'card'},
+									beforeSend: function () {
+										$("#btn_submit_card").val("loading...");
+									},
+									success: function (r) {
+										if (r.code == 1) {
+											layer.msg(r.msg);
+											location.href="{:mac_url('user/index')}";
+										}
+										else{
+											layer.msg(r.msg);
+										}
+									},
+									complete: function () {
+										$("#btn_submit_card").val("提交");
+									}
+								});
+							});
+						});
+					</script>
+			</div>
+		</div>
+	</body>
+</html>

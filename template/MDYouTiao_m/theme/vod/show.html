@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="full-screen" content="true">
+		<meta name="screen-orientation" content="portrait">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="360-fullscreen" content="true">
+		<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover">
+		<title>最新{$obj.type_name}-推荐{$obj.type_name}-第{$param.page}页筛选 - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$obj.type_key}">
+		<meta name="description" content="{$obj.type_des}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/show.css">
+	</head>
+	<body style="font-size: 12px;">
+		<div id="app">
+			<div class="contanner app-view" style="padding-top: 85px;">
+				<div class="page-header">
+					<div class="page-header-top">
+						<div class="page-left" onclick="javascript:history.back(-1);"><i class="iconfont iconnext"></i></div>
+						<div class="page-center">{$obj.type_name}</div>
+						<div class="page-right"></div>
+					</div>
+					<div class="nav">
+						<a href="{:mac_url_type($obj,['area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'time' ],'show')}" {if condition="$param.by eq '' || $param.by eq 'time'"}class="active"{/if}>最新视频</a>
+						<a href="{:mac_url_type($obj,['area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'score' ],'show')}" {if condition="$param.by eq 'score'"}class="active"{/if}>综合推荐</a>
+						<a href="{:mac_url_type($obj,['area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'hits' ],'show')}" {if condition="$param.by eq 'hits'"}class="active"{/if}>最多播放</a>
+						<a href="{:mac_url_type($obj,['area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'up' ],'show')}" {if condition="$param.by eq 'up'"}class="active"{/if}>最多喜欢</a>
+					</div>
+				</div>
+				<div class="classList">
+					<div role="feed" class="list van-list" id="content">
+						{maccms:vod num="24" paging="yes" pageurl="vod/show" half="5" order="desc" by="time"}
+						{include file="module/vodlist"}
+						{/maccms:vod}
+					</div>
+					{if condition="$madou['lazy']['state'] neq 1"}
+					{include file="system/paging"}
+					{else}
+					{include file="module/lazy"}
+					{/if}
+				</div>
+			</div>
+			{include file="system/gotop,system/gohome"}
+		</div>
+	</body>
+</html>

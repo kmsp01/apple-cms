@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="full-screen" content="true">
+		<meta name="screen-orientation" content="portrait">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="360-fullscreen" content="true">
+		<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover">
+		<title>在线支付 - 会员中心 - {$maccms.site_name}</title> 
+		<meta name="keywords" content="会员中心,{$maccms.site_keywords}"> 
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/info.css">
+	</head>
+	<body style="font-size: 12px;">
+		<div id="app">
+			<div class="app-layout app-view">
+				<div class="containers router-view" style="padding-top: 40px;">
+					<div class="page-header">
+						<div class="page-header-top">
+							<div class="page-left" onclick="javascript:history.back(-1);"><i class="iconfont iconnext"></i></div>
+							<div class="page-center">在线支付</div>
+							<div class="page-right"></div>
+						</div>
+					</div>
+					<form method="post" target="_blank" action="{:mac_url('user/gopay')}">
+						<input type="hidden" name="order_id" value="{$info.order_id}">
+						<input type="hidden" name="order_code" value="{$info.order_code}">
+						<div class="content">
+							<input type="text" value="订单编号：{$info.order_code}" disabled="disabled" class="paytype">
+						</div>
+						<div class="content">
+							<input type="text" value="订单金额：{$info.order_price}元" disabled="disabled" class="paytype">
+						</div>
+						<div class="content">
+							<select class="paytype" name="payment" id="payment">
+								<option value ="">请选择支付方式</option>
+								{volist name="ext_list" id="vo"}
+								<option value="{$key}">{$vo}支付</option>
+								{/volist}
+							</select>
+						</div>
+						<div class="content" id="paytype_box" style="display:none;">
+							<select class="paytype" id="paytype" name="paytype"></select>
+						</div>
+						<button type="submit">确认</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<script>
+			var codepay_type = '{maccms:foreach name=":explode(',',$config.codepay.type)"}<option value ="{$vo}">{if condition="$vo==1"}支付宝二维码{elseif condition="$vo==2"/}QQ钱包二维{elseif condition="$vo==3"/}微信二维码{/if}</option>{/maccms:foreach}';
+			var yipay_type = '{maccms:foreach name=":explode(',',$config.yipay.type)"}<option value ="{$vo}">{if condition="$vo==1"}支付宝{elseif condition="$vo==2"/}QQ钱包{elseif condition="$vo==3"/}微信{elseif condition="$vo==4"/}财付通{/if}</option>{/maccms:foreach}';
+			var zhapay_type ='{maccms:foreach name=":explode(',',$config.zhapay.type)"}<option value ="{$vo}">{if condition="$vo==1"}微信{elseif condition="$vo==2"/}支付宝{/if}</option> {/maccms:foreach}';
+			$("#payment").change(function() {
+				$('#paytype').html('');
+				if($("#payment").val()=="codepay" || $("#payment").val()=="zhapay"|| $("#payment").val()=="yipay"){
+					if($("#payment").val()=="codepay") {
+						$('#paytype').html(codepay_type);
+					}
+					if($("#payment").val()=="zhapay") {
+						$('#paytype').html(zhapay_type);
+					}
+					if($("#payment").val()=="yipay") {
+						$('#paytype').html(yipay_type);
+					}
+
+					$("#paytype_box").slideDown();
+				}
+				else{
+					$("#paytype_box").slideUp();
+				}
+			});
+
+			$(".paytype").change(function() {
+				$('#paytype').val( $(this).val() );
+			});
+		</script>
+	</body>
+</html>

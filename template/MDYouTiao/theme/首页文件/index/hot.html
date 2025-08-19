@@ -1,0 +1,22 @@
+<div class="home-area el-row" style="margin-left: -10px; margin-right: -10px;">
+	<div class="el-col el-col-18" style="padding-left: 10px; padding-right: 10px;">
+		<div class="top-header">
+			<a href="{:mac_url('label/rank',['by'=>'hits'])}" class="info-left">
+				<img class="left-img" src="{$maccms.path}MDassets/web/img/hot.png">
+				<span class="area-title">热门影片</span>
+			</a>
+			<a href="{:mac_url('label/rank',['by'=>'hits'])}" class="info-right">
+				<div class="more">
+					<span class="info-more">更多</span>
+					<img src="{$maccms.path}MDassets/web/img/chevron_right.png">
+				</div>
+			</a>
+		</div>
+		<div class="video-contaner zxyp-content">
+			{maccms:vod num="6" by="hits_day" order="desc"}
+			{include file="module/vodlist"}
+			{/maccms:vod}
+		</div>
+	</div>
+	{include file="index/actor"}
+</div>

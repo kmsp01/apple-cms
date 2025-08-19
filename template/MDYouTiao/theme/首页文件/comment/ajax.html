@@ -1,0 +1,50 @@
+<form class="input-wrap">
+	<input type="hidden" name="comment_pid" value="0">
+	<div class="el-textarea">
+		<textarea class="el-textarea__inner comment_content" name="comment_content" autocomplete="off" placeholder="我们一起聊聊那些有趣的事情" maxlength="200" style="min-height: 31px;resize:none;"></textarea>
+		<span class="el-input__count comment_remaining">200</span>
+	</div>
+	<div class="emoji">
+		<div class="el-popover el-popper comment_face_box face-box" x-placement="bottom-start">
+			{maccms:for start="1" end="45" }
+			<img class="emotionItem" data-id="{$i}" src="__STATIC__/images/face/{$i}.gif">
+			{/maccms:for}
+			<div x-arrow="" class="popper__arrow" style="left: 11px;"></div>
+		</div>
+		<span class="el-popover__reference-wrapper comment_face_panel"><img src="{$maccms.path}MDassets/web/img/face.png" class="emoji-face el-popover__reference"></span>
+	</div>
+	<button type="button" class="el-button handle-comment el-button--default comment_submit">
+		<span>发送评论</span>
+	</button>
+</form>
+{maccms:comment num="5" paging="yes" order="desc" by="id"}{/maccms:comment}
+{if condition="$__PAGING__.record_total neq '0'"}
+<div class="comment-list">
+	<h4>热门评论</h4>
+	<div>
+		{maccms:foreach name="__LIST__" id="vo"}
+		<div class="comment-item">
+			<div class="top-wrap">
+				<div class="top-left">
+					<img class="top-left-avatar" src="{$vo.user_id|mac_get_user_portrait}">
+					<div class="top-left-con">
+						<div class="top-left-con-title">
+							<h3>{$vo.comment_name}</h3>
+						</div>
+						<div class="top-left-con-time">{$vo.comment_time|date='Y-m-d H:i:s',###}</div>
+					</div>
+				</div>
+				<div class="top-right">
+					<div class="top-right-item digg_link" data-id="{$vo.comment_id}" data-mid="4" data-type="up"><img src="{$maccms.path}MDassets/web/img/comment_up.png"><span class="">{$vo.comment_up}</span></div>
+					<div class="top-right-item digg_link" data-id="{$vo.comment_id}" data-mid="4" data-type="down"><img src="{$maccms.path}MDassets/web/img/comment_down.png"><span class="">{$vo.comment_down}</span></div>
+				</div>
+			</div>
+			<div class="label">{$vo.comment_content|mac_em_replace}</div>
+		</div>
+		{/maccms:foreach}
+	</div>
+</div>
+{/if}
+<script type="text/javascript">
+	$('.comment-total').html('{$__PAGING__.record_total}');
+</script>

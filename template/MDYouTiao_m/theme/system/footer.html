@@ -1,0 +1,46 @@
+<div class="footer-wrap">
+	<div class="app-footer van-hairline--top-bottom van-tabbar van-tabbar--fixed" style="z-index: 100;">
+		<a href="/" class="van-tabbar-item {if condition="$maccms.aid eq 1||$maccms.aid eq 11"}van-tabbar-item--active{/if}">
+			<div class="van-tabbar-item__icon">
+				<div class="icon i1">
+					<span>首页</span>
+				</div>
+			</div>
+			<div class="van-tabbar-item__text"></div>
+		</a>
+		<a href="{:mac_url('topic/index')}" class="van-tabbar-item {if strpos($_SERVER["REQUEST_URI"],'topic')}van-tabbar-item--active{/if}">
+			<div class="van-tabbar-item__icon">
+				<div class="icon i2">
+					<span>频道</span>
+				</div>
+			</div>
+			<div class="van-tabbar-item__text"></div>
+		</a>
+		<a href="{:mac_url('label/vip')}" class="van-tabbar-item {if strpos($_SERVER["REQUEST_URI"],'vip')}van-tabbar-item--active{/if}">
+			<div class="van-tabbar-item__icon">
+				<div class="icon i3">
+					<span>VIP</span>
+				</div>
+			</div>
+			<div class="van-tabbar-item__text"></div>
+		</a>
+		<a href="{:mac_url('label/rank',['by'=>'hits'])}" class="van-tabbar-item {if strpos($_SERVER["REQUEST_URI"],'rank')}van-tabbar-item--active{/if}">
+			<div class="van-tabbar-item__icon">
+				<div class="icon i4">
+					<span>排行</span>
+				</div>
+			</div>
+			<div class="van-tabbar-item__text"></div>
+		</a>
+		<a {if condition="$GLOBALS['user']['user_id']" gt 0}href="{:mac_url('user/index')}"{else}href="{:mac_url('label/my')}"{/if} class="van-tabbar-item {if condition="$maccms.aid eq 6"}van-tabbar-item--active{/if} {if strpos($_SERVER["REQUEST_URI"],'my')}van-tabbar-item--active{/if}">
+			<div class="van-tabbar-item__icon">
+				<div class="icon i5">
+					<span>我的</span>
+				</div>
+			</div>
+			<div class="van-tabbar-item__text"></div>
+		</a>
+	</div>
+</div>
+{include file="system/gotop"}
+

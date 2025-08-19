@@ -1,0 +1,41 @@
+<div style="">
+	<div class="van-sticky">
+		<div class="controls" onclick="javascript:history.back(-1);"><i class="van-icon van-icon-arrow-left" style="color: rgb(255, 255, 255); font-size: 20px;"></i></div>
+		<div class="video-box" style="height: 210.938px;">
+			<div class="img-bg openVip" style="background-image: url({:mac_url_img($obj.vod_pic)});">
+				{if condition="$madou['free']['state'] eq ''"}
+				{if condition="$GLOBALS['user']['group_id'] eq 3"}
+				{$player_data}{$player_js}
+				{else}
+				{if condition="$GLOBALS['user']['group_id'] eq 1"}
+				{if condition="$obj.type_id eq $madou['type']['free']"}
+				{$player_data}{$player_js}
+				{else}
+				<div class="flex-center">
+					<div class="desc">本视频为VIP会员专享，VIP会员可免费观看</div>
+					<a href="{:mac_url('user/login')}"><button class="button">开通会员VIP</button></a>
+					<div class="logins btn-login">已是VIP可 <a href="{:mac_url('user/login')}">登陆</a> 观看</div>
+				</div>
+				{/if}
+				{else if condition="$GLOBALS['user']['group_id'] eq 2"}
+				{if condition="$obj.vod_points eq ''"}
+				{if condition="$obj.type_id eq $madou['type']['free']"}
+				{$player_data}{$player_js}
+				{else}
+				<div class="flex-center">
+					<div class="desc">本视频为VIP会员专享，VIP会员可免费观看</div>
+					<a href="{:mac_url('label/vip')}"><button class="button">开通会员VIP</button></a>
+				</div>
+				{/if}
+				{else}
+				{$player_data}{$player_js}
+				{/if}
+				{/if}
+				{/if}	
+				{else}
+				{$player_data}{$player_js}
+				{/if}
+			</div>
+		</div>
+	</div>
+</div>

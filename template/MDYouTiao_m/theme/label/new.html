@@ -1,0 +1,14 @@
+<?php include ('template/MDYouTiao/admin/madouconfig.php'); ?>
+{maccms:vod num="'.($madou['wap']['index']['new']).'" paging="yes" pageurl="label/new" type="current" order="desc" by="time"}
+<a href="{:mac_url_vod_play($vo)}" class="video-surface">
+	<div class="video-surface-wrap">
+		{if condition="$madou['free']['state'] eq ''"}{if condition="$vo.vod_points eq ''"}{if condition="$vo.type_id neq $madou['type']['free']"}<span class="video-item-tag video-item-tag-is-vip"></span>{/if}{else}<span class="video-item-tag video-item-tag-is-paid"></span>{/if}{else}{/if}
+		<div class="video-container" style="height: 2.82667rem;">
+			<div class="img-bg surface-img" style="background-image: url({:mac_url_img($vo.vod_pic)});"></div>
+			<span class="video-item-tag video-item-tag-hits"><img src="{$maccms.path}MDassets/h5/img/hits.png" class="play-icon">{$vo.vod_hits}</span>
+			<span class="video-item-tag video-item-tag-duration">{$vo.vod_duration|mac_default=''}</span>
+		</div>
+		<div class="video-desc text-one-line">{$vo.vod_name}</div>
+	</div>
+</a>
+{/maccms:vod}

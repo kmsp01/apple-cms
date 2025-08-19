@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="full-screen" content="true">
+		<meta name="screen-orientation" content="portrait">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="360-fullscreen" content="true">
+		<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover">
+		<title>最新{$obj.type_title}-推荐{$obj.type_title}-第{$param.page}页 - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$obj.type_key}">
+		<meta name="description" content="{$obj.type_des}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/main.css">
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/category.css">
+	</head>
+	<body style="font-size: 12px;">
+		<div id="app">
+			<div class="app-layout app-view isTopBarNav">
+				<div class="tabbar">
+					{include file="system/headtop,system/headlist"}
+				</div>
+				<div class="cantanner router-view">
+					<div class="van-list">
+						<div>
+							<ul class="list" id="content">
+								{maccms:vod num="24" paging="yes" pageurl="vod/type" half="5" order="desc" by="time"}
+								{include file="module/vodlist"}
+								{/maccms:vod}
+							</ul>
+						</div>
+						{if condition="$madou['lazy']['state'] neq 1"}
+						{include file="system/paging"}
+						{else}
+						{include file="module/lazy"}
+						{/if}
+					</div>
+				</div>
+				{include file="system/footer"}
+			</div>
+		</div>
+	</body>
+</html>

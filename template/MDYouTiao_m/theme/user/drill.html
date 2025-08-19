@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="full-screen" content="true">
+		<meta name="screen-orientation" content="portrait">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="360-fullscreen" content="true">
+		<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover">
+		<title>黄钻充值 - 会员中心 - {$maccms.site_name}</title>
+		<meta name="keywords" content="会员中心,{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/drill.css">
+	</head>
+	<body style="font-size: 12px;">
+		<div id="app">
+			<div class="app-layout app-view drill">
+				<div class="y-drill router-view" style="padding-top: 40px;">
+					<div class="page-header drill">
+						<div class="page-header-top">
+							<div class="page-left" onClick="javascript:history.back(-1);"><i class="iconfont iconnext"></i></div>
+							<div class="page-center">黄钻充值</div>
+							<div class="page-right"></div>
+						</div>
+					</div>
+					<div class="top-wrap">
+						<div class="bg-2"></div>
+						<div class="card-wrap">
+							<img class="img avatar" src="{$user.user_id|mac_get_user_portrait}">
+							<div class="left-con">
+								<div class="left-top"><span>黄钻余额：</span><span>{$user.user_points}</span></div>
+							</div>
+						</div>
+						<div class="drill-img"><img src="{$maccms.path}MDassets/h5/img/drill.png"></div>
+					</div>
+					<div class="recommend-wrap">
+						<div class="title-wrap">
+							<h3>充值推荐</h3><span>1元={$GLOBALS['config']['pay']['scale']}黄钻</span>
+						</div>
+						<div class="list-wrap" style="flex-wrap: wrap;">
+							<div data-index='0' class="list-item active" data-price="{$madou['site_integral_0']* $GLOBALS['config']['pay']['scale']}" data-money="{$madou['site_integral_0']}">
+								<div class="item-title">
+								<span class="rmb">¥</span><span>{$madou['site_integral_0']}</span></div>
+								<p>{$madou['site_integral_0']* $GLOBALS['config']['pay']['scale']}钻 送 {$madou['site_pgiveintegra_0']}钻</p>
+							</div>
+							<div data-index='1' class="list-item" data-price="{$madou['site_integral_1']* $GLOBALS['config']['pay']['scale']}" data-money="{$madou['site_integral_1']}">
+								<div class="item-title"><span class="rmb">¥</span><span>{$madou['site_integral_1']}</span></div>
+								<p>{$madou['site_integral_1']* $GLOBALS['config']['pay']['scale']}钻 送 {$madou['site_pgiveintegra_1']}钻</p>
+							</div>
+							<div data-index='2' class="list-item" data-price="{$madou['site_integral_2']* $GLOBALS['config']['pay']['scale']}" data-money="{$madou['site_integral_2']}">
+								<div class="item-title"><span class="rmb">¥</span><span>{$madou['site_integral_2']}</span></div>
+								<p>{$madou['site_integral_2']* $GLOBALS['config']['pay']['scale']}钻 送 {$madou['site_pgiveintegra_2']}钻</p>
+							</div>
+							<div data-index='3' class="list-item" data-price="{$madou['site_integral_3']* $GLOBALS['config']['pay']['scale']}" data-money="{$madou['site_integral_3']}">
+								<div class="item-title"><span class="rmb">¥</span><span>{$madou['site_integral_3']}</span></div>
+								<p>{$madou['site_integral_3']* $GLOBALS['config']['pay']['scale']}钻 送 {$madou['site_pgiveintegra_3']}钻</p>
+							</div>
+						</div>
+					</div>
+					<div class="pay-btn" data-price="{$madou['site_integral_0']* $GLOBALS['config']['pay']['scale']}" data-money="{$madou['site_integral_0']}">立即支付</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			$('.list-item').click(function(){
+				let index=$(this).attr('data-index')
+				$('.list-item').each((i,item)=>{
+					if(index==i){
+						$(this).addClass('active')
+					}else{
+						$(item).removeClass('active')
+					}
+
+				})
+				var prices = $(".active").attr("data-price"); 
+				var moneys = $(".active").attr("data-money"); 
+				$(".pay-btn").attr("data-price",prices);
+				$(".pay-btn").attr("data-money",moneys);
+			})
+			$('.pay-btn').click(function() {
+				var that = $(this);
+				var money = that.attr('data-money');
+				var price = that.attr('data-price');
+				if (Number(price) < 1) {
+					return;
+				}
+				layer.confirm('确定要充值【' + price + '】钻石吗？需要花费【' + money + '】元', {
+					title: '提示',
+					btn: ['确定', '取消']
+				}, function() {
+					$.ajax({
+						url: "{:mac_url('user/buy')}",
+						type: "post",
+						dataType: "json",
+						data: {
+							price: money,
+							flag: 'pay'
+						},
+						
+						beforeSend: function() {
+							$("#btn_submit_pay").val("loading...");
+						},
+						success: function(r) {
+							if (r.code == 1) {
+								location.href = "{:mac_url('user/pay')}?order_code=" + r.data.order_code;
+							} else {
+								layer.msg(r.msg);
+							}
+						},
+						complete: function() {
+							$("#btn_submit_pay").val("提交");
+						}
+					});
+				});
+			});
+		</script>
+	</body>
+</html>

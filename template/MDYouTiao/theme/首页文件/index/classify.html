@@ -1,0 +1,28 @@
+{maccms:type ids="'.($madou['type']['index']).'" order="asc" by="sort" id="vo1" key="key1"}
+<div class="home-area el-row">
+	<div class="home-template1">
+		<div class="top-header">
+			<div class="info-left">
+				<img class="left-img circle" src="{$maccms.path}MDassets/web/img/vips.png">
+				<span class="area-title">{$vo1.type_name}</span>
+			</div>
+			<a href="{:mac_url_type($vo1,[],'type')}" class="info-right">
+				<div class="more">
+					<span class="info-more">更多</span>
+					<img src="{$maccms.path}MDassets/web/img/chevron_right.png">
+				</div>
+			</a>
+		</div>
+		<div class="wmsp-concent">
+			<div class="wmzp-videos">
+				<div class="video-contaner">
+					{maccms:vod num="'.($madou['pc']['index']['num']).'" type="'.$vo1['type_id'].'" order="desc"
+					by="time" id="vo2" key="key2"}
+					{include file="module/i-vodlist"}
+					{/maccms:vod}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{/maccms:type}

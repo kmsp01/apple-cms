@@ -1,0 +1,42 @@
+<div class="video-box">
+{if condition="$madou['free']['state'] eq ''"}
+{if condition="$GLOBALS['user']['group_id'] eq 3"}
+{$player_data}{$player_js}
+{else}
+{if condition="$GLOBALS['user']['group_id'] eq 1"}
+{if condition="$obj.type_id eq $madou['type']['free']"}
+{$player_data}{$player_js}
+{else}
+<div class="video-before-ad noVip" style="background-image: url({:mac_url_img($obj.vod_pic)});">
+	<div class="ad-wrap">
+		<div class="ad-title">本视频为VIP会员专享，VIP会员可免费观看</div>
+		<a href="{:mac_url('user/login')}" class="ad-btn"><img src="{$maccms.path}MDassets/web/img/minivip.png">
+			<div>开通会员VIP</div>
+		</a>
+		<div class="ad-label">已是VIP可 <a href="{:mac_url('user/login')}">登录</a> 观看</div>
+	</div>
+</div>
+{/if}
+{else if condition="$GLOBALS['user']['group_id'] eq 2"}
+{if condition="$obj.vod_points eq ''"}
+{if condition="$obj.type_id eq $madou['type']['free']"}
+{$player_data}{$player_js}
+{else}
+<div class="video-before-ad noVip" style="background-image: url({:mac_url_img($obj.vod_pic)});">
+	<div class="ad-wrap">
+		<div class="ad-title">本视频为VIP会员专享，VIP会员可免费观看</div>
+		<a href="{:mac_url('label/vip')}" class="ad-btn"><img src="{$maccms.path}MDassets/web/img/minivip.png">
+			<div>开通会员VIP</div>
+		</a>
+	</div>
+</div>
+{/if}
+{else}
+{$player_data}{$player_js}
+{/if}
+{/if}
+{/if}	
+{else}
+{$player_data}{$player_js}
+{/if}
+</div>

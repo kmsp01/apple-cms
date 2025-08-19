@@ -1,0 +1,19 @@
+{if condition="$madou['comment']['state'] eq 1"}
+<div class="mbBar"></div>
+	<div class="comments actions" style="display: none;">
+	<div class="action">
+		<span title="评论" class="send comment">我也跟大家评论下！</span>
+		<span class="like btn-favs" data-type="2" data-mid="{$maccms.mid}" data-id="{$obj.vod_id}"></span>
+		<span title="分享" class="share" data-clipboard-text="{if$maccms.aid==14}{$maccms.http_type}{$maccms.site_url}{:mac_url_vod_detail($obj)}{else}{$maccms.http_type}{$maccms.site_url}{:mac_url_vod_play($obj,['sid'=>$param['sid'],'nid'=>$param['nid']])}{/if} 我正在看《{$obj.vod_name}》，你也快来一起看吧！"></span>
+	</div>
+</div>
+<div class="mac_comment" data-id="{$obj.vod_id}" data-mid="{$maccms.mid}"></div>
+<script>
+	$(function(){
+		MAC.Comment.Login = {$comment.login};
+		MAC.Comment.Verify = {$comment.verify};
+		MAC.Comment.Init();
+		MAC.Comment.Show(1);
+	});
+</script>
+{/if}

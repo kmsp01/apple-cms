@@ -1,0 +1,64 @@
+<div class="el-row">
+	<div class="site-footer">
+		{$madou['footer']['ad']}
+		<div class="footer-main">
+			<!--div class="footer-property">
+				<img src="{$madou['logo']['pic']}" class="img">
+				<a href="{:mac_url('label/question')}" class="property-item">
+					<div><img class="property-icon" src="{$maccms.path}MDassets/web/img/question.png"></div>
+					<div class="property-info">
+						<div class="property-title">常见问题</div>
+						<div class="property-desc">问题说明</div>
+					</div>
+				</a>
+				<a href="{$madou.join}" class="property-item">
+					<div><img class="property-icon" src="{$maccms.path}MDassets/web/img/join.png"></div>
+					<div class="property-info">
+						<div class="property-title">加盟合作</div>
+						<div class="property-desc">推广代理</div>
+					</div>
+				</a>
+				<a href="{:mac_url('label/contact')}" class="property-item">
+					<div><img class="property-icon" src="{$maccms.path}MDassets/web/img/connect.png"></div>
+					<div class="property-info">
+						<div class="property-title">商务合作</div>
+						<div class="property-desc">联系我们</div>
+					</div>
+				</a>
+				<a href="{:mac_url('label/newweb')}" class="property-item">
+					<div><img class="property-icon" src="{$maccms.path}MDassets/web/img/website.png"></div>
+					<div class="property-info">
+						<div class="property-title">备用网址</div>
+						<div class="property-desc">最新网址</div>
+					</div>
+				</a>
+			</div-->
+			<!--div class="middleContent">
+				<div class="footer-copyright" style="text-align: center;">{$madou['footer']['text']}</div>
+			</div-->
+		</div>
+		<div style="display: none;">{$maccms.site_tj}</div>
+	</div>
+</div>
+<div class="float-right-menu">
+	<div class="bottom">
+		<div class="top float-item gotop">
+			<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAWCAMAAAD+dOxOAAAAflBMVEVHcEz///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+gLKczAAAAKXRSTlMAvLS95rUn2iUJAQcLqemRoNXDxeXBFxT70Cbf1zAQyR8izBIc4M3dGSA+INgAAABwSURBVBjTxdDHEoJAGAPg34UtShHEQgcpQt7/BRVFZmFmz+SW75QJcazCaQOMDFHX21HvTxuwNKl7INakG/BCZuMwyyhRFZDpX+45mlJBkpglQtLSBJMEH2CXB/2ARHhednxBH7YPuL63ecg5mb57A2IjDOH5sK4AAAAAAElFTkSuQmCC">
+			返回顶部
+		</div>
+		<a href="{$madou.serve}" class="float-item">
+			<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAACC0lEQVRIS62VOWhUURSGv5+IG4JCrIQQtyaKGxa2wdFOtBANgkUKoyAuCAqmUEhhCIIWsRAXsHQJCoKdCzYWCYIWChG1SZFCFHFBLdQ/nOEOvHm+Z2Ymuc3AnXO+e+5/z/mfKFm25wOngR5gJTA3hf4GJoB7wICk70UIFW3aXgPcAtYBAXoFfE2xC9J+HPwW2CvpZZ7zD9j2wgTqBIaAc5J+ZBNtR/VH0v8fgC5J37IxReCLwAnguKThMqli33YvcAO4JOlYKdj2POBTuuJmSX//B07wMWAt0C7pVy2+rmLbG4EXwAVJJ6eDJvB54BSwKat1HrwVeAwcknS1QfBB4AqwTVLkVlceXAEeAX2SrjcIPgBcA7ZLitx6sO1lwE7gcovgw8B9SZPVim23AzfjxEyFrVRcS38I7AvwHWAP8DR1xO4WK74bnQF0AyMBjsYek1SxPWONbYfOWwIcvToiqWeWwLdDgQC/BpbGKcCqmXQF8A4YBT4GOPQNnf8A4VSLW9T4C7AIaKsaU5qeHcBRoAMIw9kvabzJPg4rjZzwjQeFttkIsBZjuzYg5ZPXDDAD7gNi/CuSnhSOdBnY9grgDDAn+fObDHgQ6AdWS3rfLDi+IGGNscYldaW3id9nQMzCckluGGx7CfA5d5uAhXevT7fYFQ+WjZn28WxHTHj0hhz8J/AcOCsp7KBuTQEt3Ondlhp8MAAAAABJRU5ErkJggg==">
+			在线客服
+		</a>
+		{if condition="$GLOBALS['user']['user_id']" gt 0}
+		<a href="{:mac_url('user/feedback')}" class="float-item">
+			<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAWCAYAAADAQbwGAAABT0lEQVQ4T+XVTauOURjF8d9CUsrgKEYmPoCBGAkR8lJiaGzgC/gCvoWJiVJGBopioDDASMqApIyUlxOlhHKW9umhgzN4npOBuGp3t9v39d/X2uu+r522W3ABe7HW9PEI25MstF2Fw7iftjdwaHqOBRT3kuxuuwYXcQrnBvATxg478YwfCSPpe/JCkjH/KdoORZdxEs+xbwDHi6+TbJ6hSm3X4QqO4Cn2J3m5ImDb9bg6IHiMA0lejYJmBrbdgOvYhYc4mGS+7SVs+g3Y9hqOTuR/wIkkt8a87RyGiTvwYDib5P1k7S02zgo8jzO4i2NJxoaL0XYeczNJbnt88r2dTfJxqYltl69wFqf/EeAvLi93Am+wJ8mTqST/ceB/aMpfKXk02M+L/2HydSUVThrtO6xeegXcwYvR0iYdfDynHVuxDTcHcKWX1FIxX3Abp78BNPsAFRbNUboAAAAASUVORK5CYII=">
+			意见反馈
+		</a>
+		{/if}
+		<!--div class="float-item download">
+			<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAYCAYAAAD+vg1LAAABhklEQVRIS+2VPUtcQRiFnxORRAmSIgZsrEXEH2AhpEtASAoJCJZa2whrY2O3hhSpg7UQsoRUpo6/wEqsbYKd31/RI+8ys4xrNuyFTZVMNcw987zvPXPmXvGXhqpwbX8BngMvJflPe6uCb4HYMyZpr5fg3OW4pN3/4HDgX7LC9gtgRNJOPn3bD1JhexL4KemgTEnHHNv+CrwF6pJWYlM72PYasAo0JM12C14G3ifxuqRaCQZmgPX0fFnSh67AqcNPwELaUAdqaf4RWErzDUlZ02Lfs8K2ym+A7UfAJvCuwy37DMxJiqveHJnRAtveBoaBCUm/CmE/8A143QbfAt5Iui600Ugc9mETHFWAXHVU0n4JsT0AfAem0/oP4JWk8zZdNBbpaAID3AfkLh+Ak2YICM9jLEo6arfHdgbfZHC87lUS/hbcweN7ywX4OoMfAxc9BF9m8CBw2kPwWQY/BY4TOOKVi3TjQKl5AswDJ6XHcZrPqpI66PfKHE9FhHoAjtg2Kv1MqxS9A9iJwpvTgAIqAAAAAElFTkSuQmCC">
+			APP下载
+		</div-->
+	</div>
+</div>

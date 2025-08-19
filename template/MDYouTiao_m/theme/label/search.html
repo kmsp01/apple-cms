@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="full-screen" content="true">
+		<meta name="screen-orientation" content="portrait">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="360-fullscreen" content="true">
+		<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover">
+		<title>搜索中心 - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/search.css">
+	</head>
+	<body style="font-size: 12px;">
+		<div id="app">
+			<div class="search-page app-view" style="overflow: auto;">
+				<form class="top-bar" name="search" style="background-image: url({$maccms.path}MDassets/h5/img/tabbar-bg.png);" method="get" action="{:mac_url('vod/search')}" onSubmit="return qrsearch(this);">
+					<img src="{$maccms.path}MDassets/h5/img/black-search.png" class="img">
+					<input type="text" id="wd" name="wd" placeholder="{$madou.search}" class="input">
+					<button id="search-btn" onClick="javascript:document.search.submit();" class="action submit">搜索</button>
+					<div onClick="javascript:history.back(-1);" class="action">取消</div>
+				</form>
+				<div class="search-body">
+					<div class="keywords history">
+						<h2>历史搜索</h2>
+						<div class="action" onClick="removeItem()">
+							<img src="{$maccms.path}MDassets/h5/img/delete.png">
+						</div>
+						<div class="labels" id="history_wd"></div>
+					</div>
+					<div class="keywords">
+						<h2>热门搜索</h2>
+						<div class="labels">
+							{maccms:foreach name=":explode(',',$maccms.search_hot)" id="vo" key="key"}
+							<a href="{:mac_url('vod/search',['wd'=>$vo])}">{$vo}</a>
+							{/maccms:foreach}
+						</div>
+					</div>
+				</div>
+			</div>
+			<script>
+				$("#search-btn").hide();
+				$("#wd").bind("input",function () {
+					var x =	$("#wd").val().length
+					if (x > 0) {
+					$("#search-btn").show();
+					}else{
+					$("#search-btn").hide();
+					}
+                });
+				function removeItem() {
+						localStorage.removeItem('wd');
+						location.reload();
+				};
+				function qrsearch(e) {
+					var wd = $("#wd").val();
+					var data = [];
+					var history_wd = localStorage.getItem("wd");
+					if (history_wd == null) {
+						data = [{
+							'wd': wd
+						}];
+					} else {
+						data = JSON.parse(history_wd)
+						var json = {
+							'wd': wd
+						};
+						data.push(json);
+						data = Madou.unique(data, 'wd')
+					};
+					localStorage.setItem("wd", JSON.stringify(data));
+				};
+				var history_wd = JSON.parse(localStorage.getItem("wd"));
+				if (history_wd == null) {
+					$('.history').hide();
+				} else {
+					var html = ''
+					var search_url="{:mac_url('vod/search')}?wd="
+					for (var i = 0; i < history_wd.length; i++) {
+						var vo = history_wd[i];
+						html += '<a href="' + maccms.path + search_url + vo.wd + '">' + vo.wd +'</a>';
+					};
+					html += '';
+					$('#history_wd').html(html);
+				}
+			</script>
+		</div>
+	</body>
+</html>

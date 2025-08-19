@@ -1,0 +1,22 @@
+<div class="el-dialog__wrapper indexDialog" style="z-index: 2005;display: none;">
+	<div class="el-dialog" style="margin-top: 15vh; width: 490px;">
+		<div class="el-dialog__header">
+			<span class="el-dialog__title"></span>
+			<button type="button" class="el-dialog__headerbtn"><i class="el-dialog__close el-icon el-icon-close"></i></button>
+		</div>
+		<div class="el-dialog__body">
+			<div class="dialog-top">
+				<img src="{$maccms.path}MDassets/web/img/notice.png" class="notice-img">
+				<div class="dialog-title-wrap">
+					<span></span>
+					<h3 class="dialog-title">官方通知</h3>
+					<span></span>
+				</div>
+			</div>
+			{$madou['notice']['content']}
+			<button type="button" class="el-button el-button--default popup-close">
+				<span>确定</span>
+			</button>
+		</div>
+	</div>
+</div>

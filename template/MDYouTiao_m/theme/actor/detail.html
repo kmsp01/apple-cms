@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="full-screen" content="true">
+		<meta name="screen-orientation" content="portrait">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="360-fullscreen" content="true">
+		<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover">
+		<title>{$obj.actor_name}个人资料_{$obj.actor_name}演过的电视剧_{$obj.actor_name}电影全集-{$maccms.site_name}</title>
+		<meta name="keywords" content="{$obj.actor_name}个人资料,{$obj.actor_name}演过的电视剧,{$obj.actor_name}电影全集,{$obj.actor_name}最新电影,{$obj.actor_name}最新电视剧">
+		<meta name="description" content="{$maccms.site_name}演示站为你收集了{$obj.actor_name}个人资料包括了{$obj.actor_name}最新演过的电视剧,{$obj.actor_name}电影全集,以及{$obj.actor_name}图片剧照最近动态等信息希望你能喜欢。">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/main.css">
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/topic-detail.css">
+	</head>
+	<body style="font-size: 12px;">
+		<div id="app">
+			<div class="app-layout app-view">
+				<div class="topic-detail router-view">
+					<div class="van-pull-refresh">
+						<div class="van-pull-refresh__track">
+							<div class="van-pull-refresh__head"></div>
+							<div class="nvyou-info bg-shadow">
+								<div class="img-bg topicBg" style="background-image: url({$obj.actor_pic|mac_url_img});"></div>
+								<a onClick="javascript:history.back(-1);" class="back-icon"><img width="16px" height="13px" src="{$maccms.path}MDassets/h5/img/back.png"></a>
+								<div class="content">
+									<div class="title">
+										<div class="avtar flex-center">
+											<img class="img" width="55px" height="55px" src="{$obj.actor_pic|mac_url_img}">
+										</div>
+										<div class="name">{$obj.actor_name}</div>
+									</div>
+									<div class="desc">
+										{$obj.actor_blurb}
+									</div>
+								</div>
+							</div>
+							<div class="list-header">
+								{maccms:vod paging="yes" pageurl="actor/detail" actor="'.$obj['actor_name'].'" order="desc" by="time" id="vo2" key="key2"}{/maccms:vod}
+								<div class="title">相关作品（{$__PAGING__.record_total}）</div>
+							</div>
+							<div role="feed" class="van-list">
+								<div class="video-list" id="content">
+									{maccms:vod num="12" actor="'.$obj['actor_name'].'" paging="yes" pageurl="actor/detail" order="desc" by="time"}
+									{include file="module/vodlistmin"}
+									{/maccms:vod}
+								</div>
+								{if condition="$madou['lazy']['state'] neq 1"}
+								{include file="widget/actorpage"}
+								{else}
+								{include file="widget/actorlazy"}
+								{/if}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

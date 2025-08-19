@@ -1,0 +1,12 @@
+<a href="{:mac_url_vod_play($vo2)}" class="video-item">
+	<div class="video">
+		<div id="video-item-img" class="video-item-img">
+			<img class="video-item-thumb lazyload" src="{$madou['lazy']['img']}" data-src="{:mac_url_img($vo2.vod_pic)}"  style="width: 288px; height: 181px;">
+			{if condition="$madou['free']['state'] eq ''"}{if condition="$vo2.vod_points eq ''"}{if condition="$vo2.type_id neq $madou['type']['free']"}<span class="video-item-tag-is-vip"></span>{/if}{else}<span class="video-item-tag-is-paid"></span>{/if}{else}{/if}
+			<span class="video-item-tag video-item-tag-hits"><img src="{$maccms.path}MDassets/web/img/hits.png" class="play-icon">{$vo2.vod_hits}次</span>
+			<span class="video-item-tag video-item-tag-duration">{$vo2.vod_duration|mac_default=''}</span>
+			<span class="play"><i class="el-icon-caret-right"></i></span>
+		</div>
+		<div class="video-desc mt10 ellipsis" style="width: 288px;">{$vo2.vod_name}</div>
+	</div>
+</a>

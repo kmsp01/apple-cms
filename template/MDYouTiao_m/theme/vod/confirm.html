@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="full-screen" content="true">
+		<meta name="screen-orientation" content="portrait">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="360-fullscreen" content="true">
+		<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover">
+		<title>在线播放{$obj.vod_name} {$obj['vod_play_list'][$param['sid']]['urls'][$param['nid']]['name']} - 高清资源 - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$obj.vod_name}{$obj['vod_play_list'][$param['sid']]['urls'][$param['nid']]['name']}免费在线观看,{$obj.vod_name}剧情介绍">
+		<meta name="description" content="{$obj.vod_name}{$obj['vod_play_list'][$param['sid']]['urls'][$param['nid']]['name']}免费在线观看,{$obj.vod_name}剧情介绍">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/main.css">
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/video.css">
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/playlist.css">
+		<script src="{$maccms.path}MDassets/js/clipboard.min.js"></script>
+	</head>
+	<body style="font-size: 12px;">
+		<div id="app">
+			<div class="app-layout app-view">
+				<div class="video-page router-view" style="padding-top: 210.938px;">
+					{include file="module/video-confirm,module/video-info,module/guess,system/gotop,system/gohome"}
+					{if condition="$madou['comment']['state'] eq 1"}
+                    <div class="mbBar"></div>
+                    	<div class="comments actions" style="display: none;">
+                    	<div class="action">
+                    		<span title="评论" class="send comment">我也跟大家评论下！</span>
+                    		<span class="like btn-favs" data-type="2" data-mid="{$maccms.mid}" data-id="{$obj.vod_id}"></span>
+                    		<span title="分享" class="share" data-clipboard-text="{if$maccms.aid==14}{$maccms.http_type}{$maccms.site_url}{:mac_url_vod_detail($obj)}{else}{$maccms.http_type}{$maccms.site_url}{:mac_url_vod_play($obj,['sid'=>$param['sid'],'nid'=>$param['nid']])}{/if} 我正在看《{$obj.vod_name}》，你也快来一起看吧！"></span>
+                    	</div>
+                    </div>
+                    <div class="mac_comment" data-id="{$obj.vod_id}" data-mid="{$maccms.mid}"></div>
+                    <script>
+                    	$(function(){
+                    		MAC.Comment.Login = 0;
+                    		MAC.Comment.Verify = 0;
+                    		MAC.Comment.Init();
+                    		MAC.Comment.Show(1);
+                    	});
+                    </script>
+                    {/if}
+					{if condition="$GLOBALS['user']['user_id']" gt 0}
+					<script>
+						var points_play= {$obj.vod_points};
+						var user_points= {$user.user_points};
+						if (points_play>user_points){
+							layer.confirm('可用钻石不足，剩余【' + user_points + '】钻石，请先进行充值！', {
+							title:'提示',btn: ['确定','取消'] //按钮
+							}, function(){
+							window.location.href= "{:mac_url('user/upgrade')}";
+							});
+						}
+					   $(document).ready(function(){
+						  $("#user_points_no").click(function(){
+							layer.confirm('可用钻石不足，剩余【' + user_points + '】钻石，请先进行充值！', {
+							 title:'提示',btn: ['确定','取消'] //按钮
+						  }, function(){
+							window.location.href= "{:mac_url('user/upgrade')}";
+							});
+						  });
+						});
+					</script>
+					{/if}
+					<script>Madou.play();</script>
+					<script>
+						var clipboard = new ClipboardJS('.share');
+						clipboard.on('success', function (e) {
+							layer.msg("复制成功,快去分享吧！");
+						});
+						clipboard.on('error', function (e) {
+						  console.log(e);
+						});
+						$('.btn-favs').on('click',function(){
+							if({$user.user_id}){
+								if($('.btn-favs').attr('data-ulog')==''){
+									MAC.Ajax(maccms.path+'/index.php/user/ajax_ulog/?ac=set&mid='+$(this).attr("data-mid")+'&id='+$(this).attr("data-id")+'&type='+$(this).attr("data-type"),'get','json','',function(r){
+										if(r.code==1){
+											MAC.Ulog.Get({$maccms.mid},{$obj.vod_id},2,1,'',function(r){
+												$('.btn-favs').attr('data-ulog',r.list[0].ulog_id);
+												$('.btn-favs').addClass('like-o');
+												layer.msg("收藏成功");
+											}) 
+										}
+									})
+								}else{
+									$.post("{:mac_url('user/ulog_del')}",{ids:$('.btn-favs').attr('data-ulog'),type:2},function(data) {
+										if (data.code == '1') {
+											$('.btn-favs').addClass('like');
+											layer.msg("取消收藏");
+											location.reload();
+										}else {
+										
+										}
+									}, 'json')
+								}
+							}else{
+								layer.msg("请先登录");
+							}
+						})
+
+						{if $user.user_id != 0}
+							MAC.Ulog.Get({$maccms.mid},{$obj.vod_id},2,1,'',function(r){
+								if(r.total==1){
+									$('.btn-favs').attr('data-ulog',r.list[0].ulog_id);
+									$('.btn-favs').addClass('like-o');
+								}else{
+									$('.btn-favs').attr('data-ulog','')
+								}  
+							})
+						{/if}
+					</script>
+				</div>
+			</div>
+		</div>
+		<span style="display:none" class="mac_ulog_set" alt="设置播放页浏览记录" data-type="4" data-mid="{$maccms.mid}" data-id="{$obj.vod_id}" data-sid="{$param.sid}" data-nid="{$param.nid}"></span>
+		<span style="display:none" class="mac_history_set" alt="设置History历史记录" data-name="[{$obj.type.type_name}]{$obj.vod_name}" data-pic="{$obj.vod_pic|mac_url_img}"></span>
+	</body>
+</html>

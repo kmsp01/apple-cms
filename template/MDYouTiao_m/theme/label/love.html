@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="full-screen" content="true">
+		<meta name="screen-orientation" content="portrait">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="360-fullscreen" content="true">
+		<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover">
+		<title>猜你喜欢 - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/main.css">
+	</head>
+	<body style="font-size: 12px;">
+		<div id="app">
+			<div class="app-layout app-view isFooterDownApp isTopBarNav">
+				<div class="tabbar">
+					{include file="system/headtop"}
+					{include file="system/headlist"}
+				</div>
+				<div class="cantanner router-view top">
+					<div class="list van-list" id="content">
+						{maccms:vod num="10" paging="yes" pageurl="label/love" half="5" order="desc" by="hits_week"}
+						<div class="list-item hasPad video-surface v2">
+							<a href="{:mac_url_vod_play($vo)}">
+							<div class="item">
+								<div class="img-bg item-img" style="background-image: url({:mac_url_img($vo.vod_pic)});"></div>
+								{if condition="$madou['free']['state'] eq ''"}{if condition="$vo.vod_points eq ''"}
+								{if condition="$vo.type_id neq $madou['type']['free']"}
+								<div class="openVip">
+									<div class="flex-center">
+										<div class="desc">本视频为VIP会员专享，VIP会员可免费观看</div>
+										<button class="button">开通会员VIP</button>
+									</div>
+								</div>
+								{/if}
+								{else}
+								<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAMAAABHPGVmAAABEVBMVEVHcEz////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9vjL+wDf+yVP//vv/9d/+xUf/677/+ev+zmL/8ND+vzP+wj7+2Yb//PT+03T/35n+35n//ff/8dH/5az/5av/46X+y1v+03P+zV//4qH+wjz+xUb+wTv+vzX/9uD/46b/9+b/+Oj/67//+On//PP/+Of+wj/+2Yfx+DpHAAAAMnRSTlMA8dL2I8js+d+PE9wiDRe8HE+SMO5Ymx8FbPyFrtiHnmASORpc5+YnjsnGxT3gyuXoKKOoJWoAAALQSURBVGjezZp3WxpBEMZXEO5OmiLSu4AUNcmsiZrEmMRY0nv9/h8kJ4hBxbuZLWPev5fn9xz33uw0IZBqtZv16ijixh0n7kZG1Xqz3RImtd5puDBHbqOzboawUalBgGqVDV3CUmkAoRqUljQQy9kooBTNLisiFvMOoOXkFxUQKa8MJJW9FJWx1gOy7q2REIUMKClTwDNWcqCo3AoSUeyDhvpFDCMdAy3F0uGMZAI0lUiGMVa7oK3uajBjcwEMaGEz8DmMMHxKwLMku2BI3VvfSzoBxpS4xWPFGBhUbP734oFR9efGEjCsORGmkDMNyd2MlhkwrsyN+wMs6Nr9kurZgPRSNp01lXclZyjbgZRns4s8WFJ+Jr9ybEGcf/lYFqwpe5mLRu1BotMMtoQ4/OvLu69KlNIFZDv86PF7KXdePlKADC5qA8TRt/JcD58qUCaVRQVxcmcMkQeHz8mQyhhSQ5yUU+19p0Jq41oNKBApXzwmUs4rvg4RIn+f0CAdH9KgQqR8skuBNHzIFh1Cc7Pr1+egAKG5uSXaahB58Aft5rZoKkJ8N+8jIU1RV4ag3VwXVQ2IfIZyc1UMdSA4Nw9FRA+CcXNEuJoQ3827oR9KXBsiP7wK/nFcOPoQGeJlhwdi4O/aC/27DLz4z6EvXtvCRwgLj+x/jCPNsHKKCys6AfINNkCyhHrlS+vwJ/7SYrl+1RKJI1oiwZMSkZM7nG+vJncsaSox4d4nIiYJN6p0+KRbOmCKoNe6RZBAjEiOPxJ9e72cQxWmP87OvmkVpiwlNkuzgKftwdLA4WlFsTTVeNqDLI1OnpYtT/OZpY0uRN8so393ow2WIY0QyfumGN3k3Q7OeEaAPMNMnrEsz4DZ/1604r5X/H+G/kzrC4qLGD3aIgbTSgnPcgzTms9kYQkxXNnWWlga64H11avLJbK5NfKWsSWy2XW44XQdbkhah/sLLpH8Opas3rQAAAAASUVORK5CYII=" class="play-img">
+								{/if}
+								{else}
+								<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAMAAABHPGVmAAABEVBMVEVHcEz////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9vjL+wDf+yVP//vv/9d/+xUf/677/+ev+zmL/8ND+vzP+wj7+2Yb//PT+03T/35n+35n//ff/8dH/5az/5av/46X+y1v+03P+zV//4qH+wjz+xUb+wTv+vzX/9uD/46b/9+b/+Oj/67//+On//PP/+Of+wj/+2Yfx+DpHAAAAMnRSTlMA8dL2I8js+d+PE9wiDRe8HE+SMO5Ymx8FbPyFrtiHnmASORpc5+YnjsnGxT3gyuXoKKOoJWoAAALQSURBVGjezZp3WxpBEMZXEO5OmiLSu4AUNcmsiZrEmMRY0nv9/h8kJ4hBxbuZLWPev5fn9xz33uw0IZBqtZv16ijixh0n7kZG1Xqz3RImtd5puDBHbqOzboawUalBgGqVDV3CUmkAoRqUljQQy9kooBTNLisiFvMOoOXkFxUQKa8MJJW9FJWx1gOy7q2REIUMKClTwDNWcqCo3AoSUeyDhvpFDCMdAy3F0uGMZAI0lUiGMVa7oK3uajBjcwEMaGEz8DmMMHxKwLMku2BI3VvfSzoBxpS4xWPFGBhUbP734oFR9efGEjCsORGmkDMNyd2MlhkwrsyN+wMs6Nr9kurZgPRSNp01lXclZyjbgZRns4s8WFJ+Jr9ybEGcf/lYFqwpe5mLRu1BotMMtoQ4/OvLu69KlNIFZDv86PF7KXdePlKADC5qA8TRt/JcD58qUCaVRQVxcmcMkQeHz8mQyhhSQ5yUU+19p0Jq41oNKBApXzwmUs4rvg4RIn+f0CAdH9KgQqR8skuBNHzIFh1Cc7Pr1+egAKG5uSXaahB58Aft5rZoKkJ8N+8jIU1RV4ag3VwXVQ2IfIZyc1UMdSA4Nw9FRA+CcXNEuJoQ3827oR9KXBsiP7wK/nFcOPoQGeJlhwdi4O/aC/27DLz4z6EvXtvCRwgLj+x/jCPNsHKKCys6AfINNkCyhHrlS+vwJ/7SYrl+1RKJI1oiwZMSkZM7nG+vJncsaSox4d4nIiYJN6p0+KRbOmCKoNe6RZBAjEiOPxJ9e72cQxWmP87OvmkVpiwlNkuzgKftwdLA4WlFsTTVeNqDLI1OnpYtT/OZpY0uRN8so393ow2WIY0QyfumGN3k3Q7OeEaAPMNMnrEsz4DZ/1604r5X/H+G/kzrC4qLGD3aIgbTSgnPcgzTms9kYQkxXNnWWlga64H11avLJbK5NfKWsSWy2XW44XQdbkhah/sLLpH8Opas3rQAAAAASUVORK5CYII=" class="play-img">
+								{/if}
+							</div>
+							</a>
+							<div class="action-wrap">
+								<a href="{:mac_url_vod_play($vo)}" class="action">
+									<div class="flex-center"><span class="like"></span>收藏</div>
+									<div class="flex-center"><span title="分享" class="share"></span>分享</div>
+									<div class="flex-center"><span title="评论" class="comment"></span>评论</div>
+								</a>
+								<div class="tags">
+								{maccms:foreach name=":explode(',',$vo.vod_tag)" id="vo2" key="key2" length="5"}
+								<a href="{:mac_url('vod/search',['tag'=>$vo2])}">{$vo2}</a>&nbsp;
+								{/maccms:foreach}
+								</div>
+							</div>
+						</div>
+						{/maccms:vod}
+					</div>
+					{include file="module/lazy"}
+				</div>
+				{include file="system/footer"}
+				<script>
+					$(".app-footer a:eq(0)").addClass("van-tabbar-item--active");
+				</script>
+			</div>
+		</div>
+	</body>
+</html>

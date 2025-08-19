@@ -1,0 +1,26 @@
+{maccms:type ids="'.($madou['type']['index']).'" order="asc" by="sort" id="vo1" key="key1"}
+<div class="hot-area">
+	<div class="HeadLink-title">
+		<img class="img left-icon round-icon" src="{$maccms.path}MDassets/h5/img/free.png"  style="width: 0.4rem; height: 0.4rem;">
+		<div class="t-left"><div>{$vo1.type_name}</div></div>
+		<div class="t-cent"></div>
+		<a href="{:mac_url_type($vo1,[],'type')}" class="t-right"><div class="look">更多爽片</div><i class="iconfont iconright"></i></a>
+	</div>
+	<div class="video-contaner" id="vodlist{$vo1.type_id}">
+		{maccms:vod num="'.($madou['wap']['index']['num']).'" type="'.$vo1['type_id'].'" order="desc" by="time" id="vo2" key="key2"}
+		<a href="{:mac_url_vod_play($vo2)}" class="video-surface">
+			<div class="video-surface-wrap">
+				{if condition="$madou['free']['state'] eq ''"}{if condition="$vo2.vod_points eq ''"}{if condition="$vo2.type_id neq $madou['type']['free']"}<span class="video-item-tag video-item-tag-is-vip"></span>{/if}{else}<span class="video-item-tag video-item-tag-is-paid"></span>{/if}{else}{/if}
+				<div class="video-container" style="height: 2.82667rem;">
+					<div class="img-bg surface-img" style="background-image: url({:mac_url_img($vo2.vod_pic)});"></div>
+					<span class="video-item-tag video-item-tag-hits"><img src="{$maccms.path}MDassets/h5/img/hits.png" class="play-icon">{$vo2.vod_hits}</span>
+					<span class="video-item-tag video-item-tag-duration">{$vo2.vod_duration|mac_default=''}</span>
+				</div>
+				<div class="video-desc text-one-line">{$vo2.vod_name}</div>
+			</div>
+		</a>
+		{/maccms:vod}
+	</div>
+	<div class="video-change more-btn" page="2" by="time" tid="{$vo1.type_id}" url="{:mac_url('label/index')}">换一批</div>
+</div>
+{/maccms:type}

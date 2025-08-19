@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" class=" ">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>猜你喜欢 - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/web/css/love.css">
+	</head>
+	<body>
+		<div id="appSite" class="site reset-element">
+			{include file="system/header"}
+			<div class="main-contaner hasBg">
+				<div class="middle middleContent">
+					<div class="el-row">
+						<div class="love">
+							<h1 class="love_title">猜你喜欢</h1>
+							<div class="nvyou-list ul">
+								{maccms:vod num="32" paging="yes" pageurl="label/love" order="desc" by="time"}
+								{include file="module/vodlist"}
+								{/maccms:vod}
+							</div>
+							{include file="system/paging"}
+						</div>
+					</div>
+				</div>
+				{include file="system/footer"}
+			</div>
+		</div>
+	</body>
+</html>

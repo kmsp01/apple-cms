@@ -1,0 +1,194 @@
+<div id="sideTitle" class="sideTitle">
+	<div class="side-title">
+		<div class="left-menu common">
+			<a href="/" class="logo router-link-exact-active router-link-active">
+				<img class="img" src="{$madou['logo']['pic']}" alt="logo">
+			</a>
+			<a href="/" class="menu-item {if condition="$maccms.aid eq 1||$maccms.aid eq 6||$maccms.aid eq 11||$maccms.aid eq 12||$maccms.aid eq 15"}active{/if}">
+				<span class="title-wrap">首页</span>
+			</a>
+			<a href="{:mac_url('label/love')}" class="menu-item {if strpos($_SERVER["REQUEST_URI"],'love')}active{/if}">
+				<span class="title-wrap">爱看
+					<img src="{$maccms.path}MDassets/web/img/emoji.png" class="love-look">
+				</span>
+			</a>
+			<a href="{:mac_url('label/vip')}" class="menu-item {if strpos($_SERVER["REQUEST_URI"],'vip')}active{/if}">
+				<span class="title-wrap">VIP</span>
+			</a>
+			<a href="{:mac_url('topic/index')}" class="menu-item {if strpos($_SERVER["REQUEST_URI"],'topic')}active{/if}">
+				<span class="title-wrap">专题</span>
+			</a>
+			<span size="mini" class="menu-popover">
+				<div class="el-popover el-popper hidden" id="tableContent" data-placement="auto">
+					<div class="el-scrollbar" style="height: 350px; overflow-x: hidden;">
+						<div class="el-scrollbar__wrap" style="margin-bottom: -17px; margin-right: -17px;">
+							<div class="el-scrollbar__view">
+								<div class="nav-dropdown">
+									<ul class="oneChild">
+										{maccms:type ids="'.$madou['type']['two'].'" order="asc" by="sort" id="vo" key="key"}
+										<li class="oneChildLi">
+											<a href="{:mac_url_type($vo)}" class="dropdown-title">{$vo.type_name}</a>
+											<ul class="child">
+												{maccms:type parent="'.$vo['type_id'].'" order="asc" by="sort" id="vo2" key="key2"}
+												<a href="{:mac_url_type($vo2,[],'show')}" class="site-drop-item"><span>{$vo2.type_name}</span></a>
+												{/maccms:type}
+											</ul>
+										</li>
+										{/maccms:type}
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+		
+				<span class="el-popover__reference-wrapper show-pop-table">
+					<div class="menu-item more el-popover__reference"><span class="text-more">更多</span>
+						<img src="{$maccms.path}MDassets/web/img/menu_down.png">
+					</div>
+				</span>
+			</span>
+		</div>
+		<div class="right-wrap">
+			<div class="right-menu-item right-search">
+				<div class="el-dropdown">
+					<form class="el-dropdown-link el-input el-input--prefix el-dropdown-selfdefine" name="search" method="get" action="{:mac_url('vod/search')}" onSubmit="return qrsearch(this);">
+						<input type="text" id="search" name="wd" autocomplete="off" placeholder="{$madou.search}" class="el-input__inner">
+						<span class="el-input__prefix">
+							<div class="search-left-icon">
+								<img src="{$maccms.path}MDassets/web/img/search.png">
+							</div>
+						</span>
+					</form>
+					<ul class="el-dropdown-menu el-popper search-history search-tips hidden" x-placement="bottom-end">
+						{maccms:foreach name=":explode(',',$maccms.search_hot)" id="vo2" key="key2"}
+						<a href="{:mac_url('vod/search',['wd'=>$vo2])}" class="el-dropdown-menu__item">
+							<span>{$vo2}</span>
+						</a>
+						{/maccms:foreach}
+						<div x-arrow="" class="popper__arrow" style="left: 134.5px;"></div>
+					</ul>
+				</div>
+			</div>
+			<div class="right-menu common">
+				<a href="{:mac_url('label/vip')}" class="right-menu-item">
+					<span class="menu-popover">
+						<span class="el-popover__reference-wrapper">
+							<div class="item marginLeft0 common el-popover__reference">
+								<img id="vipImg" src="{$maccms.path}MDassets/web/img/vip.png">
+								<span class="vipText">VIP</span>
+							</div>
+						</span>
+					</span>
+				</a>
+				<a {if condition="$GLOBALS['user']['user_id']" gt 0}href="{:mac_url('user/upgrade')}"{/if} class="right-menu-item">
+					<span class="menu-popover">
+						<span class="el-popover__reference-wrapper">
+							<div class="item marginLeft0 common el-popover__reference">
+								<img id="vipImg" src="{$maccms.path}MDassets/web/img/drill.png">
+								<span class="vipText">黄钻商城</span>
+							</div>
+						</span>
+					</span>
+				</a>
+				<!--a {if condition="$GLOBALS['user']['user_id']" gt 0}href="{$madou['load']['appurl']}"{/if} class="right-menu-item marginRight0">
+					<div class="el-tooltip item">
+						<img id="appIcon" src="{$maccms.path}MDassets/web/img/down-icon.png">
+						<span class="vipText">下载APP</span>
+					</div>
+				</a-->
+				<a {if condition="$GLOBALS['user']['user_id']" gt 0}href="{:mac_url('user/feedback')}"{/if} class="right-menu-item">
+					<span class="menu-popover">
+						<span class="el-popover__reference-wrapper">
+							<div class="item marginLeft0 common el-popover__reference">
+								<img id="vipImg" src="{$maccms.path}MDassets/web/img/message.png">
+								<span class="vipText">反馈</span>
+							</div>
+						</span>
+					</span>
+				</a>
+				{if condition="$GLOBALS['user']['user_id']" gt 0}
+				<div>
+					<span size="mini" class="menu-popover user-popover">
+						<div class="el-popover el-popper my-popover user-tips hidden" style="position: absolute; width: 316px; transform-origin: center top; top: 71px; left: 885px; right: 0px; margin: auto;" x-placement="bottom-end">
+							<div class="common">
+								<div class="my-header">
+									<div class="header-left">
+										<img class="avatar" src="{$user.user_portrait|mac_default='static/images/touxiang.png'|mac_url_img}">
+										<div class="my-main">
+											<div class="text1">
+												<img src="{$maccms.path}MDassets/h5/img/{if condition="$GLOBALS['user']['group_id'] eq 3"}vips{else}novips{/if}.png" class="icon">
+												<p class="text name">{$user.user_name}</p>
+											</div>
+											<div class="text2">
+												<p class="text pwd">{$user.user_reg_time|mac_day}</p>
+											</div>
+										</div>
+									</div>
+									{if condition="$GLOBALS['user']['user_id']" gt 0}
+									<a href="{:mac_url('user/logout')}" type="button" class="el-button my-logout el-button--default">
+										<span>退出登录</span>
+									</a>
+									{else}
+									<a href="{:mac_url('user/login')}" type="button" class="el-button my-logout el-button--default">
+										<span>登录/注册</span>
+									</a>
+									{/if}
+								</div>
+								<div class="my-con">
+									<div class="my-con-title">个人中心</div>
+									<div class="my-con-wrap">
+										<a href="{:mac_url('user/favs')}" class="my-con-item">
+											<img src="data:image/png;base64,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">
+											<div>我的喜欢</div>
+										</a>
+										<a href="{:mac_url('user/plays')}" class="my-con-item">
+											<img src="data:image/png;base64,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">
+											<div>观看历史</div>
+										</a>
+										<a href="{:mac_url('user/share')}" class="my-con-item">
+											<img src="data:image/png;base64,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">
+											<div>分享推广</div>
+										</a>
+										<a href="{:mac_url('user/index')}" class="my-con-item"><img src="data:image/png;base64,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">
+											<div>修改资料</div>
+										</a>
+									</div>
+								</div>
+							</div>
+							<div x-arrow="" class="popper__arrow" style="left: 289.5px;"></div>
+						</div>
+						<span class="el-popover__reference-wrapper user-hover">
+							<a href="{:mac_url('user/index')}" class="avatar-wrap marginLeft0 common el-popover__reference">
+								<img class="avatar" src="{$user.user_portrait|mac_default='static/images/touxiang.png'|mac_url_img}">
+							</a>
+						</span>
+					</span>
+				</div>
+				{else}
+				<a href="{:mac_url('user/login')}" class="right-menu-item marginLeft0 loginBtn"><span>登录 | 注册</span></a>
+				{/if}
+			</div>
+		</div>
+	</div>
+</div>
+<script src="{$maccms.path}MDassets/js/popover.js"></script>
+<script src="https://code.jquery.co/jquery-3.7.1.min.js"></script>
+<link rel="stylesheet" href="{$maccms.path}MDassets/web/css/popover.css">
+<script>
+			
+			
+$(function(){
+	var settings = {
+		trigger: 'hover',
+								
+	};
+	var tableContent = $('#tableContent').html(),
+								
+	tableSettings = {
+		content: tableContent,
+		width:1000,	
+	};
+	$('.show-pop-table').webuiPopover('destroy').webuiPopover($.extend({}, settings, tableSettings));
+})
+</script>

@@ -1,0 +1,55 @@
+<div class="contanner">
+	<div class="left">
+		<div class="van-tabs van-tabs--line">
+			<div class="van-tabs__wrap van-tabs__wrap--scrollable">
+				<ul class="van-tabs__nav van-tabs__nav--line van-tabs__nav--complete" style="border-color: rgb(0, 0, 0); background: transparent;">
+					<a href="/" class="van-tab {if condition="$maccms.aid eq 1"}van-tab--active{/if}">
+						<span class="van-tab__text">
+							<span class="tab-title {if condition="$maccms.aid eq 1"}tabok{else}tabno{/if}">精选</span>
+						</span>
+					</a>
+					<a href="{:mac_url('label/love')}" class="van-tab {if strpos($_SERVER["REQUEST_URI"],'love')}van-tab--active{/if}">
+						<span class="van-tab__text">
+							<span class="tab-title {if strpos($_SERVER["REQUEST_URI"],'love')}tabok{else}tabno{/if}">爱看
+								<img src="{$maccms.path}MDassets/h5/img/emoji.png" class="img">
+							</span>
+						</span>
+					</a>
+					{maccms:type ids="parent" order="asc" by="sort" id="vo" key="key" mid="1"}
+					<a href="{:mac_url_type($vo)}" class="van-tab {if condition="($vo.type_id eq $GLOBALS['type_id'] || $vo.type_id eq $GLOBALS['type_pid'])"}van-tab--active{/if}">
+						<span class="van-tab__text {if condition="($vo.type_id eq $GLOBALS['type_id'] || $vo.type_id eq $GLOBALS['type_pid'])"}active{/if}">
+							<span class="tab-title {if condition="($vo.type_id eq $GLOBALS['type_id'] || $vo.type_id eq $GLOBALS['type_pid'])"}tabok{else}tabno{/if}">{$vo.type_name}</span>
+						</span>
+					</a>
+					{/maccms:type}
+					<div class="van-tabs__line" style="background-color: rgb(0, 0, 0); width: 15px; transform: translateX(38px) translateX(-50%); height: 2px; border-radius: 2px;"></div>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="right"><img src="{$maccms.path}MDassets/h5/img/more.png" class="icon menu_btn"></div>
+	<script src="https://code.jquery.co/jquery-3.7.1.min.js"></script>
+	<div class="mb over" style="display: none">
+		<div class="search searchover">
+			<div class="close">
+				<div class="search-container flex-center"><img src="{$maccms.path}MDassets/h5/img/chevron_top.png"></div>
+			</div>
+			<div class="search-center types">
+				<div class="types-left">
+				{maccms:type ids="'.$madou['type']['two'].'" order="asc" by="sort" id="vo" key="key"}
+				<h2 class="menu-tab {if$key eq '1'}active{/if}">{$vo.type_name}</h2>
+				{/maccms:type}
+				</div>
+				<div class="searchList">
+				{maccms:type ids="'.$madou['type']['two'].'" order="asc" by="sort" id="vo" key="key"}
+				<div class="searchItems" {if$key neq '1'}style="display: none"{/if}>
+					{maccms:type parent="'.$vo['type_id'].'" num="1000" order="asc" by="sort" id="vo2" key="key2"} 
+					<a href="{:mac_url_type($vo2,[],'show')}">{$vo2.type_name}</a>
+					{/maccms:type}
+				</div>
+				{/maccms:type}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

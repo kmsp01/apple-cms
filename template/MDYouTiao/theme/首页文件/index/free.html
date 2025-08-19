@@ -1,0 +1,28 @@
+<div class="home-area el-row">
+	<div class="home-template1">
+		<div class="top-header">
+			<div class="info-left">
+				<img class="left-img circle" src="{$maccms.path}MDassets/web/img/free.png">
+				<span class="area-title">免费专区</span>
+			</div>
+			{maccms:type ids="'.($madou['type']['free']).'" order="asc" by="sort" id="vo" key="key"}
+			<a href="{:mac_url_type($vo)}" class="info-right">
+				<div class="more">
+					<span class="info-more">更多</span>
+					<img src="{$maccms.path}MDassets/web/img/chevron_right.png">
+				</div>
+			</a>
+			{/maccms:type}
+		</div>
+		<div class="wmsp-concent">
+			<div class="wmzp-videos">
+				<div class="video-contaner">
+					{maccms:vod num="'.($madou['pc']['free']['num']).'" type="'.($madou['type']['free']).'" by="time"
+					order="desc"}
+					{include file="module/vodlist"}
+					{/maccms:vod}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

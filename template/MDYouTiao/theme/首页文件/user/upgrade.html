@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>黄钻中心 - 会员中心 - {$maccms.site_name}</title>
+		<meta name="keywords" content="会员中心,{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/web/css/member.css">
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/web/css/info.css">
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/web/css/upgrade.css">
+	</head>
+	<body>
+		<div id="appSite" class="site reset-element">
+			{include file="system/header"}
+			<div class="main-contaner">
+				<div class="middle middleContent">
+					<div class="el-row">
+						<div class="message">
+							{include file="user/menu"}
+							<div class="right-wrap">
+								<div class="right-title">黄钻中心</div>
+								<div class="right-router">
+									<div class="y-drill">
+										<div class="top-wrap">
+										
+										    
+											<div class="top-left">
+												<div class="name-wrap"><img src="data:image/png;base64,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">
+													<p>黄钻余额</p>
+												</div>
+												<div class="diamond">{$user.user_points}</div>
+											</div>
+											<div class="top-right">
+												<a href="{:mac_url('user/buy')}">
+												<button type="button" class="el-button el-button--default">
+													<span>立即充值</span>
+												</button>
+												</a>
+											</div>
+										
+										</div>
+										<div class="product-wrap">
+											<div class="title-wrap">
+												<h3>黄钻兑换VIP会员</h3>
+												<p>适用于手机端，手机网页，电脑网页端</p>
+											</div>
+											<div class="list-arrow">
+												<div class="list-ul">
+													<div class="list-wrap">
+														{volist name="group_list" id="vo"}
+														{if condition="$vo.group_id gt 2 && $vo.group_status eq 1"}
+														<div class="list-item list-3 grade" data-time="{$madou['site_time_0']}" data-id="{$vo.group_id}" data-name="{$vo.group_name}" data-points="{$vo.group_points_day}" data-long="day">
+															<h3 class="title">VIP会员</h3>
+															<p class="label">{$madou['site_time_0']}天</p>
+															<div class="btn-wrap">{$vo.group_points_day}钻</div>
+															<div class="tip-wrap">优惠8%</div>
+														</div>
+														<div class="list-item list-3 grade" data-time="{$madou['site_time_1']}" data-id="{$vo.group_id}" data-name="{$vo.group_name}" data-points="{$vo.group_points_week}" data-long="week">
+															<h3 class="title">VIP会员</h3>
+															<p class="label">{$madou['site_time_1']}天</p>
+															<div class="btn-wrap">{$vo.group_points_week}钻</div>
+															<div class="tip-wrap">优惠15%</div>
+														</div>
+														<div class="list-item list-3 grade" data-time="{$madou['site_time_2']}" data-id="{$vo.group_id}" data-name="{$vo.group_name}" data-points="{$vo.group_points_month}" data-long="month">
+															<h3 class="title">VIP会员</h3>
+															<p class="label">{$madou['site_time_2']}天</p>
+															<div class="btn-wrap">{$vo.group_points_month}钻</div>
+															<div class="tip-wrap">优惠20%</div>
+														</div>
+														<div class="list-item list-3 grade" data-time="{$madou['site_time_3']}" data-id="{$vo.group_id}" data-name="{$vo.group_name}" data-points="{$vo.group_points_year}" data-long="year">
+															<h3 class="title">VIP会员</h3>
+															<p class="label">{$madou['site_time_3']}天</p>
+															<div class="btn-wrap">{$vo.group_points_year}钻</div>
+															<div class="tip-wrap">优惠25%</div>
+														</div>
+														{/if}
+														{/volist}
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="banner-wrap">
+											<img src="{$maccms.path}MDassets/web/img/drill-banner.png">
+											<div class="con-wrap">
+												<h3>黄钻兑换会员更划算</h3>
+												<p>更多福利敬请期待哦！</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{include file="system/footer"}
+				<script>
+					$('.grade').click(function(){
+						var that=$(this);
+						var group_id = that.attr('data-id');
+						var group_name = that.attr('data-name');
+						var long = that.attr('data-long');
+						var points = that.attr('data-points');
+						var group_time = that.attr('data-time');
+						layer.confirm('确定要兑换【' + group_time + '】天'+group_name+'吗？需要花费【'+points+'】钻石', {
+							title: '提示',
+							btn: ['确定', '取消']
+						}, function() {
+							$.ajax({
+								url: "{:url('user/upgrade')}",
+								type: "post",
+								dataType: "json",
+								data: {group_id: group_id,long:long,points:points,flag:'point'},
+								beforeSend: function () {
+									$(".grade").val("loading...");
+								},
+								success: function (r) {
+									layer.msg(r.msg);
+									if (r.code == 1) {
+										location.reload();
+									}
+								},
+								complete: function () {
+									$(".grade").val("提交");
+								}
+							});
+						});
+					});
+				</script>
+			</div>
+		</div>
+	</body>
+</html>

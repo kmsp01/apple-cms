@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>在线支付 - 会员中心 - {$maccms.site_name}</title> 
+		<meta name="keywords" content="会员中心,{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/web/css/member.css">
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/web/css/info.css">
+	</head>
+	<body>
+		<div id="appSite" class="site reset-element">
+			{include file="system/header"}
+			<div class="main-contaner">
+				<div class="middle middleContent">
+					<div class="el-row">
+						<div class="message">
+							{include file="user/menu"}
+							<div class="right-wrap">
+								<div class="right-title">在线支付</div>
+								<div class="right-router">
+									<form class="updateInfo" method="post" target="_blank" action="{:url('user/gopay')}">
+										<input type="hidden" name="order_id" value="{$info.order_id}">
+										<input type="hidden" name="order_code" value="{$info.order_code}">
+										<div class="content"><span>订单编号：</span>
+											<div class="input-nick el-input is-disabled">
+												<input type="text" autocomplete="off" value="{$info.order_code}" disabled="disabled" class="el-input__inner">
+											</div>
+										</div>
+										<div class="content"><span>订单金额：</span>
+											<div class="input-nick el-input is-disabled">
+												<input type="text" autocomplete="off" value="{$info.order_price}元" disabled="disabled" class="el-input__inner">
+											</div>
+										</div>
+										<div class="content"><span>支付方式：</span>
+											<div class="input-nick el-input">
+												<select name="payment" id="payment" class="el-input__inner">
+													<option value ="">请选择...</option>
+													{volist name="ext_list" id="vo"}
+													<option value="{$key}">{$vo}支付</option>
+													{/volist}
+												</select>
+											</div>
+										</div>
+										<div class="content" id="paytype_box" style="display:none;">
+											<span>支付类型：</span>
+											<div class="input-nick el-input">
+												<select class="paytype el-input__inner" id="paytype" name="paytype"></select>
+											</div>
+										</div>
+										<div style="text-align: center;">
+											<button type="submit" class="saveBtn">确认</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{include file="system/footer"}
+				<script>
+					var codepay_type = '{maccms:foreach name=":explode(',',$config.codepay.type)"}<option value ="{$vo}">{if condition="$vo==1"}支付宝二维码{elseif condition="$vo==2"/}QQ钱包二维{elseif condition="$vo==3"/}微信二维码{/if}</option>{/maccms:foreach}';
+					var yipay_type = '{maccms:foreach name=":explode(',',$config.yipay.type)"}<option value ="{$vo}">{if condition="$vo==1"}支付宝{elseif condition="$vo==2"/}QQ钱包{elseif condition="$vo==3"/}微信{elseif condition="$vo==4"/}财付通{/if}</option>{/maccms:foreach}';
+					var zhapay_type ='{maccms:foreach name=":explode(',',$config.zhapay.type)"}<option value ="{$vo}">{if condition="$vo==1"}微信{elseif condition="$vo==2"/}支付宝{/if}</option> {/maccms:foreach}';
+
+					$("#payment").change(function() {
+						$('#paytype').html('');
+						if($("#payment").val()=="codepay" || $("#payment").val()=="zhapay"|| $("#payment").val()=="yipay"){
+							if($("#payment").val()=="codepay") {
+								$('#paytype').html(codepay_type);
+							}
+							if($("#payment").val()=="zhapay") {
+								$('#paytype').html(zhapay_type);
+							}
+							if($("#payment").val()=="yipay") {
+								$('#paytype').html(yipay_type);
+							}
+
+							$("#paytype_box").slideDown();
+						}
+						else{
+							$("#paytype_box").slideUp();
+						}
+					});
+
+					$(".paytype").change(function() {
+						$('#paytype').val( $(this).val() );
+					});
+				</script>
+			</div>
+		</div>
+	</body>
+</html>

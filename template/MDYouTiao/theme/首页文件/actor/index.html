@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>明星列表 - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/web/css/actor.css">
+	</head>
+	<body>
+		<div id="appSite" class="site reset-element">
+			{include file="system/header"}
+			<div class="main-contaner">
+				<div class="middle middleContent">
+					<div class="el-row">
+						<div class="nvyou">
+							<p class="tilte" style="float: left;">明星列表</p>
+							<div style="min-height: 500px;">
+								<div class="nvyou-list">
+									{maccms:actor num="20" paging="yes" pageurl="actor/index" order="desc" by="time"}
+									<a href="{$vo|mac_url_actor_detail}" class="nvyou-item">
+										<img class="nvyou-thumb lazyload" src="{$madou['lazy']['img']}" data-src="{:mac_url_img($vo.actor_pic)}">
+										<div class="item-title">{$vo.actor_name}</div>
+									</a>
+									{/maccms:actor}
+								</div>
+							</div>
+							{include file="system/paging"}
+						</div>
+					</div>
+				</div>
+				{include file="system/footer"}
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,89 @@
+<div class="left-wrap">
+	<div class="card-wrap">
+		{if condition="$GLOBALS['user']['group_id'] eq 3"}
+		<div class="vip-route-isvip">
+			<div class="top">
+				<div class="top-left">
+					<div class="top-left-line1">
+						<div>尊贵VIP会员</div><img src="{$maccms.path}MDassets/web/img/vip-true.png">
+					</div>
+					<div class="top-left-line2">{$obj.user_end_time|mac_day|mac_default='无限期'}到期</div>
+				</div>
+				<a href="{:mac_url('label/vip')}" class="top-right">续费</a>
+			</div>
+			<div class="center">
+				<div class="center-left">
+					<!--span class="ask-wrap">您的推广邀请码
+						<span><span class="el-popover__reference-wrapper"><i class="iconfont iconicon-circle-question el-popover__reference"></i></span></span>
+					</span-->
+					<div class="center-doll"><span>{$user.user_codes}</span></div>
+				</div>
+				<div class="center-right">
+					<!--a href="{:mac_url('user/share')}" class="bottom-btn">推广赚钻石</a-->
+				</div>
+			</div>
+		</div>
+		{else}
+		<div class="vip-route">
+			<div class="listone">
+				<div class="list-item"><img src="{$maccms.path}MDassets/web/img/vip-1.png">
+					<div class="item-label">高速线路</div>
+				</div>
+				<div class="list-item"><img src="{$maccms.path}MDassets/web/img/vip-2.png">
+					<div class="item-label">免广告</div>
+				</div>
+				<div class="list-item"><img src="{$maccms.path}MDassets/web/img/vip-3.png">
+					<div class="item-label">超清观影</div>
+				</div>
+				<div class="list-item"><img src="{$maccms.path}MDassets/web/img/vip-4.png">
+					<div class="item-label">无限缓存</div>
+				</div>
+			</div>
+			<a href="{:mac_url('label/vip')}">
+			<div class="btn-wrap">
+				<div class="btn-title">立即开通</div>
+				<div class="btn-label">（平均每天不超1元）</div>
+			</div>
+			</a>
+		</div>
+		{/if}	
+	</div>
+	<div class="list">
+		<div class="list-item {if strpos($_SERVER["REQUEST_URI"],'user/index')}activeTab{/if}">
+			<a href="{:mac_url('user/index')}" class="list-item-con"><img src="{$maccms.path}MDassets/web/img/info.png">
+				<div>修改资料</div>
+			</a>
+		</div>
+		<div class="list-item {if strpos($_SERVER["REQUEST_URI"],'user/buy')}activeTab{/if}">
+			<a href="{:mac_url('user/buy')}" class="list-item-con"><img src="{$maccms.path}MDassets/web/img/card.png">
+				<div>卡密充值</div>
+			</a>
+		</div>
+		<div class="list-item {if strpos($_SERVER["REQUEST_URI"],'user/upgrade')}activeTab{/if} {if strpos($_SERVER["REQUEST_URI"],'user/drill')}activeTab{/if}">
+			<a href="{:mac_url('user/upgrade')}" class="list-item-con"><img src="{$maccms.path}MDassets/web/img/upgrade.png">
+				<div>黄钻中心</div>
+			</a>
+		</div>
+		<div class="list-item {if strpos($_SERVER["REQUEST_URI"],'user/plays')}activeTab{/if}">
+			<a href="{:mac_url('user/plays')}" class="list-item-con"><img src="{$maccms.path}MDassets/web/img/plays.png">
+				<div>观看记录</div>
+			</a>
+		</div>
+		<div class="list-item {if strpos($_SERVER["REQUEST_URI"],'user/favs')}activeTab{/if}">
+			<a href="{:mac_url('user/favs')}" class="list-item-con"><img src="{$maccms.path}MDassets/web/img/favs.png">
+				<div>我的喜欢</div>
+			</a>
+		</div>
+
+		<div class="list-item {if strpos($_SERVER["REQUEST_URI"],'user/feedback')}activeTab{/if}">
+			<a href="{:mac_url('user/feedback')}" class="list-item-con"><img src="{$maccms.path}MDassets/web/img/feedback.png">
+				<div>反馈中心</div>
+			</a>
+		</div>
+		<!--div class="list-item {if strpos($_SERVER["REQUEST_URI"],'user/share')}activeTab{/if}">
+			<a href="{:mac_url('user/share')}" class="list-item-con"><img src="{$maccms.path}MDassets/web/img/share.png">
+				<div>分享推广</div>
+			</a>
+		</div-->
+	</div>
+</div>

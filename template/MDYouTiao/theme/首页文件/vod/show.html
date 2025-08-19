@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" class=" ">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>最新{$obj.type_title}-推荐{$obj.type_title}-第{$param.page}页 - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$obj.type_key}">
+		<meta name="description" content="{$obj.type_des}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/web/css/category.css">
+	</head>
+	<body>
+		<div id="appSite" class="site reset-element">
+			{include file="system/header"}
+			<div class="main-contaner hasBg">
+				<div class="middle middleContent">
+					<div class="el-row">
+						<div class="nvyou">
+							{include file="module/select"}
+							<div class="nvyou-wrap">
+								<div class="nvyou-list el-row">
+									<div class="video-contaner">
+										{maccms:vod num="24" paging="yes" pageurl="vod/type" order="desc" by="time"}
+										{include file="module/vodlist"}
+										{/maccms:vod}
+									</div>
+									{include file="system/paging"}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{include file="system/footer"}
+			</div>
+		</div>
+	</body>
+</html>

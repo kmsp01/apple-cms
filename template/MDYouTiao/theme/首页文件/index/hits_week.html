@@ -1,0 +1,21 @@
+<div class="home-area el-row">
+	<div class="top-header">
+		<a href="{:mac_url('label/rank',['by'=>'up'])}" class="info-left">
+			<img class="left-img" src="{$maccms.path}MDassets/web/img/up.png">
+			<span class="area-title">热门推荐</span>
+		</a>
+		<a href="{:mac_url('label/rank',['by'=>'up'])}" class="info-right">
+			<div class="more">
+				<span class="info-more">更多</span>
+				<img src="{$maccms.path}MDassets/web/img/chevron_right.png">
+			</div>
+		</a>
+	</div>
+	<div class="text-center el-row">
+		<div class="video-contaner hot-content">
+			{maccms:vod num="12" by="hits_week" order="desc"}
+			{include file="module/vodlistmin"}
+			{/maccms:vod}
+		</div>
+	</div>
+</div>

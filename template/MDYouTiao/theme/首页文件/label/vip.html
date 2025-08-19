@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>VIP开通 - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/web/css/vip.css">
+	</head>
+	<body>
+		<div id="appSite" class="site reset-element">
+			{include file="system/header"}
+			<div class="main-contaner">
+				<div class="middle">
+					<div class="el-row">
+						<div class="vip-open">
+							<div class="vip-top">
+								<div class="vipContainer">
+									<div class="vip-info">
+										<h1>开通VIP会员 爽片看到爆</h1>
+										<div>优惠剩余时间<span id="days"></span></div>
+									</div>
+									<ul class="vip-lists">
+										{volist name="group_list" id="vo"}
+										{if condition="$vo.group_id gt 2 && $vo.group_status eq 1"}
+										<div class="vip-list-item item4">
+											<div class="vip-item">
+												<img class="img" src="{$maccms.path}MDassets/web/img/vip-bg1.png">
+												<div class="box box1">
+													<div class="top-wrap">
+														<div class="name-wrap">
+															<h2>{$madou['site_time_0']}天VIP会员</h2><img src="{$maccms.path}MDassets/web/img/vip-tip.png">
+														</div>
+														<h4>开通{$madou['site_time_0']}天VIP {if condition="$madou['site_givetime_0'] neq 0"} 赠送{$madou['site_givetime_0']}天VIP{/if}{if condition="$madou['site_giveintegra_0'] neq 0"} 赠送{$madou['site_giveintegra_0']}钻石{/if}</h4>
+													</div>
+													
+													<div class="con-wrap">
+														<div class="money-wrap">
+															<h2>¥<span>{$madou['site_point_0']}</span> 元</h2>
+															<h6>¥<span>{$madou['site_point_0']/$madou['site_time_0']|mac_substring=3}元/天</span></h6>
+														</div>
+														<a class="btn-pay" data-id="{$vo.group_id}" data-name="{$vo.group_name}" data-time="{$madou['site_time_0']}" data-points="{$madou['site_point_0']}" data-long="day">开通会员</a>
+													</div>
+												</div>
+												<div class="percent-wrap">
+													<div class="percent-title">8%</div>
+													<div class="percent-label">优惠比例</div>
+												</div>
+											</div>
+										</div>
+										<div class="vip-list-item item4">
+											<div class="vip-item">
+												<img class="img" src="{$maccms.path}MDassets/web/img/vip-bg2.png">
+												<div class="box box2">
+													<div class="top-wrap">
+														<div class="name-wrap">
+															<h2>{$madou['site_time_1']}天VIP会员</h2><img src="{$maccms.path}MDassets/web/img/vip-tip.png">
+														</div>
+														<h4>开通{$madou['site_time_1']}天VIP {if condition="$madou['site_givetime_1'] neq 0"}赠送{$madou['site_givetime_1']}天VIP{/if}{if condition="$madou['site_giveintegra_1'] neq 0"} 赠送{$madou['site_giveintegra_1']}钻石{/if}</h4>
+													</div>
+													<div class="con-wrap">
+														<div class="money-wrap">
+															<h2>¥<span>{$madou['site_point_1']}</span> 元</h2>
+															<h6>¥<span>{$madou['site_point_1']/$madou['site_time_1']|mac_substring=3}元/天</span></h6>
+														</div>
+														<a class="btn-pay" data-id="{$vo.group_id}" data-name="{$vo.group_name}" data-time="{$madou['site_time_1']}" data-points="{$madou['site_point_1']}" data-long="week">开通会员</a>
+													</div>
+												</div>
+												<div class="percent-wrap">
+													<div class="percent-title">15%</div>
+													<div class="percent-label">优惠比例</div>
+												</div>
+											</div>
+										</div>
+										<div class="vip-list-item item4">
+											<div class="vip-item">
+												<img class="img" src="{$maccms.path}MDassets/web/img/vip-bg3.png">
+												<div class="box box3">
+													<div class="top-wrap">
+														<div class="name-wrap">
+															<h2>{$madou['site_time_2']}天VIP会员</h2><img src="{$maccms.path}MDassets/web/img/vip-tip.png">
+														</div>
+														<h4>开通{$madou['site_time_2']}天VIP {if condition="$madou['site_givetime_2'] neq 0"}赠送{$madou['site_givetime_2']}天VIP{/if}{if condition="$madou['site_giveintegra_2'] neq 0"} 赠送{$madou['site_giveintegra_2']}钻石{/if}</h4>
+													</div>
+													<div class="con-wrap">
+														<div class="money-wrap">
+															<h2>¥<span>{$madou['site_point_2']}</span> 元</h2>
+															<h6>¥<span>{$madou['site_point_2']/$madou['site_time_2']|mac_substring=3}元/天</span></h6>
+														</div>
+														<a class="btn-pay" data-id="{$vo.group_id}" data-name="{$vo.group_name}" data-time="{$madou['site_time_2']}" data-points="{$madou['site_point_2']}" data-long="month">开通会员</a>
+													</div>
+												</div>
+												<div class="percent-wrap">
+													<div class="percent-title">20%</div>
+													<div class="percent-label">优惠比例</div>
+												</div>
+											</div>
+										</div>
+										<div class="vip-list-item item4">
+											<div class="vip-item">
+												<img class="img" src="{$maccms.path}MDassets/web/img/vip-bg4.png">
+												<div class="box box4">
+													<div class="top-wrap">
+														<div class="name-wrap">
+															<h2>{$madou['site_time_3']}天VIP会员</h2><img src="{$maccms.path}MDassets/web/img/vip-tip.png">
+														</div>
+														<h4>开通{$madou['site_time_3']}天VIP {if condition="$madou['site_givetime_3'] neq 0"}赠送{$madou['site_givetime_3']}天VIP{/if}{if condition="$madou['site_giveintegra_3'] neq 0"} 赠送{$madou['site_giveintegra_3']}钻石{/if}</h4>
+													</div>
+													<div class="con-wrap">
+														<div class="money-wrap">
+															<h2>¥<span>{$madou['site_point_3']}</span> 元</h2>
+															<h6>¥<span>{$madou['site_point_3']/$madou['site_time_3']|mac_substring=3}元/天</span></h6>
+														</div>
+														<a class="btn-pay" data-id="{$vo.group_id}" data-name="{$vo.group_name}" data-time="{$madou['site_time_3']}" data-points="{$madou['site_point_3']}" data-long="year">开通会员</a>
+													</div>
+												</div>
+												<div class="percent-wrap">
+													<div class="percent-title">25%</div>
+													<div class="percent-label">优惠比例</div>
+												</div>
+											</div>
+										</div>
+										{/if}
+										{/volist}
+									</ul>
+								</div>
+							</div>
+							<div class="vip-body">
+								<div class="vipContainer">
+									<div class="vipPrivilege">
+										<h2><span>VIP特权</span></h2>
+										<ul>
+											<li>
+												<img class="el-image" src="{$maccms.path}MDassets/web/img/bg_1.png">
+												<img src="{$maccms.path}MDassets/web/img/icon_1.png">
+												<p>VIP高速线路</p>
+											</li>
+											<li>
+												<img class="el-image" src="{$maccms.path}MDassets/web/img/bg_2.png">
+												<img src="{$maccms.path}MDassets/web/img/icon_2.png">
+												<p>免广告</p>
+											</li>
+											<li>
+												<img class="el-image" src="{$maccms.path}MDassets/web/img/bg_3.png">
+												<img src="{$maccms.path}MDassets/web/img/icon_3.png">
+												<p>高清观影</p>
+											</li>
+											<li>
+												<img class="el-image" src="{$maccms.path}MDassets/web/img/bg_4.png">
+												<img src="{$maccms.path}MDassets/web/img/icon_4.png">
+												<p>无限下载</p>
+											</li>
+										</ul>
+									</div>
+			
+								</div>
+								<div class="vip-haopian">
+									<h2><span>升级VIP 好片天天看到爽</span></h2>
+									<ul>
+										<li>
+											<img class="el-image" src="{$maccms.path}MDassets/web/img/thumb1_left.gif">
+											<p>天天更新，大大满足</p>
+										</li>
+										<li><img class="el-image" src="{$maccms.path}MDassets/web/img/thumb1_middle.gif">
+											<p>精彩大片，每日更新</p>
+										</li>
+										<li><img class="el-image" src="{$maccms.path}MDassets/web/img/thumb1_right.gif">
+											<p>全台独家，爽度爆表</p>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{include file="system/footer"}
+				<script>
+				$('.btn-pay').click(function(){
+					var that=$(this);
+					var group_id = that.attr('data-id');
+					var group_name = that.attr('data-name');
+					var long = that.attr('data-long');
+					var points = that.attr('data-points');
+					var group_time = that.attr('data-time');
+					var user_id ="{$user.user_id}";
+					layer.confirm('确定要开通【'+group_time+'】天'+group_name+'吗？需要花费【'+points+'】元', {
+						title: '提示',
+						btn: ['确定', '取消']
+					}, function() {    
+						$.ajax({
+							url: "{:url('user/upgrade')}",
+							type: "post",
+							dataType: "json",
+							data: {group_id: group_id,long:long},
+							beforeSend: function () {},
+							success: function(r) {
+								if (r.code == 1) {
+								    //location.href = "https://pay.kmsp001.online"
+								    window.open("{$GLOBALS['config']['pay']['card']['url']}", '_blank');
+								//	location.href = "{:mac_url('user/pay')}?order_code=" + r.data.order_code;
+								} else {
+									if (user_id == 0) {
+										layer.msg("请先登录或注册账号");
+										setTimeout(function(){
+											location.href = "{:mac_url('user/login')}";
+										},1500);
+									} else {
+										layer.msg(r.msg);
+									}
+								}
+							},
+							complete: function () {}
+						});
+					});
+				});
+				Madou.countdown();
+				</script>
+			</div>
+		</div>
+	</body>
+</html>

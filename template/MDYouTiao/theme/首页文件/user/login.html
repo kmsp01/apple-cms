@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>用户登录 - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/web/css/login.css">
+	</head>
+	<body>
+		<div id="appSite" class="site reset-element">
+			{include file="system/header"}
+			<div class="main-contaner">
+				<div class="middle">
+					<div class="el-row">
+						<div>
+							<div class="login findPwd">
+								<div class="find-pwd">
+									<div class="step_1">
+										<h2>登录账号</h2>
+										<form method="post" id="fm" action="">
+											<div class="row-phone el-row" style="margin-top: 20px;">
+												<div class="el-input el-input--prefix">
+													<input type="text" id="user_name" name="user_name" autocomplete="off" placeholder="请输入您的登录账号" class="el-input__inner">
+													<span class="el-input__prefix">
+														<img src="{$maccms.path}MDassets/web/img/username.png" class="input-icon">
+													</span>
+												</div>
+											</div>
+											<div class="row-phone el-row" style="margin-top: 20px;">
+												<div class="el-input el-input--prefix">
+													<input type="password" id="user_pwd" name="user_pwd" autocomplete="off" placeholder="请输入您的登录密码" class="el-input__inner">
+													<span class="el-input__prefix">
+														<img src="{$maccms.path}MDassets/web/img/password.png" class="input-icon">
+													</span>
+												</div>
+											</div>
+											{if condition="$GLOBALS['config']['user']['login_verify'] eq 1"}
+											<div class="row-phone el-row" style="margin-top: 20px;">
+												<div class="Verify capacha-input el-input el-input--prefix">
+													<input type="text" id="verify" name="verify" autocomplete="off" placeholder="请输入验证码" class="el-input__inner">
+													<span class="el-input__prefix"><img src="{$maccms.path}MDassets/web/img/capacha.png" class="input-icon"></span>
+												</div>
+												<div class="Verify-img">
+													<img id="verify_img" src="{:url('verify/index')}" onClick="this.src=this.src+'?'"  alt="单击刷新" />
+												</div>		
+											</div>	
+											{/if}
+											<div class="text-center btn-wrap el-row">
+												<button type="button" id="btn_submit" class="el-button btn-login el-button--primary is-round">
+													<span>立即登录</span>
+												</button>
+												<div class="btn-tip-wrap">
+													<a href="{:mac_url('user/findpass')}" class="bottom-btn">找回密码</a>
+													<a href="{:mac_url('user/reg')}" class="bottom-btn">立即注册</a>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{include file="system/footer"}
+				<script type="text/javascript">
+					$(function(){
+						$("body").bind('keyup',function(event) {
+							if(event.keyCode==13){ $('#btnLogin').click(); }
+						});
+						$('#btn_submit').click(function() {
+							if ($('#user_name').val()  == '') { layer.msg('请输入您的登录账号！'); $("#user_name").focus(); return false; }
+							if ($('#user_pwd').val()  == '') { layer.msg('请输入您的登录密码！'); $("#user_pwd").focus(); return false; }
+							if ($('#verify').length> 0 && $('#verify').val()  == '') { layer.msg('请输入验证码！'); $("#verify").focus(); return false; }
+							$.ajax({
+								url: "{:url('user/login')}",
+								type: "post",
+								dataType: "json",
+								data: $('#fm').serialize(),
+								beforeSend: function () {
+									$("#btn_submit").val("loading...");
+								},
+								success: function (r) {
+									if(r.code==1){
+										location.href="{:mac_url('user/index')}";
+									}
+									else{
+										layer.msg(r.msg);
+										$('#verify_img').click();
+									}
+								},
+								complete: function () {
+									$("#btn_submit").val("立即登录");
+								}
+							});
+						});
+					});
+				</script>
+			</div>
+		</div>
+	</body>
+</html>

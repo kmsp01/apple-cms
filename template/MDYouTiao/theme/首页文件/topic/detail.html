@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>{$obj.topic_name}专题详情- {$maccms.site_name}</title>
+		<meta name="keywords" content="{$obj.topic_name}电影专题,{$obj.topic_name}电视剧专题,{$obj.topic_name}综艺专题,{$obj.topic_name}动漫专题,{$obj.topic_name}推荐专题">
+		<meta name="description" content="本站提供{$obj.topic_name},最新最全精品专题数据">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/web/css/main.css">
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/web/css/detail.css">
+	</head>
+	<body>
+		<div id="appSite" class="site reset-element">
+			{include file="system/header"}
+			<div class="main-contaner hasBg">
+				<div class="middle">
+					<div class="el-row">
+						<div class="topic-detail">
+							<div>
+								<div class="desc el-row">
+									<div class="img-bg detail-bg" style="background-image: url({$obj.topic_pic_thumb|mac_url_img});"></div>
+									<div class="desc-content">
+										<span class="name">{$obj.topic_name}</span>
+										<span class="info">{$obj.topic_sub}</span>
+									</div>
+									<a href="{:mac_url('topic/index')}" class="more-topic">更多精彩专题等你来发现 &gt;</a>
+									<div class="el-image nyImage">
+									<img src="{$obj.topic_pic_thumb|mac_url_img}" class="el-image__inner" style="object-fit: cover;">
+								</div>
+								</div>
+							</div>
+							<div class="middleContent">
+								<div class="tabs el-row"></div>
+								<div class="el-row">
+									<div class="video-contaner">
+										{maccms:vod ids="'.$obj['topic_rel_vod'].'" num="24" paging="yes" pageurl="topic/detail" order="desc" by="time"}
+										{include file="module/vodlist"}
+										{/maccms:vod}
+									</div>
+									{include file="widget/topicpage"}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{include file="system/footer"}
+			</div>
+		</div>
+	</body>
+</html>

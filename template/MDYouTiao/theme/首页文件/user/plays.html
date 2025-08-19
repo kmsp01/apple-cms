@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>观看记录 - 会员中心 - {$maccms.site_name}</title> 
+		<meta name="keywords" content="会员中心,{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/web/css/member.css">
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/web/css/favs.css">
+	</head>
+	<body>
+		<div id="appSite" class="site reset-element">
+			{include file="system/header"}
+			<div class="main-contaner">
+				<div class="middle middleContent">
+					<div class="el-row">
+						<div class="message">
+							{include file="user/menu"}
+							<div class="right-wrap">
+								<div class="right-title">观看记录</div>
+								<div class="right-router">
+									<div class="love">
+										{if condition="$__PAGING__.record_total gt 0"}
+										<ul>
+											{volist name="list" id="vo"}
+											{if condition="$vo.ulog_mid eq 1"}
+											{maccms:vod num="10" order="desc" by="time" ids="'.$vo['ulog_rid'].'" id="vo1" key="key1"}
+											<li>
+												<a href="{$vo.data.link}" class="video">
+													<div id="video-item-img" class="video-item-img">
+														<img class="video-item-thumb" src="{:mac_url_img($vo1.vod_pic)}" style="width: 214px; height: 134px;">
+														{if condition="$madou['free']['state'] eq ''"}{if condition="$vo1.vod_points eq ''"}{if condition="$vo1.type_id neq $madou['type']['free']"}<span class="video-item-tag-is-vip"></span>{/if}{else}<span class="video-item-tag-is-paid"></span>{/if}{else}{/if}
+														<span class="video-item-tag video-item-tag-hits">
+															<img src="{$maccms.path}MDassets/web/img/hits.png" class="play-icon">{$vo1.vod_hits}
+														</span>
+														<span class="video-item-tag video-item-tag-duration">{$vo1.vod_duration|mac_default=''}</span>
+														<span class="play"><i class="el-icon-caret-right"></i></span>
+													</div>
+													<div class="video-desc mt10 ellipsis" style="width: 214px;">
+														{$vo1.vod_name}
+													</div>
+												</a>
+											</li>
+											{/maccms:vod}
+											{/if}
+											{/volist}
+											
+										</ul>
+										{if condition="$__PAGING__.record_total gt 6"}
+										{include file="system/paging"}
+										{/if}
+										{else/}
+										<div class="empty"><img src="{$maccms.path}MDassets/web/img/empty.png">
+											<p>您没有看过任何视频耶!</p>
+										</div>
+										{/if}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{include file="system/footer"}
+			</div>
+		</div>
+	</body>
+</html>

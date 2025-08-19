@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="full-screen" content="true">
+		<meta name="screen-orientation" content="portrait">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="360-fullscreen" content="true">
+		<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover">
+		<title>我的分享 - 会员中心 - {$maccms.site_name}</title>
+		<meta name="keywords" content="会员中心,{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/reward.css">
+	</head>
+	<body style="font-size: 12px;">
+		<div id="app">
+			<div class="app-layout app-view">
+				<div class="container router-view" style="padding-top: 80px;">
+					<div  class="page-header">
+						<div class="page-header-top">
+							<div class="page-left" onclick="javascript:history.back(-1);"><i class="iconfont iconnext"></i></div>
+							<div class="page-center">我的分享</div>
+							<div class="page-right"></div>
+						</div>
+						<div class="van-tabs van-tabs--line">
+							<div class="van-tabs__wrap">
+								<div role="tablist" class="van-tabs__nav van-tabs__nav--line" style="border-color: rgb(51, 51, 51);">
+									<a href="{:url('user/reward')}" class="van-tab {if condition="$param.level eq ''"}van-tab--activex{/if}"><span class="van-tab__text van-tab__text--ellipsis">一级下线</span></a>
+									<a href="{:url('user/reward')}?level=2" class="van-tab {if condition="$param.level eq '2'"}van-tab--activex{/if}"><span class="van-tab__text van-tab__text--ellipsis">二级下线</span></a>
+									<a href="{:url('user/reward')}?level=3" class="van-tab {if condition="$param.level eq '3'"}van-tab--activex{/if}"><span class="van-tab__text van-tab__text--ellipsis">三级下线</span></a>
+								</div>
+							</div>
+						</div>
+					</div>
+					{if condition="$__PAGING__.record_total gt 0"}
+					<div class="body">
+						<div class="thead">
+							<div class="title">编号</div>
+							<div class="title">账户</div>
+							<div class="title">注册时间</div>
+						</div>
+						{volist name="list" id="vo"}
+						<div class="item">
+							<div class="li">{$vo.user_id}</div>
+							<div class="li">{$vo.user_name}</div>
+							<div class="li">{$vo.user_reg_time|mac_day}</div>
+						</div>
+						{/volist}
+					</div>
+					{/if}
+					{include file="system/paging"}
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

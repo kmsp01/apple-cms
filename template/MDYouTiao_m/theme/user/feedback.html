@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="full-screen" content="true">
+		<meta name="screen-orientation" content="portrait">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="360-fullscreen" content="true">
+		<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover">
+		<title>找回密码 - 会员中心 - {$maccms.site_name} </title>
+		<meta name="keywords" content="会员中心,{$maccms.site_keywords}"/>
+		<meta name="description" content="{$maccms.site_description}"/>
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/feedback.css">
+	</head>
+	<body style="font-size: 12px;">
+		<div id="app">
+			<div class="app-layout app-view">
+				<div class="containers router-view" style="padding-top: 40px;">
+					<div class="page-header">
+						<div class="page-header-top">
+							<div class="page-left" onclick="javascript:history.back(-1);"><i class="iconfont iconnext"></i></div>
+							<div class="page-center">意见反馈</div>
+							<div class="page-right"></div>
+						</div>
+					</div>
+					<div class="page-body">
+						<div class="title">反馈内容</div>
+						<form class="gbook_form">
+						<div class="van-cell van-field van-field--min-height">
+							<div class="van-cell__value van-cell__value--alone van-field__value">
+								<div class="van-field__body">
+									<textarea name="gbook_content" rows="6" placeholder="请输入您需要反馈的问题描述，我们将进一步为您解决" class="van-field__control gbook_content"></textarea>
+								</div>
+							</div>
+						</div>
+						</form>
+						<button type="button" class="gbook_submit submit_btn">确认提交</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			$(function(){
+				MAC.Gbook.Login = 0;
+				MAC.Gbook.Verify = 0;
+				MAC.Gbook.Init();
+			});
+		</script>
+	</body>
+</html>

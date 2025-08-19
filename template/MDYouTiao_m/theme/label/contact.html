@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="full-screen" content="true">
+		<meta name="screen-orientation" content="portrait">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="360-fullscreen" content="true">
+		<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover">
+		<title>商务合作 - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/contact.css">
+		<script src="{$maccms.path}MDassets/js/clipboard.min.js"></script>
+	</head>
+	<body style="font-size: 12px;">
+		<div id="app">
+			<div class="app-layout app-view">
+				<div class="containers router-view" style="padding-top: 40px;">
+					<div class="page-header">
+						<div class="page-header-top">
+							<div onclick="javascript:history.back(-1);" class="page-left"><i class="iconfont iconnext"></i></div>
+							<div class="page-center">商务合作</div>
+							<div class="page-right"></div>
+						</div>
+					</div>
+					<div class="content">
+						<div class="contacts">
+							<div class="contact">
+								<img src="{$maccms.path}MDassets/h5/img/users.png">
+								<span>代理合作</span>
+							</div>
+							<div class="contact">
+								<img src="{$maccms.path}MDassets/h5/img/put.png">
+								<span>广告投放</span>
+							</div>
+							<div class="contact">
+								<img src="{$maccms.path}MDassets/h5/img/origin.png" style="height: 22px;">
+								<span>片源合作</span>
+							</div>
+							<div class="contact">
+								<img src="{$maccms.path}MDassets/h5/img/girl.png">
+							<span>演员合作</span>
+							</div>
+							<div class="contact">
+								<img src="{$maccms.path}MDassets/h5/img/flow.png">
+							<span>流量合作</span>
+							</div>
+						</div>
+						<div class="lists">
+							{if condition="$madou['contact']['tg']['state'] eq 1"}
+							<div class="list">
+								<img src="{$maccms.path}MDassets/h5/img/tg.png">
+								<div class="cont">Telegram:{$madou[contact][tg][name]}</div>
+								<button id="copy" class="button2" data-clipboard-text="{$madou[contact][tg][name]}">复制</button>
+							</div>
+							{/if}
+							{if condition="$madou['contact']['skype']['state'] eq 1"}
+							<div class="list">
+								<img src="{$maccms.path}MDassets/h5/img/skype.png">
+								<div class="cont">Skype:{$madou[contact][skype][name]}</div>
+								<button id="copy" class="button2" data-clipboard-text="{$madou[contact][skype][name]}">复制</button>
+							</div>
+							{/if}
+							{if condition="$madou['contact']['whatapp']['state'] eq 1"}
+							<div class="list">
+								<img src="{$maccms.path}MDassets/h5/img/whatApp.png">
+								<div class="cont">WhatApp:{$madou[contact][whatapp][name]}</div>
+								<button id="copy" class="button2" data-clipboard-text="{$madou[contact][whatapp][name]}">复制</button>
+							</div>
+							{/if}
+							{if condition="$madou['contact']['potato']['state'] eq 1"}
+							<div class="list">
+								<img src="{$maccms.path}MDassets/h5/img/potato.png">
+								<div class="cont">Potato:{$madou[contact][potato][name]}</div>
+								<button id="copy" class="button2" data-clipboard-text="{$madou[contact][potato][name]}">复制</button>
+							</div>
+							{/if}
+						</div>
+					</div>
+				</div>
+				<script>
+					var clipboard = new ClipboardJS('#copy');
+						clipboard.on('success', function (e) {
+							layer.msg("复制成功！");
+						});
+						clipboard.on('error', function (e) {
+						  console.log(e);
+					});
+				</script>
+			</div>
+		</div>
+	</body>
+</html>

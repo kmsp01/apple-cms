@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="full-screen" content="true">
+		<meta name="screen-orientation" content="portrait">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="360-fullscreen" content="true">
+		<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover">
+		<title>黄钻中心 - 会员中心 - {$maccms.site_name}</title>
+		<meta name="keywords" content="会员中心,{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/upgrade.css">
+	</head>
+	<body style="font-size: 12px;">
+		<div id="app">
+			<div class="app-layout app-view drill">
+				<div class="y-drill router-view" style="padding-top: 40px;">
+					<div class="page-header drill">
+						<div class="page-header-top">
+							<div class="page-left" onClick="javascript:history.back(-1);"><i class="iconfont iconnext"></i></div>
+							<div class="page-center">黄钻中心</div>
+						</div>
+					</div>
+					<div class="top-wrap">
+						<div class="bg-2"></div>
+						<div class="top-con">
+							<div class="card-wrap">
+								<div class="card-left">
+									<img class="img avatar" src="{$user.user_id|mac_get_user_portrait}">
+									<div class="left-con">
+										<div class="left-top">
+										<span >{$user.user_name}</span>
+										</div>
+										<p>{if condition="$GLOBALS['user']['group_id'] eq 3"}{$user.user_end_time|mac_day|mac_default='无限期'}到期{else}您当前未开通VIP会员{/if}</p>
+									</div>
+								</div>
+								<div class="card-right">
+								<div class="right-top">
+									<span>黄钻余额：</span>
+									<span>{$user.user_points}</span>
+								</div>
+								<a href="{:mac_url('user/drill')}" class="btn">立即充值</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="y-gou">
+						<h3>黄钻兑换VIP会员</h3>
+						<p class="label">适用于手机端，手机网页，电脑网页端</p>
+						<div class="list-wrap">
+							{volist name="group_list" id="vo"}
+							{if condition="$vo.group_id gt 2 && $vo.group_status eq 1"}
+							<div class="product">
+								<div class="list-wrap list-2">
+									<div class="list-item grade" data-time="{$madou['site_time_0']}" data-id="{$vo.group_id}" data-name="{$vo.group_name}" data-points="{$vo.group_points_day}" data-long="day">
+										<h3 class="title">VIP会员</h3>
+										<p class="label">{$madou['site_time_0']}天</p>
+										<div class="btn-wrap">{$vo.group_points_day}钻</div>
+										<div class="tip-wrap">优惠8%</div>
+									</div>
+									<div class="list-item grade" data-time="{$madou['site_time_1']}" data-id="{$vo.group_id}" data-name="{$vo.group_name}" data-points="{$vo.group_points_week}" data-long="week">
+										<h3 class="title">VIP会员</h3>
+										<p class="label">{$madou['site_time_1']}天</p>
+										<div class="btn-wrap">{$vo.group_points_week}钻</div>
+										<div class="tip-wrap">优惠15%</div>
+									</div>
+								</div>
+							</div>
+							<div class="product">
+								<div class="list-wrap list-2" style="margin-top:0;">
+									<div class="list-item grade" data-time="{$madou['site_time_2']}" data-id="{$vo.group_id}" data-name="{$vo.group_name}" data-points="{$vo.group_points_month}" data-long="month">
+										<h3 class="title">VIP会员</h3>
+										<p class="label">{$madou['site_time_2']}天</p>
+										<div class="btn-wrap">{$vo.group_points_month}钻</div>
+										<div class="tip-wrap">优惠20%</div>
+									</div>
+									<div class="list-item grade" data-time="{$madou['site_time_3']}" data-id="{$vo.group_id}" data-name="{$vo.group_name}" data-points="{$vo.group_points_year}" data-long="year">
+										<h3 class="title">VIP会员</h3>
+										<p class="label">{$madou['site_time_3']}天</p>
+										<div class="btn-wrap">{$vo.group_points_year}钻</div>
+										<div class="tip-wrap">优惠25%</div>
+									</div>
+								</div>
+							</div>
+							{/if}
+							{/volist}
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<script>
+			$('.grade').click(function(){
+				var that=$(this);
+				var group_id = that.attr('data-id');
+				var group_name = that.attr('data-name');
+				var long = that.attr('data-long');
+				var points = that.attr('data-points');
+				var group_time = that.attr('data-time');
+				layer.confirm('确定要兑换【' + group_time + '】天'+group_name+'吗？需要花费【'+points+'】钻石', {
+					title: '提示',
+					btn: ['确定', '取消']
+				}, function() {
+					$.ajax({
+						url: "{:url('user/upgrade')}",
+						type: "post",
+						dataType: "json",
+						data: {group_id: group_id,long:long,points:points,flag:'point'},
+						beforeSend: function () {
+							$(".grade").val("loading...");
+						},
+						success: function (r) {
+							layer.msg(r.msg);
+							if (r.code == 1) {
+								location.reload();
+							}
+						},
+						complete: function () {
+							$(".grade").val("提交");
+						}
+					});
+				});
+			});
+		</script>
+	</body>
+</html>

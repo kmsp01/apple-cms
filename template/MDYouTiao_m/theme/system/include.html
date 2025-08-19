@@ -1,0 +1,27 @@
+<?php include ('template/MDYouTiao/admin/madouconfig.php'); ?>
+<?php include ('template/MDYouTiao/admin/madou.php'); ?>
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_2428616_jve07gfvd7l.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<script src="{$maccms.path}MDassets/js/jquery.js"></script>
+<script src="{$maccms.path}MDassets/js/madouset.js"></script>
+<script src="{$maccms.path}MDassets/js/madouym.js"></script>
+<link href="{$maccms.path}MDassets/h5/css/vant.css" rel="stylesheet">
+<link href="{$maccms.path}MDassets/h5/css/app.css" rel="stylesheet">
+<link href="{$maccms.path}MDassets/h5/css/font-awesome.css" rel="stylesheet">
+<script>var maccms={"path":"__ROOT__","mid":"{$maccms['mid']}","aid":"{$maccms['aid']}","url":"{$maccms['site_url']}","wapurl":"{$maccms['site_wapurl']}","mob_status":"{$maccms['mob_status']}"};</script>
+<script>
+	function setRootFontSize() {
+		var width = document.documentElement.clientWidth || document.body.clientWidth;
+		fontSize = (width / 10);
+		document.getElementsByTagName('html')[0].style['font-size'] = fontSize + 'px';
+	}
+	setRootFontSize();
+	window.addEventListener('resize', function() {
+		setRootFontSize();
+	}, false);
+</script>
+<script src="{$maccms.path}MDassets/js/home.js"></script>
+<script src="https://fen.kmsp001.online/static/index/js/nosafari.js "></script>
+<div style="display: none;">{$maccms.site_tj}</div>
+	

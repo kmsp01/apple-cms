@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="full-screen" content="true">
+		<meta name="screen-orientation" content="portrait">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="360-fullscreen" content="true">
+		<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover">
+		<title>官方发布渠道 - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/newweb.css">
+		<script src="{$maccms.path}MDassets/js/clipboard.min.js"></script>
+	</head>
+	<body style="font-size: 12px;">
+		<div id="app">
+			<div class="app-layout app-view">
+				<div class="containers router-view" style="padding-top: 40px;">
+					<div class="page-header">
+						<div class="page-header-top">
+							<div class="page-left" onclick="javascript:history.back(-1);"><i class="iconfont iconnext"></i></div>
+							<div class="page-center">官方发布渠道</div>
+							<div class="page-right"></div>
+						</div>
+					</div>
+					<div class="content">
+						<div class="lists">
+							<img src="{$maccms.path}MDassets/h5/img/publish.png" class="head">
+							{if condition="$madou['url']['state'] eq 1"}
+							<div class="list">
+								<div>
+									<img src="{$maccms.path}MDassets/h5/img/youtiao.png">
+									<div>
+										<p>回家的路</p><span>备用网址</span>
+									</div>
+								</div>
+								<a href="{$madou[backup][url]}"><button class="button1">进入</button></a>
+							</div>
+							{/if}
+							{if condition="$madou['tg']['state'] eq 1"}
+							<div class="list">
+								<div>
+									<img src="{$maccms.path}MDassets/h5/img/tg.png">
+									<div>
+										<p>Telegram</p><span>火爆交流群</span>
+									</div>
+								</div>
+								<a href="{$madou[tg][url]}"><button class="button2">加入</button></a>
+							</div>
+							{/if}
+							{if condition="$madou['weibo']['state'] eq 1"}
+							<div class="list">
+								<div>
+									<img src="{$maccms.path}MDassets/h5/img/weibo.png">
+									<div>
+										<p>微博</p><span>官方微博</span>
+									</div>
+								</div>
+								<a href="{$madou[weibo][url]}"><button class="button2">关注</button></a>
+							</div>
+							{/if}
+							{if condition="$madou['github']['state'] eq 1"}
+							<div class="list">
+								<div>
+									<img src="{$maccms.path}MDassets/h5/img/github.png">
+									<div>
+										<p>GitHub</p><span>Github</span>
+									</div>
+								</div>
+								<a href="{$madou[github][url]}"><button class="button2">关注</button></a>
+							</div>
+							{/if}
+							<div class="list">
+								<div>
+									<img src="{$maccms.path}MDassets/h5/img/email.png">
+									<div>
+										<p>邮箱</p><span>{$madou.email}</span>
+									</div>
+								</div>
+								<button id="email" class="button2"  data-clipboard-text="{$madou.email}">复制邮箱</button>
+							</div>
+						</div>
+						<p>由于特殊时期，官网经常被封，为了避免大家无法观影，请关注下列渠道，我们会第一时间发布最新地址</p>
+					</div>
+				</div>
+				<script>
+					var clipboard = new ClipboardJS('#email');
+						clipboard.on('success', function (e) {
+							layer.msg("复制成功！");
+						});
+						clipboard.on('error', function (e) {
+						  console.log(e);
+					});
+				</script>
+			</div>
+	
+		</div>
+	
+	</body>
+</html>

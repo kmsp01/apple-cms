@@ -1,0 +1,23 @@
+<div class="el-row">
+	<div class="home-carousel">
+		<div class="swiper-wrapper">
+		    {maccms:vod num="10" by="hits" order="desc" level="9"}
+			<div class="swiper-slide">
+				<a href="{:mac_url_vod_play($vo)}" class="ad-link">
+					<img class="banner-img" src="{:mac_url_img($vo.vod_pic_slide)}">
+				</a>
+			</div>
+			{/maccms:vod}
+			{maccms:carousel num="10" type="pc" order="asc" by="id"}
+			<div class="swiper-slide">
+				<a href="{$vo.carousel_url}" target="_blank" class="ad-link">
+					<img class="banner-img" src="{:mac_url_img($vo.carousel_logo)}">
+				</a>
+			</div>
+			{/maccms:carousel}
+		</div>
+		<ul class="el-carousel__indicators"></ul>
+		<button type="button" class="el-carousel__arrow el-carousel__arrow--left"><i class="el-icon-arrow-left"></i></button>
+		<button type="button" class="el-carousel__arrow el-carousel__arrow--right"><i class="el-icon-arrow-right"></i></button>
+	</div>
+</div>

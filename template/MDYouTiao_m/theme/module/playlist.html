@@ -1,0 +1,43 @@
+{if condition="$madou['playlist']['state'] eq 1"}
+<div class="clearfix" id="playlist">
+            	<div class="play-head clearfix">
+            		<h3 class="play-title">播放列表</h3>
+            		<div class="play-tips">
+            			<marquee scrollamount="4" behavior="scroll" onmouseover="this.stop()" onmouseout="this.start()">
+            				<a class="play-notice">{$madou[paly][notice]}</a>
+            			</marquee>
+            		</div>
+            		<a class="play-sort-btn" href="javascript:void(0)" style=""><span>排序</span></a>
+            	</div>
+            	<div class="plays-from" id="plays">
+            		<div class="clearfix">
+            		   {maccms:foreach name="obj.vod_play_list" id="vo"}
+    					<a class="play-btn {if$vo.player_info.from==$obj['vod_play_list'][$param['sid']]['player_info']['from']} active{/if}"  {if$vo.player_info.from==$obj['vod_play_list'][$param['sid']]['player_info']['from']}href="javascript:;" 
+    					class="play-btn"{else}href="{:mac_url_vod_play($obj,['sid'=>$vo.sid,'nid'=>$param.nid])}"{/if}>	
+    					{$vo.player_info.show}
+    					</a>
+    					{/maccms:foreach}
+            		</div>
+            	</div>
+                <div id="play-list" class="play-box">
+                {maccms:foreach name="obj.vod_play_list" id="vo"}  
+            	<div id="playsx" class="play-tabs-box  {if condition="$param.sid eq $key"}desc show{/if}" >
+            		<div class="row">
+            			<div class="play-list-wrap">
+            			    
+            				<ul class="play-plays-list play-sort-list play-list-hide-xs clearfix">
+            				    
+            				    {maccms:foreach name="vo.urls" id="vo2" key="key2"}
+            					<li class="play-col-xs-4 play-col-sm-2 play-li">
+            				        <a class="play-url {if condition="$param.sid eq $vo.sid && $param.nid eq $vo2.nid"}active{/if}" href="{:mac_url_vod_play($obj,['sid'=>$vo.sid,'nid'=>$vo2.nid])}">{$vo2.name}</a>
+            					</li>
+            					{/maccms:foreach}
+            				</ul>
+            				
+            			</div>
+            		</div>
+            	</div>
+            	{/maccms:foreach}
+            	</div>
+            </div>	
+             {/if}

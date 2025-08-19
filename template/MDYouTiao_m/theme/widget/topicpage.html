@@ -1,0 +1,28 @@
+{if condition="$__PAGING__.record_total gt 0"}
+<div class="btns" style="margin-top: .8rem;">
+	<ul class="van-pagination">
+		{if$__PAGING__['page_current'] eq '1'}
+		<a class="van-pagination__item van-pagination__prev van-hairline"><i class="van-icon van-icon-arrow-left"></i></a>
+		{else}
+		<a href="{:mac_url_topic_detail($obj)}?page={$__PAGING__.page_current-1}" class="van-pagination__item van-pagination__prev van-hairline"><i class="van-icon van-icon-arrow-left"></i></a>
+		{/if}
+		{maccms:foreach name="$__PAGING__.page_num" id="num"}
+		{if condition="$__PAGING__['page_current'] eq $num"}
+		<a class="van-pagination__item van-pagination__item--active van-pagination__page van-hairline">{$num}</a>
+		{else}	
+		<a href="{:mac_url_topic_detail($obj)}?page={$num}" class="van-pagination__item van-pagination__page van-hairline">{$num}</a>
+		{/if}
+		{/maccms:foreach}
+		{if condition="$__PAGING__['page_current'] eq $__PAGING__.page_total"}
+		<a class="van-pagination__item van-pagination__next van-hairline"><i class="van-icon van-icon-arrow"></i></a>
+		{else}
+		<a href="{:mac_url_topic_detail($obj)}?page={$__PAGING__.page_current+1}" class="van-pagination__item van-pagination__next van-hairline"><i class="van-icon van-icon-arrow"></i></a>
+		{/if}
+	</ul>
+</div>
+{else/}	
+<div class="empty">
+	<img src="{$maccms.path}MDassets/h5/img/empty.png">
+	<p>这里什么都没有哦～</p>
+</div>
+{/if}

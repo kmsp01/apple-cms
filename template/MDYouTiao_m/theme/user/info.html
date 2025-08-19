@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="full-screen" content="true">
+		<meta name="screen-orientation" content="portrait">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="360-fullscreen" content="true">
+		<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover">
+		<title>修改密码 - 会员中心 - {$maccms.site_name}</title>
+		<meta name="keywords" content="会员中心,{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/info.css">
+	</head>
+	<body style="font-size: 12px;">
+		<div id="app">
+			<div class="app-layout app-view">
+				<div class="containers router-view" style="padding-top: 40px;">
+					<div class="page-header">
+						<div class="page-header-top">
+							<div class="page-left" onclick="javascript:history.back(-1);"><i class="iconfont iconnext"></i></div>
+							<div class="page-center">修改密码</div>
+							<div class="page-right"></div>
+						</div>
+					</div>
+					<form id="fm" name="fm" method="post" action="">
+					<div class="content">
+						<img src="{$maccms.path}MDassets/h5/img/password.png">
+						<input type="password" name="user_pwd" placeholder="请输入原密码">
+					</div>
+					<div class="content">
+						<img src="{$maccms.path}MDassets/h5/img/password.png">
+						<input type="password" name="user_pwd1" placeholder="请输入新密码">
+					</div>
+					<div class="content">
+						<img src="{$maccms.path}MDassets/h5/img/password.png">
+						<input type="password" name="user_pwd2" placeholder="请再次输入新密码">
+					</div>
+					<div class="content">
+						<img src="{$maccms.path}MDassets/h5/img/findpass.png">
+						<input type="text" name="user_question" value="{$obj.user_question}" placeholder="请输入您的密码找回问题">
+					</div>
+					<div class="content">
+						<img src="{$maccms.path}MDassets/h5/img/findpass.png">
+						<input type="text" name="user_answer" value="{$obj.user_answer}" placeholder="请输入您的密码找回答案">
+					</div>
+					</form>
+					<button type="button" id="btn_submit">提交</button>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			$('.btn_unbind').click(function(){
+				var ac = $(this).attr('ac');
+				if(ac!='email' && ac!='phone'){
+					layer.msg('参数错误');
+				}
+				if(confirm('确认解除绑定吗？此操作不可恢复？')) {
+					$.ajax({
+						url: "{:mac_url('user/unbind')}",
+						type: "post",
+						dataType: "json",
+						data: {ac: ac},
+						beforeSend: function () {
+							//开启loading
+						},
+						success: function (r) {
+							layer.msg(r.msg);
+							if(r.code==1){
+								location.href="{:mac_url('user/info')}";
+							}
+						},
+						complete: function () {
+							//结束loading
+						}
+					});
+				}
+			});
+
+			$("#btn_submit").click(function() {
+				var data = $("#fm").serialize();
+				$.ajax({
+					url: "{:mac_url('user/info')}",
+					type: "post",
+					dataType: "json",
+					data: data,
+					beforeSend: function () {
+						//开启loading
+						//$(".loading_box").css("display","block");
+						$("#btn_submit").val("loading...");
+					},
+					success: function (r) {
+						layer.msg(r.msg);
+						if(r.code==1){
+							location.href="{:url('user/info')}";
+						}
+					},
+					complete: function () {
+						//结束loading
+						//$(".loading_box").css("display","none");
+						$("#btn_submit").val("提交");
+					}
+				});
+			});
+		</script>
+	</body>
+</html>

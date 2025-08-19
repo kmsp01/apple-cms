@@ -1,0 +1,24 @@
+<div class="love-lists">
+	<h2>为你推荐</h2>
+		<div class="lists">
+		{maccms:vod num="10" type="current" order="desc" by="time"}
+		<dl class="">
+			<a href="{:mac_url_vod_play($vo)}">
+				<dt>
+					<img class="el-image" src="{:mac_url_img($vo.vod_pic)}">
+					{if condition="$madou['free']['state'] eq ''"}{if condition="$vo.vod_points eq ''"}{if condition="$vo.type_id neq $madou['type']['free']"}<span class="tag vip"></span>{/if}{else}<span class="paid vip"></span>{/if}{else}{/if}
+					<span class="duration">{$vo.vod_duration|mac_default=''}</span>
+				</dt>
+				<dd>
+					<h3>{$vo.vod_name}</h3>
+					<div class="rate">
+						{include file="module/star"}
+						<span>{$vo.vod_score}</span>
+					</div>
+					<p>{$vo.vod_hits}次播放<span>|</span>{$vo.vod_up}喜欢</p>
+				</dd>
+			</a>	
+		</dl>
+		{/maccms:vod}
+	</div>
+</div>

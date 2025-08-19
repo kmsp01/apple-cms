@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="full-screen" content="true">
+		<meta name="screen-orientation" content="portrait">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="360-fullscreen" content="true">
+		<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover">
+		<title>{$param['ac_text']}找回密码 - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/login.css">
+	</head>
+	<body style="font-size: 12px;">
+		<div id="app">
+			<div class="app-layout app-view">
+				<div class="containers router-view" style="padding-top: 40px;">
+					<div class="page-header">
+						<div class="page-header-top">
+							<div class="page-left" onclick="javascript:history.back(-1);"><i class="iconfont iconnext"></i></div>
+							<div class="page-center">{$param['ac_text']}找回密码</div>
+						</div>
+					</div>
+					<div class="page-body">
+						<div class="login flex-center login-center">
+							<div class="center">
+								<form class="phone-login flex-center" method="post" id="fm" action="">
+									<div class="van-cell van-cell--required van-field">
+										<div class="van-cell__title van-field__label">
+											<div class="flex-center">
+												<img width="17px" height="17px" src="{$maccms.path}MDassets/h5/img/username.png" class="icon-code">
+											</div>
+										</div>
+										<div class="van-cell__value van-field__value">
+											<div class="van-field__body">
+												<input type="text" id="to" name="to" placeholder="请输入您绑定的{$param['ac_text']}" class="van-field__control">
+											</div>
+										</div>
+									</div>
+									<div style="width: 100%;">
+										<div class="short-cell van-cell van-field">
+											<div class="van-cell__title van-field__label">
+												<div class="flex-center">
+													<img width="17px" height="17px" src="{$maccms.path}MDassets/h5/img/capacha.png" class="icon-code">
+												</div>
+											</div>
+											<div class="van-cell__value van-field__value">
+												<div class="van-field__body">
+													<input type="text" id="verify" name="verify" placeholder="请输入验证码" class="van-field__control">
+												</div>
+											</div>
+										</div>
+										<img class="sms-btn van-button van-button--primary" src="{:mac_url('verify/index')}" onClick="this.src=this.src+'?'" alt="单击刷新">
+									</div>
+								</form>	
+								<form class="phone-login flex-center" method="post" id="fm2" action="">
+									<input type="hidden" name="ac" value="{$param['ac']}">
+									<div style="width: 100%;">
+										<div class="short-cell van-cell van-field">
+											<div class="van-cell__title van-field__label">
+												<div class="flex-center">
+													<img width="17px" height="17px" src="{$maccms.path}MDassets/h5/img/capacha.png" class="icon-code">
+												</div>
+											</div>
+											<div class="van-cell__value van-field__value">
+												<div class="van-field__body">
+													<input type="text" id="code" name="code" placeholder="请输入{$param['ac_text']}验证码" class="van-field__control">
+												</div>
+											</div>
+										</div>
+										<button type="button" id="btn_send" class="sms-btn van-button van-button--primary van-button--normal">
+											<div class="van-button__content">
+												<span class="van-button__text">获取验证码</span>
+											</div>
+										</button>
+									</div>
+									<div class="van-cell van-cell--required van-field">
+										<div class="van-cell__title van-field__label">
+											<div class="flex-center">
+												<img width="17px" height="17px" src="{$maccms.path}MDassets/h5/img/password.png" class="icon-code">
+											</div>
+										</div>
+										<div class="van-cell__value van-field__value">
+											<div class="van-field__body">
+												<input type="password" id="user_pwd" name="user_pwd" placeholder="请输入您的新密码" class="van-field__control">
+											</div>
+										</div>
+									</div>
+									<div class="van-cell van-cell--required van-field">
+										<div class="van-cell__title van-field__label">
+											<div class="flex-center">
+												<img width="17px" height="17px" src="{$maccms.path}MDassets/h5/img/password.png" class="icon-code">
+											</div>
+										</div>
+										<div class="van-cell__value van-field__value">
+											<div class="van-field__body">
+												<input type="password" id="user_pwd2" name="user_pwd2" placeholder="请输入您的确认密码" class="van-field__control">
+											</div>
+										</div>
+									</div>
+									<div class="botton-area">
+										<button type="button" id="btn_submit" class="van-button van-button--primary van-button--large van-button--round">
+											<div class="van-button__content">
+												<span class="van-button__text">重置密码</span>
+											</div>
+										</button>
+									</div>
+								</form>	
+								<div class="tool">
+									<a href="{:mac_url('user/login')}" class="findpass-btn">立即登录</a>
+									<div class="flex-1"></div>
+									<a href="{:mac_url('user/findpass_msg')}?ac=email" class="regist-btn">邮箱找回</a>
+									<div class="flex-1"></div>
+									<a href="{:mac_url('user/findpass_msg')}?ac=phone" class="regist-btn">手机找回</a>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+					<script type="text/javascript">
+						$(function(){
+							$("body").bind('keyup',function(event) {
+								if(event.keyCode==13){ $('#btnLogin').click(); }
+							});
+							$('#btn_send').click(function() {
+								if ($('#to').val()  == '') { layer.msg('请输入{$param["ac_text"]}！'); $("#to").focus(); return false; }
+
+								$.ajax({
+									url: "{:mac_url('user/findpass_msg')}",
+									type: "post",
+									dataType: "json",
+									data: $('#fm').serialize(),
+									beforeSend: function () {
+										$("#btn_send").val("loading...");
+									},
+									success: function (r) {
+										layer.msg(r.msg);
+									},
+									complete: function () {
+										$('#verify').click();
+										$("#btn_send").val("发送邮件");
+									}
+								});
+							});
+
+							$('#btn_submit').click(function() {
+								if ($('#to').val()  == '') { layer.msg('请输入您绑定的{$param['ac_text']}!'); $("#to").focus(); return false; }
+								if ($('#verify').val()  == '') { layer.msg('请输入验证码！'); $("#verify").focus(); return false; }
+								if ($('#code').val()  == '') { layer.msg('请输入{$param['ac_text']}验证码！'); $("#code").focus(); return false; }
+								if ($('#user_pwd').val()  == '') { layer.msg('请输入您的新密码！'); $("#user_pwd").focus(); return false; }
+								if ($('#user_pwd2').val()  == '') { layer.msg('请输入您的确认密码！'); $("#user_pwd2").focus(); return false; }
+								if ($('#user_pwd').val()  != $('#user_pwd2').val() ) { layer.msg('二次密码不一致！'); $("#user_pwd2").focus(); return false; }
+								
+
+								var data= {ac:'{$param["ac"]}',to:$('#to').val(),code:$('#code').val(),user_pwd:$('#user_pwd').val(),user_pwd2:$('#user_pwd2').val()};
+								$.ajax({
+									url: "{:url('user/findpass_reset')}",
+									type: "post",
+									dataType: "json",
+									data: data,
+									beforeSend: function () {
+										$("#btn_submit").val("loading...");
+									},
+									success: function (r) {
+										layer.msg(r.msg);
+									},
+									complete: function () {
+										$("#btn_submit").val("重置密码");
+									}
+								});
+							});
+						});
+					</script>
+				</div>
+			</div>
+		</div>
+
+	</body>
+</html>

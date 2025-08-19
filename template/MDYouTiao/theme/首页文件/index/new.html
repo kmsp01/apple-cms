@@ -1,0 +1,68 @@
+<div class="home-area el-row">
+	<div class="top-header">
+		<a href="{:mac_url('label/rank',['by'=>'time'])}" class="info-left">
+			<img class="left-img" src="{$maccms.path}MDassets/web/img/new.png">
+			<span class="area-title">最新影片</span>
+		</a>
+		<a href="{:mac_url('label/rank',['by'=>'time'])}" class="info-right">
+			<div class="more">
+				<span class="info-more">更多</span>
+				<img src="{$maccms.path}MDassets/web/img/chevron_right.png">
+			</div>
+		</a>
+	</div>
+	<div class="home-new-wrap">
+		<div class="home-new">
+			<div class="el-carousel swiper-container">
+				<div class="el-carousel__container swiper-wrapper" style="height: 500px;">
+					<div class="el-carousel__item swiper-slide ">
+						<div class="video-contaner zxyp-content" size="[object Object]">
+							{maccms:vod num="'.($madou['pc']['index']['new']).'" by="time" order="desc"}
+							{include file="module/vodlist"}
+							{/maccms:vod}		
+						</div>
+					</div>
+					<div class="el-carousel__item swiper-slide">
+						<div class="video-contaner zxyp-content">
+							{maccms:vod num="'.($madou['pc']['index']['new']).'" by="time" start="'.($madou['pc']['index']['new']+1).'" order="desc"}
+							{include file="module/vodlist"}
+							{/maccms:vod}		
+						</div>
+					</div>
+					<div class="el-carousel__item swiper-slide">
+						<div class="video-contaner zxyp-content">
+							{maccms:vod num="'.($madou['pc']['index']['new']).'" by="time" start="'.($madou['pc']['index']['new']*2+1).'" order="desc"}
+							{include file="module/vodlist"}
+							{/maccms:vod}		
+						</div>
+					</div>
+					<div class="el-carousel__item swiper-slide">
+						<div class="video-contaner zxyp-content">
+							{maccms:vod num="'.($madou['pc']['index']['new']).'" by="time" start="'.($madou['pc']['index']['new']*3+1).'" order="desc"}
+							{include file="module/vodlist"}
+							{/maccms:vod}		
+						</div>
+					</div>
+					<div class="el-carousel__item swiper-slide">
+						<div class="video-contaner zxyp-content">
+							{maccms:vod num="'.($madou['pc']['index']['new']).'" by="time" start="'.($madou['pc']['index']['new']*4+1).'" order="desc"}
+							{include file="module/vodlist"}
+							{/maccms:vod}		
+						</div>
+					</div>
+					<div class="el-carousel__item swiper-slide">
+						<div class="video-contaner zxyp-content">
+							{maccms:vod num="'.($madou['pc']['index']['new']).'" by="time" start="'.($madou['pc']['index']['new']*5+1).'" order="desc"}
+							{include file="module/vodlist"}
+							{/maccms:vod}		
+						</div>
+					</div>					
+				</div>
+			</div>	
+			<div class="indicator">
+				<div class="arrow left new-carousel__arrow--left"><i class="el-icon-arrow-left"></i></div>
+				<div class="arrow right new-carousel__arrow--right"><i class="el-icon-arrow-right"></i></div>
+			</div>
+		</div>
+	</div>
+</div>

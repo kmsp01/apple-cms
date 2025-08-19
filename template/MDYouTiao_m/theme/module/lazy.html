@@ -1,0 +1,13 @@
+{if$__PAGING__.page_total>1}
+<a href="{$__PAGING__.page_url|mac_url_page=$__PAGING__.page_next}" class="van-list__loading madou_more">
+	<div class="van-loading van-loading--circular">
+		<span class="van-loading__spinner van-loading__spinner--circular" style="width: 16px; height: 16px;">
+			<svg viewBox="25 25 50 50" class="van-loading__circular">
+				<circle cx="50" cy="50" r="20" fill="none"></circle>
+			</svg>
+		</span>
+		<span class="van-loading__text">加载中...</span>
+	</div>
+</a>
+<div class="van-list__finished-text hidden">啊～哥哥到底啦！</div>
+{/if}

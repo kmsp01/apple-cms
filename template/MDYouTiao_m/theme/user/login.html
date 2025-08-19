@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="full-screen" content="true">
+		<meta name="screen-orientation" content="portrait">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="360-fullscreen" content="true">
+		<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover">
+		<title>用户登录 - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/login.css">
+	</head>
+	<body style="font-size: 12px;">
+		<div id="app">
+			<div class="app-layout app-view">
+				<div class="containers router-view" style="padding-top: 40px;">
+					<div class="page-header">
+						<div class="page-header-top">
+							<div class="page-left" onclick="javascript:history.back(-1);"><i class="iconfont iconnext"></i></div>
+							<div class="page-center">登录账号</div>
+						</div>
+					</div>
+					<div class="page-body">
+						<div class="login flex-center login-center">
+							<div class="center">
+								<form class="phone-login flex-center" method="post" id="fm" action="">
+									<div class="van-cell van-cell--required van-field">
+										<div class="van-cell__title van-field__label">
+											<div class="flex-center">
+												<img width="17px" height="17px" src="{$maccms.path}MDassets/h5/img/username.png" class="icon-code">
+											</div>
+										</div>
+										<div class="van-cell__value van-field__value">
+											<div class="van-field__body">
+												<input type="text" id="user_name" name="user_name" placeholder="请输入您的登录账号" class="van-field__control">
+											</div>
+										</div>
+									</div>
+									<div class="van-cell van-cell--required van-field">
+										<div class="van-cell__title van-field__label">
+											<div class="flex-center">
+												<img width="17px" height="17px" src="{$maccms.path}MDassets/h5/img/password.png" class="icon-code">
+											</div>
+										</div>
+										<div class="van-cell__value van-field__value">
+											<div class="van-field__body">
+												<input type="password" id="user_pwd" name="user_pwd" placeholder="请输入您的登录密码" class="van-field__control">
+											</div>
+										</div>
+									</div>
+									{if condition="$GLOBALS['config']['user']['login_verify'] eq 1"}
+									<div style="width: 100%;">
+										<div class="short-cell van-cell van-field">
+											<div class="van-cell__title van-field__label">
+												<div class="flex-center">
+													<img width="17px" height="17px" src="{$maccms.path}MDassets/h5/img/capacha.png" class="icon-code">
+												</div>
+											</div>
+											<div class="van-cell__value van-field__value">
+												<div class="van-field__body">
+													<input type="text" id="verify" name="verify" placeholder="请输入验证码" class="van-field__control">
+												</div>
+											</div>
+										</div>
+										<img id="verify_img" class="sms-btn van-button van-button--primary" src="{:mac_url('verify/index')}"  onClick="this.src=this.src+'?'"   alt="单击刷新">
+									</div>
+									{/if}
+									<div class="botton-area">
+										<button type="button" id="btn_submit" class="van-button van-button--primary van-button--large van-button--round">
+											<div class="van-button__content">
+												<span class="van-button__text">立即登录</span>
+											</div>
+										</button>
+									</div>
+								</form>	
+								<div class="tool">
+									<a href="{:mac_url('user/findpass')}" class="findpass-btn">找回密码</a>
+									<div class="flex-1"></div>
+									<a href="{:mac_url('user/reg')}" class="regist-btn">立即注册</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<script type="text/javascript">
+						$(function(){
+							$("body").bind('keyup',function(event) {
+								if(event.keyCode==13){ $('#btnLogin').click(); }
+							});
+							$('#btn_submit').click(function() {
+								if ($('#user_name').val()  == '') { layer.msg('请输入您的登录账号！'); $("#user_name").focus(); return false; }
+								if ($('#user_pwd').val()  == '') { layer.msg('请输入您的登录密码！'); $("#user_pwd").focus(); return false; }
+								if ($('#verify').length> 0 && $('#verify').val()  == '') { layer.msg('请输入验证码！'); $("#verify").focus(); return false; }
+								$.ajax({
+									url: "{:url('user/login')}",
+									type: "post",
+									dataType: "json",
+									data: $('#fm').serialize(),
+									beforeSend: function () {
+										$("#btn_submit").val("loading...");
+									},
+									success: function (r) {
+										if(r.code==1){
+											location.href="{:mac_url('user/index')}";
+										}
+										else{
+											layer.msg(r.msg);
+											$('#verify_img').click();
+										}
+									},
+									complete: function () {
+										$("#btn_submit").val("立即登录");
+									}
+								});
+							});
+						});
+					</script>
+				</div>
+			</div>
+		</div>
+
+	</body>
+</html>

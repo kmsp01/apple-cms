@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>在线播放{$obj.vod_name} {$obj['vod_play_list'][$param['sid']]['urls'][$param['nid']]['name']} - 高清资源 - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$obj.vod_name}{$obj['vod_play_list'][$param['sid']]['urls'][$param['nid']]['name']}免费在线观看,{$obj.vod_name}剧情介绍">
+		<meta name="description" content="{$obj.vod_name}{$obj['vod_play_list'][$param['sid']]['urls'][$param['nid']]['name']}免费在线观看,{$obj.vod_name}剧情介绍">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/web/css/video.css">
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/web/css/playlist.css">
+		<script src="{$maccms.path}MDassets/js/clipboard.min.js"></script>
+	</head>
+	<body class="">
+		<div id="appSite" class="site reset-element">
+			{include file="system/header"}
+			<div class="main-contaner">
+				<div class="middle middleContent">
+					<div class="el-row">
+						<div class="video-page">
+							<div class="video">
+								{include file="module/video,module/video-info,module/guess,module/comment"}
+							</div>
+							{include file="module/guess-right"}
+						</div>
+					</div>
+				</div>
+				<span style="display:none" class="mac_ulog_set" alt="设置播放页浏览记录" data-type="4" data-mid="{$maccms.mid}" data-id="{$obj.vod_id}" data-sid="{$param.sid}" data-nid="{$param.nid}"></span>
+				<span style="display:none" class="mac_history_set" alt="设置History历史记录" data-name="[{$obj.type.type_name}]{$obj.vod_name}" data-pic="{$obj.vod_pic|mac_url_img}"></span>
+				{if condition="$madou['trysee']['state'] eq '1' && $madou['free']['state'] eq '1'"}
+				{if condition="$GLOBALS['user']['group_id'] neq 3"}
+				<script>layer.msg('剩余观看次数：{$trysee_num-1} 次！');</script>
+				{/if}
+				{elseif condition="$madou['trysee']['state'] eq '1' && $madou['type']['free'] eq $obj.type_id"}
+				{if condition="$GLOBALS['user']['group_id'] neq 3"}
+				<script>layer.msg('剩余观看次数：{$trysee_num-1} 次！');</script>
+				{/if}
+				{/if}
+				<script>
+					var clipboard = new ClipboardJS('#share');
+					clipboard.on('success', function (e) {
+						layer.msg("复制成功,快去分享吧！");
+					});
+					clipboard.on('error', function (e) {
+					  console.log(e);
+					});
+					$('.btn-favs').on('click',function(){
+						if({$user.user_id}){
+							if($('.btn-favs').attr('data-ulog')==''){
+								MAC.Ajax(maccms.path+'/index.php/user/ajax_ulog/?ac=set&mid='+$(this).attr("data-mid")+'&id='+$(this).attr("data-id")+'&type='+$(this).attr("data-type"),'get','json','',function(r){
+									if(r.code==1){
+										MAC.Ulog.Get({$maccms.mid},{$obj.vod_id},2,1,'',function(r){
+											$('.btn-favs').attr('data-ulog',r.list[0].ulog_id);
+											$('.favs').attr('src','/MDassets/web/img/heart.png');
+											layer.msg("收藏成功");
+										}) 
+									}
+								})
+							}else{
+								$.post("{:url('user/ulog_del')}",{ids:$('.btn-favs').attr('data-ulog'),type:2},function(data) {
+									if (data.code == '1') {
+										$('.favs').attr('src','/MDassets/web/img/list-favs.png');
+										layer.msg("取消收藏");
+										location.reload();
+									}else {
+									
+									}
+								}, 'json')
+							}
+						}else{
+							layer.msg("请先登录");
+						}
+					})
+					{if $user.user_id != 0}
+						MAC.Ulog.Get({$maccms.mid},{$obj.vod_id},2,1,'',function(r){
+							if(r.total==1){
+								$('.btn-favs').attr('data-ulog',r.list[0].ulog_id);
+								$('.favs').attr('src','/MDassets/web/img/heart.png');
+							}else{
+								$('.btn-favs').attr('data-ulog','')
+							}  
+						})
+					{/if}
+				</script>
+				{include file="system/footer"}
+			</div>
+		</div>
+	</body>
+</html>

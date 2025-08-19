@@ -1,0 +1,22 @@
+<div class="video-box">
+	{if condition="$GLOBALS['user']['group_id'] eq 1"}
+	<div class="video-before-ad noVip" style="background-image: url({:mac_url_img($obj.vod_pic)});">
+		<div class="ad-wrap">
+			<div class="ad-title">本视频为钻石付费，付费后可观看</div>
+			<a href="{:mac_url('user/login')}" class="ad-btn"><img src="{$maccms.path}MDassets/web/img/minivip.png"><div>立即登录</div></a>
+			<div class="ad-label">已购买过可 <a href="{:mac_url('user/login')}">登录</a> 观看</div>
+		</div>
+	</div>
+	{else}
+	<div class="video-before-ad noVip" style="background-image: url({:mac_url_img($obj.vod_pic)});">
+		<div class="ad-wrap">
+			<div class="ad-title">观看此视频，需要支付【{$obj.vod_points}】钻石，确认支付吗？</div>
+			{if condition="$obj.vod_points <= $user.user_points"}	
+			<a href="javascript:;" class="ad-btn" onclick="MAC.User.BuyPopedom(this)" data-id="{$obj.vod_id}" data-sid="{$param.sid}" data-nid="{$param.nid}" data-mid="1" data-type="{if condition="$obj.player_info.flag eq 'play'"}4{else/}5{/if}" data-mid="1"><img src="{$maccms.path}MDassets/web/img/minivip.png"><div>确认购买</div></a>
+			{else}
+			<a href="javascript:;" class="ad-btn" id="user_points_no"><img src="{$maccms.path}MDassets/web/img/minivip.png"><div>确认购买</div></a>
+		{/if}
+		</div>
+	</div>
+	{/if}
+</div>

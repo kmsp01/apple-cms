@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="full-screen" content="true">
+		<meta name="screen-orientation" content="portrait">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="360-fullscreen" content="true">
+		<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover">
+		<title>分享推广 - 会员中心 - {$maccms.site_name}</title>
+		<meta name="keywords" content="会员中心,{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/invite.css">
+		<script src="{$maccms.path}MDassets/js/clipboard.min.js"></script>
+	</head>
+	<body style="font-size: 12px;">
+		<div id="app">
+			<div class="app-layout app-view">
+				<div class="containers router-view" style="padding-top: 40px;">
+					<div class="page-header">
+						<div class="page-header-top">
+							<div class="page-left" onClick="javascript:history.back(-1);"><i class="iconfont iconnext"></i></div>
+							<div class="page-center">分享推广</div>
+							<div class="page-right"></div>
+						</div>
+					</div>
+					<div class="content">
+						<img src="/MDassets/web/img/share-logo.png" class="logo-youtiao">
+						<div class="titles"><span>//</span><p>快将二维码发给好友吧!</p><span>//</span></div>
+						<div class="codeBox"><img src="{:mac_url('qrcode/index')}?url={$maccms.http_type}{$maccms.site_url}?invite={$user.user_codes}"></div>
+						<h3>{$user.user_codes}</h3>
+						<p>您的邀请码</p>
+						<div class="copyBtn" id="share" data-clipboard-text="{$maccms.http_type}{$maccms.site_url}?invite={$user.user_codes}">复制推广链接</div>
+					</div>
+					<div class="footerText">邀请码：{$user.user_codes}</div>
+					<div class="footerText link-copy">
+						推广链接：{$maccms.http_type}{$maccms.site_url}?invite={$user.user_codes}
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			var clipboard = new ClipboardJS('#share');
+				clipboard.on('success', function (e) {
+					layer.msg("复制成功,快去分享吧！");
+				});
+				clipboard.on('error', function (e) {
+				  console.log(e);
+			});
+		</script>
+	</body>
+</html>

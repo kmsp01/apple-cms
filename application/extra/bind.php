@@ -1,0 +1,22 @@
+<?php
+return array (
+  '7a4856e7b6a1e1a2580a9b69cdc7233c_5' => 6,
+  'f437ccfe7735c4bd9ec045aad345c02e_1' => 3,
+  'f437ccfe7735c4bd9ec045aad345c02e_2' => 23,
+  'f437ccfe7735c4bd9ec045aad345c02e_3' => 3,
+  'f437ccfe7735c4bd9ec045aad345c02e_5' => 21,
+  'f437ccfe7735c4bd9ec045aad345c02e_6' => 3,
+  'f437ccfe7735c4bd9ec045aad345c02e_7' => 5,
+  'f437ccfe7735c4bd9ec045aad345c02e_8' => 4,
+  'f437ccfe7735c4bd9ec045aad345c02e_10' => 1,
+  'f437ccfe7735c4bd9ec045aad345c02e_9' => 1,
+  'f437ccfe7735c4bd9ec045aad345c02e_11' => 3,
+  'f437ccfe7735c4bd9ec045aad345c02e_15' => 3,
+  'f437ccfe7735c4bd9ec045aad345c02e_12' => 1,
+  'f437ccfe7735c4bd9ec045aad345c02e_16' => 3,
+  'f437ccfe7735c4bd9ec045aad345c02e_33' => 2,
+  'f437ccfe7735c4bd9ec045aad345c02e_37' => 4,
+  'f437ccfe7735c4bd9ec045aad345c02e_39' => 3,
+  'f437ccfe7735c4bd9ec045aad345c02e_35' => 2,
+  'f437ccfe7735c4bd9ec045aad345c02e_34' => 2,
+);

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>商务合作 - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/web/css/contact.css">
+		<script src="{$maccms.path}MDassets/js/clipboard.min.js"></script>
+	</head>
+	<body>
+		<div id="appSite" class="site reset-element">
+			{include file="system/header"}
+			<div class="main-contaner">
+				<div class="middle">
+					<div class="el-row">
+						<div class="contact-wrap">
+							<div class="top-wrap">
+								<div class="top-item">
+									<img src="{$maccms.path}MDassets/web/img/users.png">
+									<span>代理合作</span>
+								</div>
+								<div class="top-item">
+									<img src="{$maccms.path}MDassets/web/img/ad.png">
+									<span>广告投放</span>
+								</div>
+								<div class="top-item"><img src="{$maccms.path}MDassets/web/img/origin.png">
+									<span>片源合作</span>
+								</div>
+								<div class="top-item"><img src="{$maccms.path}MDassets/web/img/girl.png"><span>演员合作</span>
+								</div>
+								<div class="top-item">
+									<img src="{$maccms.path}MDassets/web/img/flow.png">
+									<span>流量合作</span>
+								</div>
+							</div>
+							<div class="list-wrap">
+								{if condition="$madou['contact']['tg']['state'] eq 1"}
+								<div class="list-item">
+									<div class="list-left">
+										<img src="{$maccms.path}MDassets/web/img/tg.png"><span>Telegram：{$madou[contact][tg][name]}</span>
+									</div>
+									<a href="{$madou[contact][tg][url]}" class="list-right">联系</a>
+								</div>
+								{/if}
+								{if condition="$madou['contact']['skype']['state'] eq 1"}
+								<div class="list-item">
+									<div class="list-left">
+										<img src="{$maccms.path}MDassets/web/img/skype.png"><span>Skype：{$madou[contact][skype][name]}</span>
+									</div>
+									<a href="{$madou[contact][skype][url]}" class="list-right">联系</a>
+								</div>
+								{/if}
+								{if condition="$madou['contact']['whatapp']['state'] eq 1"}
+								<div class="list-item">
+									<div class="list-left"><img src="{$maccms.path}MDassets/web/img/whatApp.png"><span>WhatApp：{$madou[contact][whatapp][name]}</span>
+									</div>
+									<a href="{$madou[contact][whatapp][url]}" class="list-right">联系</a>
+								</div>
+								{/if}
+								{if condition="$madou['contact']['potato']['state'] eq 1"}
+								<div class="list-item">
+									<div class="list-left">
+										<img src="{$maccms.path}MDassets/web/img/potato.png"><span>Potato：{$madou[contact][potato][name]}</span>
+									</div>
+									<a href="{$madou[contact][potato][url]}" class="list-right">联系</a>
+								</div>
+								{/if}
+							</div>
+						</div>
+					</div>
+				</div>
+				{include file="system/footer"}
+				<script>
+					var clipboard = new ClipboardJS('#copy');
+						clipboard.on('success', function (e) {
+							layer.msg("复制成功！");
+						});
+						clipboard.on('error', function (e) {
+						  console.log(e);
+					});
+				</script>
+			</div>
+		</div>
+	</body>
+</html>

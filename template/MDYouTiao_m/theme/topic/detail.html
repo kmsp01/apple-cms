@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="full-screen" content="true">
+		<meta name="screen-orientation" content="portrait">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="360-fullscreen" content="true">
+		<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover">
+		<title>{$obj.topic_name}专题详情- {$maccms.site_name}</title>
+		<meta name="keywords" content="{$obj.topic_name}电影专题,{$obj.topic_name}电视剧专题,{$obj.topic_name}综艺专题,{$obj.topic_name}动漫专题,{$obj.topic_name}推荐专题">
+		<meta name="description" content="本站提供{$obj.topic_name},最新最全精品专题数据">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/main.css">
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/topic-detail.css">
+	</head>
+	<body style="font-size: 12px;">
+		<div id="app">
+			<div class="app-layout app-view">
+				<div class="topic-detail router-view">
+					<div class="van-pull-refresh">
+						<div class="van-pull-refresh__track">
+							<div class="van-pull-refresh__head"></div>
+							<div class="img-bg info" style="background-image: url({$obj.topic_pic_thumb|mac_url_img});">
+								<a onClick="javascript:history.back(-1);" class="back-icon"><img width="16px" height="13px" src="{$maccms.path}MDassets/h5/img/back.png"></a>
+								<div class="content">
+									<div class="title">{$obj.topic_name}</div>
+									<div class="desc">{$obj.topic_sub}</div>
+								</div>
+							</div>
+							<div class="list-header">
+								<div class="title">相关作品（{$obj.vod_list|count}）</div>
+							</div>
+							<div class="van-list">
+								<div class="video-list" id="content">
+									{maccms:vod ids="'.$obj['topic_rel_vod'].'" num="12" paging="yes" pageurl="topic/detail" order="desc" by="time"}
+									{include file="module/vodlistmin"}
+									{/maccms:vod}
+								</div>
+								{if condition="$madou['lazy']['state'] neq 1"}
+								{include file="widget/topicpage"}
+								{else}
+								{include file="widget/topiclazy"}
+								{/if}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

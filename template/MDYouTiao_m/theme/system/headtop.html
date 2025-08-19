@@ -1,0 +1,10 @@
+<div id="topBar" class="top-bar">
+	<a href="{:mac_url('label/search')}" class="left-area"><img src="{$maccms.path}MDassets/h5/img/search.png" class="seaech-home">|<div class="input">{$madou.search}</div></a>
+	<div class="right-area">
+		<a href="{:mac_url('label/vip')}" class="down-btn van-button van-button--primary van-button--mini van-button--round">
+			<div class="van-button__content">
+				<span class="van-button__text">{if condition="$GLOBALS['user']['group_id'] eq 3"}续费会员{else}开会员{/if}<img src="{$maccms.path}MDassets/h5/img/vip_active.png"></span>
+			</div>
+		</a>
+	</div>
+</div>

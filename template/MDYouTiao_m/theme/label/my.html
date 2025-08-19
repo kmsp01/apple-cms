@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="full-screen" content="true">
+		<meta name="screen-orientation" content="portrait">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="360-fullscreen" content="true">
+		<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover">
+		<title>会员中心 - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/main.css">
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/my.css">
+	</head>
+	<body style="font-size: 12px;">
+		<div id="app">
+			<div class="app-layout app-view isFooter my">
+				<div class="container router-view" style="padding-top: 40px;">
+					<div class="page-header page-header-wrap my">
+						<div class="page-header-top">
+							<div class="page-center">个人中心</div>
+							<div class="page-right">
+								<div class="right-wrap">
+									<img src="data:image/png;base64,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" class="left">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="heads">
+						<div class="user-info">
+							<div class="user-wrap">
+								<div class="left">
+									<div class="img-bg portrait" style="background-image: url({$user.user_id|mac_get_user_portrait});"></div>
+									<div class="left-main">
+										<div class="text1">
+											<img src="{$maccms.path}MDassets/h5/img/{if condition="$GLOBALS['user']['group_id'] eq 3"}vips{else}novips{/if}.png" class="icon">
+											<p class="text name loginTitle">{$user.user_name}</p>
+										</div>
+										<div class="text2">
+											<p class="text pwd">请您登录后查看</p>
+										</div>
+									</div>
+								</div>
+								<div class="right">
+									<div class="logins"><a href="{:mac_url('user/reg')}">注册</a>｜<a href="{:mac_url('user/login')}">登录</a></div>
+									<div class="drill-wrap">
+										<img src="{$maccms.path}MDassets/h5/img/drill.png" class="drill"><span>黄钻商城</span>
+										<span class="title">0</span><i class="iconfont iconright1"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="card-wrap">
+							<div class="ellipse">
+								<div class="tourists">
+								<a href="{:mac_url('user/login')}">
+									<button class="vip-button">
+										<div>立即开通</div>
+										<div class="desc">(平均每天不超1元)</div>
+									</button>
+								</a>	
+								</div>
+							</div>
+						</div>
+						<div class="history-wrap">
+							<div class="title-top">
+								<div class="HeadLink-title">
+									<div class="t-left">
+										<div>历史记录</div>
+									</div>
+									<div class="t-cent"></div>
+									<a href="{:mac_url('user/login')}" class="t-right">
+										<div class="look">请先登录</div><i class="iconfont iconright"></i>
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="link-wrap">
+							<div class="link-title">
+								<p>功能列表</p>
+							</div>
+							<div class="link-list">
+								<a href="{:mac_url('user/login')}" class="item">
+									<img src="{$maccms.path}MDassets/h5/img/list-1.png" class="item-img">
+									<span class="name">卡密充值</span>
+								</a>
+								<a href="{:mac_url('user/login')}" class="item">
+									<img src="{$maccms.path}MDassets/h5/img/list-2.png" class="item-img">
+									<span class="name">我的喜欢</span>
+								</a>
+								<a href="{:mac_url('label/contact')}" class="item">
+									<img src="{$maccms.path}MDassets/h5/img/list-3.png" class="item-img">
+									<span class="name">商务合作</span>
+								</a>
+								<a href="{$madou.serve}" class="item">
+									<img src="{$maccms.path}MDassets/h5/img/list-4.png" class="item-img">
+									<span class="name">专属客服</span>
+								</a>
+								<a href="{$madou.join}" class="item">
+									<img src="{$maccms.path}MDassets/h5/img/list-5.png" class="item-img">
+									<span class="name">加盟代理</span>
+								</a>
+								<a href="{:mac_url('user/login')}" class="item">
+									<img src="{$maccms.path}MDassets/h5/img/list-6.png" class="item-img">
+									<span class="name">意见反馈</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div style="padding: 15px;">
+						<div class="ad-container"></div>
+					</div>
+					
+				</div>
+				{include file="system/footer"}
+			</div>
+		</div>
+	</body>
+</html>

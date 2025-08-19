@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>反馈中心 - 会员中心 - {$maccms.site_name}</title> 
+		<meta name="keywords" content="会员中心,{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/web/css/member.css">
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/web/css/feedback.css">
+	</head>
+	<body>
+		<div id="appSite" class="site reset-element">
+			{include file="system/header"}
+			<div class="main-contaner">
+				<div class="middle middleContent">
+					<div class="el-row">
+						<div class="message">
+							{include file="user/menu"}
+							<div class="right-wrap">
+								<div class="right-title">反馈中心</div>
+								<div class="right-router">
+									<form class="updateInfo gbook_form">
+										<div class="content" style="">
+											<div class="el-textarea" style="">
+											<textarea name="gbook_content" autocomplete="off" placeholder="请输入您需要反馈的问题描述，我们将进一步为您解决" maxlength="300" class="el-textarea__inner gbook_content"></textarea>
+											</div>
+										</div>
+										<div style="text-align: center;margin-top: 0px;">
+											<button type="button" class="saveBtn gbook_submit submit_btn">确认提交</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<script>
+					$(function(){
+						MAC.Gbook.Login = 0;
+						MAC.Gbook.Verify = 0;
+						MAC.Gbook.Init();
+					});
+				</script>
+				{include file="system/footer"}
+			</div>
+		</div>
+	</body>
+</html>

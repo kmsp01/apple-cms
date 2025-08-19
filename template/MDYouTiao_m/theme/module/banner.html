@@ -1,0 +1,15 @@
+<div class="swiper-container rec-swipe">
+	<div class="swiper-wrapper">
+	    {maccms:vod num="10" by="hits" order="desc" level="9"}
+		<!--a href="{:mac_url_vod_play($vo)}" target="_blank" class="swipe-img swiper-slide">
+			<div class="img-bg swipe-img" style="background-image: url({:mac_url_img($vo.vod_pic_slide)});"></div>
+		</a-->
+		{/maccms:vod}
+		{maccms:carousel num="10" type="wap" order="asc" by="id"}
+		<a href="{$vo.carousel_url}" target="_blank" class="swipe-img swiper-slide">
+			<div class="img-bg swipe-img" style="background-image: url({:mac_url_img($vo.carousel_logo)});"></div>
+		</a>
+		{/maccms:carousel}
+	</div> 
+	<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+</div>

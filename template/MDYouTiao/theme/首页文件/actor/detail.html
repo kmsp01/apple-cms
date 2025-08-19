@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>{$obj.actor_name}个人资料_{$obj.actor_name}演过的电视剧_{$obj.actor_name}电影全集-{$maccms.site_name}</title>
+		<meta name="keywords" content="{$obj.actor_name}个人资料,{$obj.actor_name}演过的电视剧,{$obj.actor_name}电影全集,{$obj.actor_name}最新电影,{$obj.actor_name}最新电视剧">
+		<meta name="description" content="{$maccms.site_name}演示站为你收集了{$obj.actor_name}个人资料包括了{$obj.actor_name}最新演过的电视剧,{$obj.actor_name}电影全集,以及{$obj.actor_name}图片剧照最近动态等信息希望你能喜欢。">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/web/css/main.css">
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/web/css/detail.css">
+	</head>
+	<body>
+		<div id="appSite" class="site reset-element">
+			{include file="system/header"}
+			<div class="main-contaner hasBg">
+				<div class="middle">
+					<div class="el-row">
+						<div class="topic-detail">
+							<div>
+								<div class="desc el-row">
+									<div class="img-bg detail-bg" style="background-image: url({$obj.actor_pic|mac_url_img});"></div>
+									<div class="desc-content">
+										<span class="name">{$obj.actor_name}</span>
+										<span class="info">{$obj.actor_blurb}</span>
+									</div>
+									<div class="el-image nyImage">
+									<img src="{$obj.actor_pic|mac_url_img}" class="el-image__inner" style="object-fit: cover;">
+								</div>
+								</div>
+							</div>
+							<div class="middleContent">
+								<div class="tabs el-row"></div>
+								<div class="el-row">
+									<div class="video-contaner">
+										{maccms:vod num="24" actor="'.$obj['actor_name'].'" paging="yes" pageurl="actor/detail" order="desc" by="time"}
+										{include file="module/vodlist"}
+										{/maccms:vod}
+									</div>
+									{include file="widget/actorpage"}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{include file="system/footer"}
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,31 @@
+<div class="video-info">
+	<div class="basic-info">
+		<div class="basic-top">
+			<h2 class="ellipsis">{$obj.vod_name}</h2>
+			<div class="tips-wrap">
+				<div id="share" data-clipboard-text="{if$maccms.aid==14}{$maccms.http_type}{$maccms.site_url}{:mac_url_vod_detail($obj)}{else}{$maccms.http_type}{$maccms.site_url}{:mac_url_vod_play($obj,['sid'=>$param['sid'],'nid'=>$param['nid']])}{/if} 我正在看《{$obj.vod_name}》，你也快来一起看吧！" class="tips-item"><img src="{$maccms.path}MDassets/web/img/list-share.png" class="tips-img"><span>分享</span></div>
+				<div class="tips-item btn-favs" data-type="2" data-mid="{$maccms.mid}" data-id="{$obj.vod_id}"><img src="{$maccms.path}MDassets/web/img/list-favs.png" class="tips-img favs"><span>收藏</span></div>
+				<a href="#pinglun" class="tips-item tips-comment-wrap"><img src="{$maccms.path}MDassets/web/img/list-comment.png"><span class="comment-total"></span></a>
+			</div>
+		</div>
+		<div class="basic-des">
+			<div class="desc">{$obj.vod_blurb}</div>
+			<div class="labels">
+				{$obj.vod_tag|mac_url_create='tag'}
+			</div>
+		</div>
+		{include file="module/playlist"}
+	</div>
+	{if condition="$GLOBALS['user']['group_id'] eq 3"}
+	<div class="view-times vip">
+		<span>{$user.user_end_time|mac_day|mac_default='无限期'}到期</span>
+		<a href="{:mac_url('label/vip')}">续费会员</a>
+	</div>
+	{else}
+	<div class="view-times">
+		<span>会员立享多项特权</span>
+		<img src="{$maccms.path}MDassets/web/img/visit.png" class="time-img visit">
+		<a href="{:mac_url('label/vip')}">获取会员</a>
+	</div>
+	{/if}
+</div>

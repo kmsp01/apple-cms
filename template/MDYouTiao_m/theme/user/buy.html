@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="full-screen" content="true">
+		<meta name="screen-orientation" content="portrait">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="360-fullscreen" content="true">
+		<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover">
+		<title>卡密充值 - 会员中心 - {$maccms.site_name}</title> 
+		<meta name="keywords" content="会员中心,{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/login.css">
+	</head>
+	<body style="font-size: 12px;">
+		<div id="app">
+			<div class="app-layout app-view">
+				<div class="containers router-view" style="padding-top: 40px;">
+					<div class="page-header">
+						<div class="page-header-top">
+							<div class="page-left" onclick="javascript:history.back(-1);"><i class="iconfont iconnext"></i></div>
+							<div class="page-center">卡密充值</div>
+							<div class="page-right"></div>
+						</div>
+					</div>
+					<div class="page-body">
+						<div class="content">
+							<input type="text" name="card_no" value="" placeholder="请输入请输入充值卡号">
+						</div>
+						<p class="tishi">点击购买卡密(有效期间为从成功充值日期起计算)</p>
+						{if condition="$GLOBALS['config']['pay']['card']['url'] neq ''"}
+						<a href="{$GLOBALS['config']['pay']['card']['url']}" target="_blank"><button class="card-url" type="button">购买卡密</button></a>
+						{/if}
+						<button class="button" type="button" id="btn_submit_card">立即充值</button>
+					</div>
+					<script>
+						$(".go-back").click(function () {
+							var ref = document.referrer;
+							location.href=ref;
+						});
+						$('#btn_submit_card').click(function(){
+							var that=$(this);
+							var no = $('input[name="card_no"]').val();
+							if(no==''){
+								layer.msg('请输入充值卡卡号');
+								return;
+							}
+							layer.confirm('确定要使用充值卡充值吗？', {
+							title:'提示',btn: ['确定','取消']
+							}, function(){
+								$.ajax({
+									url: "{:url('user/buy')}",
+									type: "post",
+									dataType: "json",
+									data: {card_no: no,flag:'card'},
+									beforeSend: function () {
+										$("#btn_submit_card").val("loading...");
+									},
+									success: function (r) {
+										if (r.code == 1) {
+											layer.msg(r.msg);
+											location.href="{:mac_url('user/index')}";
+										}
+										else{
+											layer.msg(r.msg);
+										}
+									},
+									complete: function () {
+										$("#btn_submit_card").val("提交");
+									}
+								});
+							});
+						});
+					</script>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

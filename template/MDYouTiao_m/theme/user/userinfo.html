@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="full-screen" content="true">
+		<meta name="screen-orientation" content="portrait">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="360-fullscreen" content="true">
+		<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover">
+		<title>个人资料 - 会员中心 - {$maccms.site_name}</title>
+		<meta name="keywords" content="会员中心,{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/userinfo.css">
+		<script src="{$maccms.path}static/js/jquery.imageupload.js"></script>
+	</head>
+	<body style="font-size: 12px;" class="">
+		<div id="app">
+			<div class="app-layout app-view">
+	
+				<div class="containers router-view" style="padding-top: 40px;">
+					<div class="page-header">
+						<div class="page-header-top">
+							<div class="page-left" onclick="javascript:history.back(-1);"><i class="iconfont iconnext"></i></div>
+							<div class="page-center">个人资料</div>
+							<div class="page-right"></div>
+						</div>
+					</div>
+					<div class="avatar">
+						<p>头像</p>
+						<div><img class="img avatarImg face upload-btn" src="{$user.user_id|mac_get_user_portrait}"><img src="{$maccms.path}MDassets/h5/img/rightIcon.png" class="rightIcon"></div>
+					</div>
+					<div class="list">
+						<div class="item">
+							<p>账号</p>
+							<div><p>{$user.user_name}</p></div>
+						</div>
+						<a href="{:mac_url('user/bind')}?ac=phone" class="item">
+							<p>手机号</p>
+							<div><p>{$user.user_phone}</p><img src="{$maccms.path}MDassets/h5/img/rightIcon.png" class="rightIcon"></div>
+						</a>
+						<a href="{:mac_url('user/bind')}?ac=email" class="item">
+							<p>邮箱号</p>
+							<div><p>{$user.user_email}</p><img src="{$maccms.path}MDassets/h5/img/rightIcon.png" class="rightIcon"></div>
+						</a>
+						<a href="{:url('user/info')}" class="item">
+							<p>修改密码</p>
+							<div><img src="{$maccms.path}MDassets/h5/img/rightIcon.png" class="rightIcon"></div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			$(".upload-btn").click(function(){
+				$(".btn-default").click() 
+			})
+			$(".face").imageUpload({
+				formAction: "{:mac_url('user/portrait')}",
+				inputFileName:'file',
+				browseButtonValue: '',
+				browseButtonClass:'btn btn-default btn-xs',
+				automaticUpload: true,
+				hideDeleteButton: true,
+				hover:true
+			})
+			$(".face").on("imageUpload.uploadFailed", function (ev, err) {
+				layer.msg(err);
+			});
+		</script>
+	</body>
+</html>

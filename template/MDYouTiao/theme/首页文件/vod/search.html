@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>{$param.wd}{$param.actor}{$param.director}{$param.area}{$param.lang}{$param.year}{$param.class}{$param.tag}搜索结果 - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$param.wd}{$param.actor}{$param.director}{$param.area}{$param.lang}{$param.year}{$param.class}{$param.tag}搜索结果">
+		<meta name="description" content="{$param.wd}{$param.actor}{$param.director}{$param.area}{$param.lang}{$param.year}{$param.class}{$param.tag}搜索结果">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/web/css/search.css">
+	</head>
+	<body>
+		<div id="appSite" class="site reset-element">
+			{include file="system/header"}
+			<div class="main-contaner hasBg">
+				<div class="middle middleContent">
+					<div class="el-row">
+						<div class="search-page">
+							<div class="search-body">
+								{maccms:vod num="24" paging="yes" pageurl="vod/search" order="desc" by="time"}{/maccms:vod}
+								{if condition="$__PAGING__.record_total eq '0'"}
+								<div class="empty">
+									<img src="{$maccms.path}MDassets/web/img/empty-search.png">
+									<p>这里什么都没有搜到～</p>
+									<div class="keywords keywords2">
+										<div class="labels">
+											{maccms:foreach name=":explode(',',$maccms.search_hot)" id="vo2" key="key2"}
+											<a href="{:mac_url('vod/search',['wd'=>$vo2])}">{$vo2}</a>
+											{/maccms:foreach}
+										</div>
+									</div>
+								</div>
+								{else}
+								<div class="lists">
+									<div class="result-sumary">
+										搜索"{$param.wd}{$param.actor}{$param.director}{$param.area}{$param.lang}{$param.year}{$param.class}{$param.tag}", 共计<b class="mac_total"></b>条视频
+									</div>
+									<h2 class="video-title">相关影片</h2>
+									<ul>
+										{maccms:vod num="24" paging="yes" pageurl="vod/search" order="desc" by="time"}
+										{include file="module/vodlist"}
+										{/maccms:vod}
+									</ul>
+									{include file="system/paging"}
+								</div>
+								{/if}
+							</div>
+						</div>
+					</div>
+				</div>
+				<script>
+					$('.mac_total').html('{$__PAGING__.record_total}');
+				</script>
+				{include file="system/footer"}
+			</div>
+		</div>
+	</body>
+</html>

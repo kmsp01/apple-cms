@@ -1,0 +1,26 @@
+<div class="el-col el-col-6" style="padding-left: 10px; padding-right: 10px; margin-top: 2px;">
+	<div class="area-info">
+		<a href="{:mac_url('actor/index')}" class="info-left">
+			<span class="rank-title">明星排行榜</span>
+			<img src="{$maccms.path}MDassets/web/img/rank-bg.png" class="rank-img">
+		</a>
+		<a href="{:mac_url('actor/index')}" class="info-right">
+			<div class="more">
+				<span class="info-more">更多</span>
+				<img src="{$maccms.path}MDassets/web/img/chevron_right.png">
+			</div>
+		</a>
+	</div>
+	<div class="rank-content">
+		{maccms:actor num="5" order="desc" by="time"}
+		<a href="{$vo|mac_url_actor_detail}" class="rank-item">
+			<span class="rank-level">{$key}</span>
+			<img class="rank-avatar lazyload" src="{$madou['lazy']['img']}" data-src="{:mac_url_img($vo.actor_pic)}">
+			<div class="rank-info">
+				<h3>{$vo.actor_name}</h3>
+				<p>{$vo.actor_blurb}</p>
+			</div>
+		</a>
+		{/maccms:actor}
+	</div>
+</div>

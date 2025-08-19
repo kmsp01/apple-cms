@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="full-screen" content="true">
+		<meta name="screen-orientation" content="portrait">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="360-fullscreen" content="true">
+		<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover">
+		<title>绑定{if condition="$ac eq 'phone'"}手机{else/}邮箱{/if} - 会员中心 - {$maccms.site_name}</title> 
+		<meta name="keywords" content="会员中心,{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/bind.css">
+	</head>
+	<body style="font-size: 12px;">
+		<div id="app">
+			<div class="app-layout app-view">
+
+				<div class="containers router-view" style="padding-top: 40px;">
+					<div class="page-header">
+						<div class="page-header-top">
+							<div class="page-left" onclick="javascript:history.back(-1);"><i class="iconfont iconnext"></i></div>
+							<div class="page-center">绑定{if condition="$ac eq 'phone'"}手机{else/}邮箱{/if}</div>
+							<div class="page-right"></div>
+						</div>
+					</div>
+					<div class="page-body">
+						<form id="fm" name="fm" method="post" action="">
+							<input type="hidden" name="ac" value="{$ac}">
+							<div class="content">
+								<input type="text" name="to" value="{if condition="$ac eq 'phone'"}{$obj.user_phone}{else/}{$obj.user_email}{/if}" placeholder="请输入{if condition="$ac eq 'phone'"}手机号码{else/}邮箱地址{/if}">
+							</div>
+							<div class="flex-row">
+								<div class="content">
+								<img src="{$maccms.path}MDassets/h5/img/capacha.png">
+									<input type="text" name="code" placeholder="请输入{if condition="$ac eq 'phone'"}手机{else/}邮箱{/if}验证码">
+								</div>
+								<button type="button" id="btn_bind_send" class="capachaText">获取验证码</button>
+							</div>
+							<button class="button" type="button" id="btn_submit">绑定</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			var countdown=60;
+			function settime(val) {
+				if (countdown == 0) {
+					val.removeAttribute("disabled");
+					val.value="获取验证码";
+					countdown = 60;
+					return true;
+				} else {
+					val.setAttribute("disabled", true);
+					val.value="重新发送(" + countdown + ")";
+					countdown--;
+				}
+				setTimeout(function() {settime(val) },1000)
+			}
+
+			$('#btn_bind_send').click(function(){
+				var ac = $('input[name="ac"]').val();
+				var to = $('input[name="to"]').val();
+				if(ac=='email') {
+					var pattern = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+					var ex = pattern.test(to);
+					if (!ex) {
+						layer.msg('邮箱格式不正确');
+						return;
+					}
+				}
+				else if(ac=='phone') {
+					var pattern=/^[1][0-9]{10}$/;
+					var ex = pattern.test(to);
+					if (!ex) {
+						layer.msg('手机号格式不正确');
+						return;
+					}
+				}
+				else{
+					layer.msg('参数错误');
+					return;
+				}
+				settime(this);
+				var data = $("#fm").serialize();
+
+				$.ajax({
+					url: "{:mac_url('user/bindmsg')}",
+					type: "post",
+					dataType: "json",
+					data: data,
+					beforeSend: function () {
+						//开启loading
+					},
+					success: function (r) {
+						layer.msg(r.msg);
+					},
+					complete: function () {
+						//结束loading
+					}
+				});
+			});
+
+			$("#btn_submit").click(function() {
+				var ac = $('input[name="ac"]').val();
+				var to = $('input[name="to"]').val();
+
+				if(ac=='email') {
+					var pattern = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+					var ex = pattern.test(to);
+					if (!ex) {
+						layer.msg('邮箱格式不正确');
+						return;
+					}
+				}
+				else if(ac=='phone') {
+					var pattern=/^[1][0-9]{10}$/;
+					var ex = pattern.test(to);
+					if (!ex) {
+						layer.msg('手机号格式不正确');
+						return;
+					}
+				}
+				else{
+					layer.msg('参数错误');
+					return;
+				}
+
+				var code = $('input[name="code"]').val();
+				if(code==''){
+					layer.msg('请输入验证码');
+					return;
+				}
+				var data = $("#fm").serialize();
+
+				$.ajax({
+					url: "{:mac_url('user/bind')}",
+					type: "post",
+					dataType: "json",
+					data: data,
+					beforeSend: function () {
+						//开启loading
+						//$(".loading_box").css("display","block");
+						$("#btn_submit").val("loading...");
+					},
+					success: function (r) {
+						layer.msg(r.msg);
+						if(r.code==1){
+							location.href="{:mac_url('user/userinfo')}";
+						}
+					},
+					complete: function () {
+						//结束loading
+						//$(".loading_box").css("display","none");
+						$("#btn_submit").val("提交");
+					}
+				});
+			});
+
+		</script>
+	</body>
+</html>

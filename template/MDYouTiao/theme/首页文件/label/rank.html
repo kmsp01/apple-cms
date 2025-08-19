@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>排行榜 - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/web/css/main.css">
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/web/css/rank.css">
+	</head>
+	<body>
+		<div id="appSite" class="site reset-element">
+			{include file="system/header"}
+			<div class="main-contaner">
+				<div class="middle middleContent">
+					<div class="el-row">
+						<div class="ranks">
+							<nav>
+								<a href="{:mac_url('label/rank',['by'=>'hits'])}" {if strpos($_SERVER["REQUEST_URI"],'hits')}class="router-link-exact-active router-link-active active"{/if}>热门榜</a>
+								<a href="{:mac_url('label/rank',['by'=>'time'])}" {if strpos($_SERVER["REQUEST_URI"],'time')}class="router-link-exact-active router-link-active active"{/if}>新片榜</a>
+								<a href="{:mac_url('label/rank',['by'=>'score'])}" {if strpos($_SERVER["REQUEST_URI"],'score')}class="router-link-exact-active router-link-active active"{/if}>好评榜</a>
+								<a href="{:mac_url('label/rank',['by'=>'up'])}" {if strpos($_SERVER["REQUEST_URI"],'up')}class="router-link-exact-active router-link-active active"{/if}>收藏榜</a>
+							</nav>
+							<div class="lists-wrap">
+								<div class="lists el-row">
+									<div class="el-row">
+										<div class="video-contaner">
+										{maccms:vod num="24" paging="yes" pageurl="label/rank" order="desc" by="time"}
+										{include file="module/vodlist"}
+										{/maccms:vod}
+										</div>
+									</div>
+									{include file="system/paging"}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{include file="system/footer"}
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>备用网址 - {$maccms.site_name}</title>
+		<meta name="keywords" content="{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/web/css/newweb.css">
+		<script src="{$maccms.path}MDassets/js/clipboard.min.js"></script>
+	</head>
+	<body>
+		<div id="appSite" class="site reset-element">
+			{include file="system/header"}
+			<div class="main-contaner">
+				<div class="middle">
+					<div class="el-row">
+						<div class="contact-wrap">
+							<div class="top-wrap">
+								<img src="{$maccms.path}MDassets/web/img/publish.png">
+							</div>
+							<div class="list-wrap">
+								{if condition="$madou['url']['state'] eq 1"}
+								<div class="list-item">
+									<div class="list-left">
+										<img src="{$maccms.path}MDassets/web/img/youtiao.png">
+										<div><span class="title">回家的路</span><span class="label">备用网址</span></div>
+									</div>
+									<a class="list-right" href="{$madou[backup][url]}">进入</a>
+								</div>
+								{/if}
+								{if condition="$madou['tg']['state'] eq 1"}
+								<div class="list-item">
+									<div class="list-left">
+										<img src="{$maccms.path}MDassets/web/img/tg.png">
+										<div><span class="title">Telegram</span><span class="label">火爆交流群</span></div>
+									</div>
+									<a class="list-right" href="{$madou[tg][url]}">加入</a>
+								</div>
+								{/if}
+								{if condition="$madou['weibo']['state'] eq 1"}
+								<div class="list-item">
+									<div class="list-left">
+										<img src="{$maccms.path}MDassets/web/img/weibo.png">
+										<div><span class="title">微博</span><span class="label">官方微博</span></div>
+									</div>
+									<a class="list-right" href="{$madou[weibo][url]}">关注</a>
+								</div>
+								{/if}
+								{if condition="$madou['github']['state'] eq 1"}
+								<div class="list-item">
+									<div class="list-left">
+										<img src="{$maccms.path}MDassets/web/img/github.png">
+										<div><span class="title">GitHub</span><span class="label">Github</span></div>
+									</div>
+									<a class="list-right" href="{$madou[github][url]}">关注</a>
+								</div>
+								{/if}
+								<div class="list-item">
+									<div class="list-left">
+										<img src="{$maccms.path}MDassets/web/img/email.png">
+										<div><span class="title">邮箱</span><span class="label">{$madou.email}</span></div>
+									</div>
+									<div id="email" class="list-right" data-clipboard-text="{$madou.email}">复制邮箱</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{include file="system/footer"}
+				<script>
+					var clipboard = new ClipboardJS('#email');
+						clipboard.on('success', function (e) {
+							layer.msg("复制成功！");
+						});
+						clipboard.on('error', function (e) {
+						  console.log(e);
+					});
+				</script>
+			</div>
+		</div>
+	</body>
+</html>

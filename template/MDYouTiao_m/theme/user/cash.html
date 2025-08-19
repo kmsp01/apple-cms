@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="full-screen" content="true">
+		<meta name="screen-orientation" content="portrait">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="360-fullscreen" content="true">
+		<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover">
+		<title>申请提现 - 会员中心 - {$maccms.site_name}</title> 
+		<meta name="keywords" content="会员中心,{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/h5/css/cash.css">
+	</head>
+	<body style="font-size: 12px;">
+		<div id="app">
+			<div class="app-layout app-view">
+				<div class="containers router-view" style="padding-top: 40px;">
+					<div class="page-header">
+						<div class="page-header-top">
+							<div class="page-left" onclick="javascript:history.back(-1);"><i class="iconfont iconnext"></i></div>
+							<div class="page-center">申请提现</div>
+							<div class="page-right"></div>
+							<div class="page-right"><a href="{:mac_url('user/recording')}" class="clearHistory">提现记录</a></div>
+						</div>
+					</div>
+					<div class="content">
+						<div class="title">
+							<p>当前余额为</p><span>￥{$GLOBALS['user']['user_points']/$GLOBALS['config']['user']['cash_ratio']|mac_substring=5}</span>
+						</div>
+					</div>
+					<form id="fm" name="fm" method="post" action="">
+						<div class="list">
+							<p>提现金额</p><input type="text" name="cash_money" placeholder="最少￥{$GLOBALS['config']['user']['cash_min']}" value="">
+						</div>
+						<div class="list">
+							<p>银行名称</p><input type="text" name="cash_bank_name" placeholder="开户行名称或支付宝微信" value="">
+						</div>
+						<div class="list">
+							<p>银行账户</p><input type="text" name="cash_bank_no" placeholder="银行账户或支付宝微信账号" value="">
+						</div>
+						
+						<div class="list">
+							<p>收款姓名</p><input type="text" name="cash_payee_name" placeholder="收款人姓名与上方账户对应" value="">
+						</div>
+						<p class="tishi">剩余{$GLOBALS['user']['user_points']}钻石，相当于{$GLOBALS['user']['user_points']/$GLOBALS['config']['user']['cash_ratio']}元；冻结{$GLOBALS['user']['user_points_froze']}钻石，相当于{$GLOBALS['user']['user_points_froze']/$GLOBALS['config']['user']['cash_ratio']}元</p>
+						<button type="button" id="btn_submit">提交申请</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<script>
+			$("#btn_submit").click(function() {
+				var cash_money = $('input[name="cash_money"]').val();
+				if(cash_money==''){
+					layer.msg('请输入提现金额');
+					return;
+				}
+				var cash_bank_name = $('input[name="cash_bank_name"]').val();
+				if(cash_bank_name==''){
+					layer.msg('请输入开户行名称或支付宝微信');
+					return;
+				}
+				var cash_bank_no = $('input[name="cash_bank_no"]').val();
+				if(cash_bank_no==''){
+					layer.msg('请输入银行账户或支付宝微信账号');
+					return;
+				}
+				var cash_payee_name = $('input[name="cash_payee_name"]').val();
+				if(cash_payee_name==''){
+					layer.msg('请输入收款人姓名');
+					return;
+				}
+				
+
+				var data = $("#fm").serialize();
+				$.ajax({
+					url: "{:url('user/cash')}",
+					type: "post",
+					dataType: "json",
+					data: data,
+					beforeSend: function () {
+						//开启loading
+						//$(".loading_box").css("display","block");
+						$("#btn_submit").val("loading...");
+					},
+					success: function (r) {
+						layer.msg(r.msg);
+						if(r.code==1){
+							location.href="{:url('user/cash')}";
+						}
+					},
+					complete: function () {
+						//结束loading
+						//$(".loading_box").css("display","none");
+						$("#btn_submit").val("提交");
+					}
+				});
+			});
+		</script>
+	</body>
+</html>

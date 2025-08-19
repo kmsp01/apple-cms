@@ -1,0 +1,39 @@
+<div class="video">
+	<div class="video-info">
+		{if condition="$GLOBALS['user']['group_id'] eq 3"}
+		<div class="view-times vip" style="background-image: url({$maccms.path}MDassets/h5/img/view-time-vip.png);">
+			<div class="left flex-center">
+				<img src="{$maccms.path}MDassets/h5/img/time.png" class="img">{$user.user_end_time|mac_day|mac_default='无限期'}到期
+			</div>
+			<a href="{:mac_url('label/vip')}"><button style="background-image: url({$maccms.path}MDassets/h5/img/view-time-vip-button.png);">续费会员</button></a>
+		</div>
+		{else}
+		<div class="view-times" style="background-image: url({$maccms.path}MDassets/h5/img/view-time.png);">
+			<div class="left flex-center">会员立享多项特权<img src="{$maccms.path}MDassets/h5/img/privilege.png" class="time-img"></div>
+			<a href="{:mac_url('label/vip')}"><button style="background-image: url({$maccms.path}MDassets/h5/img/obtain.png);">获取会员</button></a>
+		</div>
+		{/if}
+		<div class="basic-info">
+			<h2>{$obj.vod_name}</h2>
+			<div class="video-content">
+				<h3><span>简介</span><i class="van-icon van-icon-arrow"></i></h3>
+				<p>{$obj.vod_blurb}</p>
+			</div>
+			<div class="actions">
+				<div class="rate">
+				{include file="module/star3"}
+				<span>{$obj.vod_score}</span>
+				</div>
+				<div class="action">
+					<span class="like btn-favs" data-type="2" data-mid="{$maccms.mid}" data-id="{$obj.vod_id}"></span>
+					<span title="分享" class="share" data-clipboard-text="{if$maccms.aid==14}{$maccms.http_type}{$maccms.site_url}{:mac_url_vod_detail($obj)}{else}{$maccms.http_type}{$maccms.site_url}{:mac_url_vod_play($obj,['sid'=>$param['sid'],'nid'=>$param['nid']])}{/if} 我正在看《{$obj.vod_name}》，你也快来一起看吧！"></span>
+					|<span title="评论" class="commentx hl-total"></span>
+				</div>
+			</div>
+			<div class="labels">
+				{$obj.vod_tag|mac_url_create='tag'}
+			</div>
+    		{include file="module/playlist"}
+		</div>
+	</div>
+</div>

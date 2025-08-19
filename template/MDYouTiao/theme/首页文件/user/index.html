@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>会员中心 - {$maccms.site_name}</title> 
+		<meta name="keywords" content="会员中心,{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/web/css/member.css">
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/web/css/info.css">
+		<script src="{$maccms.path}static/js/jquery.imageupload.js"></script>
+	</head>
+	<body>
+		<div id="appSite" class="site reset-element">
+			{include file="system/header"}
+			<div class="main-contaner">
+				<div class="middle middleContent">
+					<div class="el-row">
+						<div class="message">
+							{include file="user/menu"}
+							<div class="right-wrap">
+								<div class="right-title">修改资料</div>
+								<div class="right-router">
+									<form class="updateInfo" id="fm" name="fm" method="post" action="" >
+										<div class="portraitBox"><span>头像：</span>
+											<div class="portrait">
+												<img class="img face" src="{$obj.user_portrait|mac_default='static/images/touxiang.png'|mac_url_img}?v={:time()}">
+												<button type="button" class="el-button el-button--default upload-btn"><span>修改</span></button>
+											</div>
+										</div>
+										<div class="content"><span>原密码：</span>
+											<div class="input-nick el-input">
+												<input type="password" autocomplete="off" name="user_pwd" placeholder="请输入原始密码" class="el-input__inner">
+											</div>
+										</div>
+										<div class="content"><span>新密码：</span>
+											<div class="input-nick el-input">
+												<input type="password" autocomplete="off" name="user_pwd1" placeholder="请输入新密码,不修改请留空" class="el-input__inner">
+											</div>
+										</div>
+										<div class="content"><span>重复密码：</span>
+											<div class="input-nick el-input">
+												<input type="password" autocomplete="off" name="user_pwd2" placeholder="请重复新密码,不修改请留空" class="el-input__inner">
+											</div>
+										</div>
+										<div class="content">
+											<span>找回问题：</span>
+											<div class="input-nick el-input">
+												<input type="text" autocomplete="off" name="user_question" placeholder="请输入新密码,不修改请留空" value="{$obj.user_question}" class="el-input__inner">
+											</div>
+										</div>
+										<div class="content">
+											<span>找回答案：</span>
+											<div class="input-nick el-input">
+												<input type="text" autocomplete="off" name="user_answer" placeholder="请重复新密码,不修改请留空" value="{$obj.user_answer}" class="el-input__inner">
+											</div>
+										</div>
+										<!--div class="content">
+											<span>手机号码：</span>
+											{if condition="$obj.user_phone neq ''"}
+											<div class="capacha-input el-input el-input-group">
+												<input type="text" autocomplete="off" placeholder="请绑定手机号码" readonly="readonly" value="{$obj.user_phone}" class="el-input__inner">
+											</div>
+											<button type="button" class="el-button el-button--default btn_unbind" ac="phone">
+												<span>解绑</span>
+											</button>
+											{else/}
+											<div class="capacha-input el-input el-input-group">
+												<input type="text" autocomplete="off" placeholder="请绑定手机号码" readonly="readonly" value="{$obj.user_phone}" class="el-input__inner">
+											</div>
+											<a href="{:url('user/bind')}?ac=phone">
+											<button type="button" class="el-button capacha-button el-button--default">
+												<span>绑定</span>
+											</button>
+											</a>
+											{/if}
+										</div-->	
+										<div class="content">
+											<span>邮箱地址：</span>
+											{if condition="$obj.user_email neq ''"}
+											<div class="capacha-input el-input el-input-group">
+												<input type="text" autocomplete="off" placeholder="请绑定邮箱地址" readonly="readonly" value="{$obj.user_email}" class="el-input__inner">
+											</div>
+											<button type="button" class="el-button el-button--default btn_unbind" ac="email">
+												<span>解绑</span>
+											</button>
+											{else/}
+											<div class="capacha-input el-input el-input-group">
+												<input type="text" autocomplete="off" placeholder="请绑定邮箱地址" readonly="readonly" value="{$obj.user_email}" class="el-input__inner">
+											</div>
+											<a href="{:url('user/bind')}?ac=email">
+											<button type="button" class="el-button capacha-button el-button--default">
+												<span>绑定</span>
+											</button>
+											</a>
+											{/if}
+										</div>
+										<div style="text-align: center;">
+											<button type="button" id="btn_submit" class="saveBtn">保存</button>
+										</div>
+										
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<script type="text/javascript">
+					$('.btn_unbind').click(function(){
+						var ac = $(this).attr('ac');
+						if(ac!='email' && ac!='phone'){
+							layer.msg('参数错误');
+						}
+						if(confirm('确认解除绑定吗？此操作不可恢复？')) {
+							$.ajax({
+								url: "{:url('user/unbind')}",
+								type: "post",
+								dataType: "json",
+								data: {ac: ac},
+								beforeSend: function () {
+									//开启loading
+								},
+								success: function (r) {
+									layer.msg(r.msg);
+									if(r.code==1){
+										setTimeout(function(){
+											location.href="{:url('user/index')}";
+										},1500);
+									}
+								},
+								complete: function () {
+									//结束loading
+								}
+							});
+						}
+					});
+
+					$("#btn_submit").click(function() {
+						var data = $("#fm").serialize();
+						$.ajax({
+							url: "{:url('user/info')}",
+							type: "post",
+							dataType: "json",
+							data: data,
+							beforeSend: function () {
+								//开启loading
+								//$(".loading_box").css("display","block");
+								$("#btn_submit").val("loading...");
+							},
+							success: function (r) {
+								layer.msg(r.msg);
+								if(r.code==1){
+									setTimeout(function(){
+										location.href="{:url('user/index')}";
+									},1500);
+								}
+							},
+							complete: function () {
+								//结束loading
+								//$(".loading_box").css("display","none");
+								$("#btn_submit").val("提交");
+							}
+						});
+					});
+
+				</script>
+				<script>
+					$(".upload-btn").click(function(){
+						$(".btn-default").click() 
+					})
+					$(".face").imageUpload({
+						formAction: "{:mac_url('user/portrait')}",
+						inputFileName:'file',
+						browseButtonValue: '',
+						browseButtonClass:'btn btn-default btn-xs',
+						automaticUpload: true,
+						hideDeleteButton: true,
+						hover:true
+					})
+					$(".face").on("imageUpload.uploadFailed", function (ev, err) {
+						layer.msg(err);
+					});
+				</script>
+				{include file="system/footer"}
+			</div>
+		</div>
+	</body>
+</html>

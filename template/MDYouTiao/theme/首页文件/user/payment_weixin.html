@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>微信充值 - 会员中心 - {$maccms.site_name}</title> 
+		<meta name="keywords" content="会员中心,{$maccms.site_keywords}">
+		<meta name="description" content="{$maccms.site_description}">
+		{include file="system/include"}
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/web/css/member.css">
+		<link rel="stylesheet" type="text/css" href="{$maccms.path}MDassets/web/css/info.css">
+	</head>
+	<body>
+		<div id="appSite" class="site reset-element">
+			{include file="system/header"}
+			<div class="main-contaner">
+				<div class="middle middleContent">
+					<div class="el-row">
+						<div class="message">
+							{include file="user/menu"}
+							<div class="right-wrap">
+								<div class="right-title">微信在线支付</div>
+								<div class="right-router" >
+									<form class="updateInfo" method="post" target="_blank" action="{:mac_url('user/gopay')}">
+										<input type="hidden" name="order_id" value="{$info.order_id}">
+										<input type="hidden" name="order_code" value="{$info.order_code}">
+										<div class="content"><span>订单编号：</span>
+											<div class="input-nick el-input is-disabled">
+												<input type="text" autocomplete="off" value="{$order.order_code}" disabled="disabled" class="el-input__inner">
+											</div>
+										</div>
+										<div class="content"><span>订单金额：</span>
+											<div class="input-nick el-input is-disabled">
+												<input type="text" autocomplete="off" value="{$order.order_price}元" disabled="disabled" class="el-input__inner">
+											</div>
+										</div>
+										<div class="content"><span>扫码支付：</span>
+											<div class="input-nick el-input is-disabled">
+												<img src="{:mac_url('user/qrcode')}?data={$payment.code_url|urlencode}" width="250" height="250"/>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{include file="system/footer"}
+				<script>
+					function check(){
+						$.get("{:mac_url('user/order_info')}" + '?order_id={$order.order_id}', function(data){
+							if(data.info.order_status == 1){
+								layer.msg('支付完成，即将跳转到会员中心');
+								window.location.href = "{:mac_url('user/index')}";
+							}
+						});
+					}
+					$(function(){
+						setInterval(function(){check()}, 5000);  //5秒查询一次支付是否成功
+					})
+				</script>
+			</div>
+		</div>
+	</body>
+</html>

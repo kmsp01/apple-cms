@@ -1,0 +1,25 @@
+<div style="">
+	<div class="van-sticky">
+		<div class="controls" onclick="javascript:history.back(-1);"><i class="van-icon van-icon-arrow-left" style="color: rgb(255, 255, 255); font-size: 20px;"></i></div>
+		<div class="video-box" style="height: 210.938px;">
+			<div class="img-bg openVip" style="background-image: url({:mac_url_img($obj.vod_pic)});">
+				{if condition="$GLOBALS['user']['group_id'] eq 1"}
+				<div class="flex-center">
+				<div class="desc">本视频为钻石付费，付费后可观看</div>
+				<a href="{:mac_url('user/login')}"><button class="button">立即登录</button></a>
+				<div class="logins btn-login">已购买过可 <a href="{:mac_url('user/login')}">登陆</a> 观看</div>
+				</div>
+				{else}
+				<div class="flex-center">
+				<div class="desc">观看此视频，需要支付【{$obj.vod_points}】钻石，确认支付吗？</div>
+				{if condition="$obj.vod_points <= $user.user_points"}	
+				<a href="javascript:;" onclick="MAC.User.BuyPopedom(this)" data-id="{$obj.vod_id}" data-sid="{$param.sid}" data-nid="{$param.nid}" data-mid="1" data-type="{if condition="$obj.player_info.flag eq 'play'"}4{else/}5{/if}" data-mid="1"><button class="button">确认购买</button></a>
+				{else}
+				<a id="user_points_no"><button class="button">确认购买</button></a>
+				{/if}
+				</div>
+				{/if}
+			</div>
+		</div>
+	</div>
+</div>
